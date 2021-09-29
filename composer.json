@@ -1,0 +1,36 @@
+{
+    "name": "exit11/article",
+    "description": "mpcs core : article extention",
+    "type": "library",
+    "authors": [
+        {
+            "name": "HWAJUN LEE",
+            "email": "ezrock@naver.com"
+        }
+    ],
+    "require": {
+        "mpcs-ui/bootstrap5": "dev-master",
+        "mpcs/core": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Exit11\\Article\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Exit11\\Article\\ArticleServiceProvider",
+                "Exit11\\Article\\ArticleAuthServiceProvider",
+                "Exit11\\Article\\ArticleEventServiceProvider",
+                "Exit11\\Article\\ArticleBroadcastServiceProvider"
+            ],
+            "aliases": {
+                "Article": "Exit11\\Article\\Facades\\Article"
+            }
+        }
+    }
+}
