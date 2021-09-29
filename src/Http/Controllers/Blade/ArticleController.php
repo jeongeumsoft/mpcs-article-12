@@ -2,7 +2,7 @@
 
 namespace Exit11\Article\Http\Controllers\Blade;
 
-use Exit11\Article\Http\Controllers\ArticleController as Controller;
+use Exit11\Article\Http\Controllers\Api\ArticleController as Controller;
 use Exit11\Article\Http\Requests\ArticleRequest as Request;
 use Exit11\Article\Facades\Article;
 use Exit11\Article\Facades\Core;

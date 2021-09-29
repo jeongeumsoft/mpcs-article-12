@@ -45,5 +45,6 @@ class ArticleServiceProvider extends ServiceProvider
     public function register()
     {
         //$this->commands($this->commands);
+        $this->app->bind('Exit11\Article\Repositories\ArticleRepositoryInterface', 'Exit11\Article\Repositories\ArticleRepository');
     }
 }
