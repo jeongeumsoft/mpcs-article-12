@@ -11,6 +11,7 @@ Route::group([
     'namespace'     => 'Exit11\Article\Http\Controllers\Api',
     'middleware'    => Core::getConfig('route.middleware'),
 ], function (Router $router) {
+    $router->resource('categories', 'CategoryController')->names('categories')->except(['create', 'destroy']);
     $router->resource('articles', 'ArticleController')->names('articles');
 });
 
@@ -22,6 +23,9 @@ Route::group([
     'namespace'     => 'Exit11\Article\Http\Controllers\Blade',
     'middleware'    => config('mpcs.route.middleware'),
 ], function (Router $router) {
+    $router->get('categories/list', 'CategoryController@list')->name('categories.list');
+    $router->get('categories/list_categories', 'CategoryController@listCategories')->name('categories.list_categories');
+    $router->resource('categories', 'CategoryController')->except(['create', 'destroy']);
     $router->get('articles/list', 'ArticleController@list')->name('articles.list');
     $router->resource('articles', 'ArticleController');
 });

@@ -23,9 +23,10 @@ class ArticleServiceProvider extends ServiceProvider
 
         /* 콘솔에서 vendor:publish 가동시 설치 파일 */
         if ($this->app->runningInConsole()) {
-            $this->publishes([__DIR__ . '/../config' => config_path()], 'mpcs-article-config');
-            $this->publishes([__DIR__ . '/../dist/public' => public_path()], 'mpcs-article-assets');
-            $this->publishes([__DIR__ . '/../dist/resources' => resource_path()], 'mpcs-article-resources');
+            $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+            $this->publishes([__DIR__ . '/../config' => config_path()], 'config');
+            $this->publishes([__DIR__ . '/../dist/public' => public_path()], 'assets');
+            $this->publishes([__DIR__ . '/../dist/resources' => resource_path()], 'resources');
         }
 
         /* 라우터, 다국어 */
@@ -45,6 +46,7 @@ class ArticleServiceProvider extends ServiceProvider
     public function register()
     {
         //$this->commands($this->commands);
+        $this->app->bind('Exit11\Article\Repositories\CategoryRepositoryInterface', 'Exit11\Article\Repositories\CategoryRepository');
         $this->app->bind('Exit11\Article\Repositories\ArticleRepositoryInterface', 'Exit11\Article\Repositories\ArticleRepository');
     }
 }

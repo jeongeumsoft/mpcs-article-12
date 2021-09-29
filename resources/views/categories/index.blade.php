@@ -1,0 +1,63 @@
+@extends(Bootstrap5::theme('layouts.crud'))
+
+{{-- 브라우저 타이틀 --}}
+@section('app_title', '카테고리관리')
+
+{{-- 목록 서브타이틀 --}}
+@section('crud_subtitle', '카테고리관리')
+
+
+{{-- 검색폼 영역 --}}
+@section('crud_search')
+    @component(Bootstrap5::theme('components.aside_crud_search'))
+        @include('mpcs-article::categories.partials.search')
+    @endcomponent
+@endsection
+
+
+{{-- 헤더 버튼 그룹 --}}
+@section('crud_button_group')
+    <button class="btn-crud-create btn btn-primary font-weight-bold"><i class="mdi mdi-plus-circle-outline mr-1"></i>
+        {{ trans('ui-bootstrap5::word.create') }}</button>
+@endsection
+
+
+
+{{-- CRUD 모달 폼 영역--}}
+@section('crud_form')
+    {{-- 생성 --}}
+    @component(Bootstrap5::theme('components.modal_crud_create'))
+        {{-- 제목 --}}
+        @slot('title')
+            카테고리 생성
+        @endslot
+
+        {!!Form::open()->idPrefix('category_create_')!!}   
+        @include('mpcs-article::categories.partials.form')
+        {!!Form::close()!!}
+    @endcomponent
+
+    {{-- 수정 --}}
+    @component(Bootstrap5::theme('components.modal_crud_edit'))
+        {{-- 제목 --}}
+        @slot('title')
+            카테고리 수정
+        @endslot
+
+        {!!Form::open()->idPrefix('category_edit_')!!}   
+        @include('mpcs-article::categories.partials.form')
+        {!!Form::close()!!}
+    @endcomponent
+
+@endsection
+
+@push('after_app_src_scripts')
+<script src="/vendor/mpcs-ui/bootstrap5/js/crud.js"></script>
+@endpush
+
+{{-- CURD 스크립트 추가--}}
+@push('after_app_scripts')
+    <script>
+        window.CRUD.branch();
+    </script>
+@endpush
