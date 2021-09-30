@@ -78,16 +78,15 @@ class ArticleCategoryRepository implements ArticleCategoryRepositoryInterface
             $model->parent_id = $this->request['parent_id'] ?? null;
             $model->type = $this->request['type'];
             $model->is_visible = $this->request['is_visible'] ?? false;
-            $this->model->save();
 
             // nested_info: depth(, nested_ids)
-            $this->model->nested_info = $this->model->parent;
+            $model->nested_info = $model->parent;
 
             // max depth 체크
-            if ($this->model::$maxDepth < $this->model->depth) {
+            if ($this->model::$maxDepth < $model->depth) {
                 abort(422, trans('validation.max.numeric', ['attribute' => 'depth', 'max' => $this->model::$maxDepth]));
             }
-            $this->model->save();
+            $model->save();
 
             DB::commit();
         } catch (Exception $e) {

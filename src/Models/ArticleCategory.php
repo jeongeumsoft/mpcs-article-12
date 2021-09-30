@@ -2,6 +2,7 @@
 
 namespace Exit11\Article\Models;
 
+use Mpcs\Core\Facades\Core;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Mpcs\Core\Traits\ModelTrait;
@@ -22,6 +23,12 @@ class ArticleCategory extends Model
     public $sortable = ['id', 'name', 'is_visible'];
     public $defaultSortable = [
         'name' => 'asc',
+    ];
+
+    public $appends = ['nested_str'];
+
+    protected static $m_params = [
+        'default_load_relations' => ['allParent', 'allChildren']
     ];
 
     // 카테고리 깊이
@@ -75,6 +82,26 @@ class ArticleCategory extends Model
 
         $this->attributes['depth'] = $depth;
         // $this->attributes['nested_ids'] = $nestedIdx;
+    }
+
+    /**
+     * getNestedStrAttribute
+     *
+     * @return void
+     */
+    public function getNestedStrAttribute()
+    {
+        return Core::getAllNestedNames($this);
+    }
+
+    /**
+     * getNestedParentStrAttribute
+     *
+     * @return void
+     */
+    public function getNestedParentStrAttribute()
+    {
+        return Core::getAllNestedNames($this->parent_id ? $this->allParent : null);
     }
 
     /**

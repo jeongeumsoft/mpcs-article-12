@@ -19,11 +19,11 @@ class CreateArticlesTable extends Migration
             $table->string('slug');
             $table->text('summary')->nullable();
             $table->LongText('content')->nullable();
-            $table->string('image')->nullable();
+            $table->string('thumbnail')->nullable();
             $table->integer('view_count')->unsigned()->default(0);
             $table->timestamp('released_at')->nullable();
-            $table->softDeletes();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

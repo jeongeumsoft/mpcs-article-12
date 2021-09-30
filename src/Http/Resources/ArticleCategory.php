@@ -33,6 +33,12 @@ class ArticleCategory extends JsonResource
             'children' => $this->whenLoaded('children', function () {
                 return new EntityCategoryCollection($this->children);
             }),
+            $this->mergeWhen($this->relationLoaded('allParent'), function () {
+                return [
+                    'nested_str' => $this->nested_str,
+                    'nested_parent_str' => $this->nested_parent_str
+                ];
+            }),
         ];
     }
 }

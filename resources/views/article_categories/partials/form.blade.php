@@ -1,5 +1,4 @@
 {!! Form::text('id')->type('hidden') !!}
-{!! Form::text('parent_id')->type('hidden') !!}
 
 <div class="form-group row">
     <label class="col">{{ trans('ui-bootstrap5::word.is_visible_message') }} </label>
@@ -11,8 +10,7 @@
         </div>
     </div>
 </div>
-{{-- 
-{!!Form::select('parent_id', '부모 카테고리', $selectParent)->attrs(['data-type' => 'select-one'])->wrapperAttrs(['class' => 'mb-3'])!!} --}}
+{!!Form::select('parent_id', '부모 카테고리', $categories)->attrs(['data-type' => 'select-one'])->wrapperAttrs(['class' => 'mb-3'])!!}
 
 {!! Form::text('name', trans('ui-bootstrap5::word.name'))
 ->placeholder(trans('ui-bootstrap5::word.name'))
