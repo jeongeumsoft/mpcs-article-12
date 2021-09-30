@@ -7,13 +7,13 @@ use App\Http\Controllers\Controller;
 use Mpcs\Core\Traits\ControllerTrait;
 use Mpcs\Core\Facades\Core;
 
-use Exit11\Article\Http\Requests\CategoryRequest as Request;
-use Exit11\Article\Services\CategoryService as Service;
-use Exit11\Article\Models\Category as Model;
-use Exit11\Article\Http\Resources\Category as Resource;
-use Exit11\Article\Http\Resources\CategoryCollection as ResourceCollection;
+use Exit11\Article\Http\Requests\ArticleCategoryRequest as Request;
+use Exit11\Article\Services\ArticleCategoryService as Service;
+use Exit11\Article\Models\ArticleCategory as Model;
+use Exit11\Article\Http\Resources\ArticleCategory as Resource;
+use Exit11\Article\Http\Resources\ArticleCategoryCollection as ResourceCollection;
 
-class CategoryController extends Controller
+class ArticleCategoryController extends Controller
 {
     use ControllerTrait;
     protected $service;
@@ -42,23 +42,23 @@ class CategoryController extends Controller
     /**
      * edit
      *
-     * @param  mixed $category
+     * @param  mixed $article_category
      * @return void
      */
-    public function edit(Model $category)
+    public function edit(Model $article_category)
     {
-        return new Resource($this->service->edit($category));
+        return new Resource($this->service->edit($article_category));
     }
 
     /**
      * show
      *
-     * @param  mixed $category
+     * @param  mixed $article_category
      * @return void
      */
-    public function show(Model $category)
+    public function show(Model $article_category)
     {
-        return new Resource($this->service->show($category));
+        return new Resource($this->service->show($article_category));
     }
 
     /**
@@ -79,9 +79,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Model $category)
+    public function update(Request $request, Model $article_category)
     {
-        return new Resource($this->service->update($category));
+        return new Resource($this->service->update($article_category));
     }
 
     /**
@@ -90,8 +90,19 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Model $category)
+    public function destroy(Model $article_category)
     {
-        return Core::responseJson($this->service->destroy($category));
+        return Core::responseJson($this->service->destroy($article_category));
+    }
+
+    /**
+     * saveOrder
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function saveOrder(Request $request)
+    {
+        return Core::responseJson($this->service->saveOrder());
     }
 }

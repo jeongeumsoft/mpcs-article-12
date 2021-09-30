@@ -5,7 +5,7 @@ namespace Exit11\Article\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Mpcs\Core\Traits\ResourceTrait;
 
-class Category extends JsonResource
+class ArticleCategory extends JsonResource
 {
     use ResourceTrait;
 
@@ -23,13 +23,15 @@ class Category extends JsonResource
             'name' => $this->name,
             'slug' => $this->slug,
             'description' => $this->description,
+            'order' => $this->order,
+            'type_str' => $this->type_str,
             'is_visible' => $this->is_visible,
             'depth' => $this->depth,
             'all_children' => $this->whenLoaded('allChildren', function () {
-                return new CategoryCollection($this->allChildren);
+                return new EntityCategoryCollection($this->allChildren);
             }),
             'children' => $this->whenLoaded('children', function () {
-                return new CategoryCollection($this->children);
+                return new EntityCategoryCollection($this->children);
             }),
         ];
     }

@@ -1,14 +1,19 @@
 <li data-crud-id="{{ $branch->id }}" data-parent-id="{{ $branch->parent_id }}" class="mb-1">
     <div class="d-flex justify-content-between align-items-center">
         @if($branch->allChildren->count() > 0)
-            <div class="col-auto pe-2">
-                <button class="btn btn-light py-0 px-1 align-middle" data-bs-toggle="collapse" href="#branch_{{ $branch->id }}" aria-expanded="false" title="펼침/접힘">
+            <div class="col-auto">
+                <button class="btn btn-sm btn-icon p-0" data-bs-toggle="collapse" href="#branch_{{ $branch->id }}" aria-expanded="false" title="펼침/접힘">
                     <i class="mdi mdi-arrow-collapse-vertical"></i>
                 </button>
             </div>
         @else
-            <div class="col-auto px-3"></div>
+            <div class="col-auto" style="padding-left: 28px;"></div>
         @endif
+        {{-- <div class="col-auto">
+            <button type="button" class="btn btn-sm btn-icon p-0 handle">
+                <i class="mdi mdi-drag-vertical"></i>
+            </button>
+        </div> --}}
         <div class="d-flex justify-content-between align-items-center col p-1 border rounded">
             <div class="col-auto">
                 <div class="form-check form-switch">
@@ -43,9 +48,9 @@
         </div>
     </div>
     @if($branch->allChildren->count() > 0)
-    <ul class="pt-1 collapse" style="list-style: none" id="branch_{{ $branch->id }}">
+    <ul class="pt-1 collapse nested-sortable" style="list-style: none" id="branch_{{ $branch->id }}">
         @foreach($branch->allChildren as $branch)
-            @include('mpcs-article::categories.partials.branch', $branch)
+            @include('mpcs-article::article_categories.partials.branch', $branch)
         @endforeach
     </ul>
     @endif

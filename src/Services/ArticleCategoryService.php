@@ -3,10 +3,10 @@
 namespace Exit11\Article\Services;
 
 use Mpcs\Core\Facades\Core;
-use Exit11\Article\Repositories\CategoryRepositoryInterface as RepositoryInterface;
+use Exit11\Article\Repositories\ArticleCategoryRepositoryInterface as RepositoryInterface;
 use Mpcs\Core\Traits\ServiceTrait;
 
-class CategoryService
+class ArticleCategoryService
 {
     use ServiceTrait;
 
@@ -108,6 +108,23 @@ class CategoryService
                 'id' => $id,
             ];
         }
+        Core::crudAbort();
+    }
+
+    /**
+     * saveOrder
+     *
+     * @return void
+     */
+    public function saveOrder()
+    {
+        if ($this->repository->saveOrder()) {
+            return [
+                'flag' => true,
+                'status' => 200,
+            ];
+        }
+
         Core::crudAbort();
     }
 }

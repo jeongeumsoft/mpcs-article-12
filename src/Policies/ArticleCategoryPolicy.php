@@ -3,11 +3,11 @@
 namespace Exit11\Article\Policies;
 
 use Mpcs\Core\Models\User;
-use Exit11\Article\Models\Category as Model;
+use Exit11\Article\Models\ArticleCategory as Model;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Mpcs\Core\Facades\Core;
 
-class CategoryPolicy
+class ArticleCategoryPolicy
 {
     use HandlesAuthorization;
 

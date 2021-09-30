@@ -2,7 +2,7 @@
 
 namespace Exit11\Article\Repositories;
 
-interface CategoryRepositoryInterface
+interface ArticleCategoryRepositoryInterface
 {
     public function select($enableRequestParam, $isApiSelect);
 
@@ -17,4 +17,6 @@ interface CategoryRepositoryInterface
     public function delete($model);
 
     public function get($model);
+
+    public function saveOrder();
 }

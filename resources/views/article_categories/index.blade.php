@@ -10,15 +10,20 @@
 {{-- 검색폼 영역 --}}
 @section('crud_search')
     @component(Bootstrap5::theme('components.aside_crud_search'))
-        @include('mpcs-article::categories.partials.search')
+        @include('mpcs-article::article_categories.partials.search')
     @endcomponent
 @endsection
 
 
 {{-- 헤더 버튼 그룹 --}}
 @section('crud_button_group')
+    {{-- <button type="button" class="btn btn-danger dd-save">
+        <i class="mdi mdi-content-save-all mr-2"></i>
+        <span class="d-none d-sm-inline"> {{ trans('ui-bootstrap4::word.button.save_order') }} </span>
+    </button> --}}
     <button class="btn-crud-create btn btn-primary font-weight-bold"><i class="mdi mdi-plus-circle-outline mr-1"></i>
-        {{ trans('ui-bootstrap5::word.create') }}</button>
+        {{ trans('ui-bootstrap5::word.create') }}
+    </button>
 @endsection
 
 
@@ -33,7 +38,7 @@
         @endslot
 
         {!!Form::open()->idPrefix('category_create_')!!}   
-        @include('mpcs-article::categories.partials.form')
+        @include('mpcs-article::article_categories.partials.form')
         {!!Form::close()!!}
     @endcomponent
 
@@ -45,7 +50,7 @@
         @endslot
 
         {!!Form::open()->idPrefix('category_edit_')!!}   
-        @include('mpcs-article::categories.partials.form')
+        @include('mpcs-article::article_categories.partials.form')
         {!!Form::close()!!}
     @endcomponent
 
@@ -58,6 +63,6 @@
 {{-- CURD 스크립트 추가--}}
 @push('after_app_scripts')
     <script>
-        window.CRUD.branch();
+        window.CRUD.sortable();
     </script>
 @endpush

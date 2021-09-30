@@ -2,10 +2,11 @@
 
 namespace Exit11\Article\Http\Controllers\Blade;
 
-use Exit11\Article\Http\Controllers\Api\CategoryController as Controller;
-use Exit11\Article\Http\Requests\CategoryRequest as Request;
+use Exit11\Article\Http\Controllers\Api\ArticleCategoryController as Controller;
+use Exit11\Article\Http\Requests\ArticleCategoryRequest as Request;
+use Exit11\Article\Models\ArticleCategory as Model;
 
-class CategoryController extends Controller
+class ArticleCategoryController extends Controller
 {
     /**
      * index
@@ -14,7 +15,8 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        return view('mpcs-article::categories.index')->withInput($request->flash());
+        $types = Model::getAllowTypes();
+        return view('mpcs-article::article_categories.index', compact('types'))->withInput($request->flash());
     }
 
     /**
@@ -31,7 +33,7 @@ class CategoryController extends Controller
 
         $datas = $this->service->index();
 
-        return view('mpcs-article::categories.partials.list', compact('datas'))->withInput($request->flash());
+        return view('mpcs-article::article_categories.partials.list', compact('datas'))->withInput($request->flash());
     }
 
     /**
@@ -49,6 +51,6 @@ class CategoryController extends Controller
 
         $datas = $this->service->index();
 
-        return view('mpcs-article::categories.partials.list_categories', compact('datas'))->withInput($request->flash());
+        return view('mpcs-article::article_categories.partials.list_categories', compact('datas'))->withInput($request->flash());
     }
 }

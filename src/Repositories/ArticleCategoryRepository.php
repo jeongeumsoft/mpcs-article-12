@@ -2,12 +2,12 @@
 
 namespace Exit11\Article\Repositories;
 
-use Exit11\Article\Models\Category as Model;
+use Exit11\Article\Models\ArticleCategory as Model;
 use Mpcs\Core\Traits\RepositoryTrait;
 use Illuminate\Support\Facades\DB;
 use Exception;
 
-class CategoryRepository implements CategoryRepositoryInterface
+class ArticleCategoryRepository implements ArticleCategoryRepositoryInterface
 {
     use RepositoryTrait;
 
@@ -21,10 +21,9 @@ class CategoryRepository implements CategoryRepositoryInterface
     {
         $apiSelectParams = [
             'item_list' => ['id', 'name', 'is_visible'],
-            'attribute_name' => trans('cms.attributes.category')
+            'attribute_name' => trans('mpcs-article::word.attributes.category')
         ];
         $model = $this->model::search($enableRequestParam);
-
         return $this->getSelectFormatter($model, $isApiSelect, $apiSelectParams);
     }
 
@@ -43,9 +42,9 @@ class CategoryRepository implements CategoryRepositoryInterface
         try {
             /* DB 트랜젝션 통과 */
             $this->model->name = $this->request['name'];
-            $this->model->slug = $this->request['slug'];
             $this->model->description = $this->request['description'] ?? null;
             $this->model->parent_id = $this->request['parent_id'] ?? null;
+            $this->model->type = $this->request['type'];
             $this->model->is_visible = $this->request['is_visible'] ?? false;
             $this->model->save();
 
@@ -75,19 +74,20 @@ class CategoryRepository implements CategoryRepositoryInterface
         try {
             /* DB 트랜젝션 통과 */
             $model->name = $this->request['name'];
-            $model->slug = $this->request['slug'];
             $model->description = $this->request['description'] ?? null;
             $model->parent_id = $this->request['parent_id'] ?? null;
+            $model->type = $this->request['type'];
             $model->is_visible = $this->request['is_visible'] ?? false;
+            $this->model->save();
 
             // nested_info: depth(, nested_ids)
-            $model->nested_info = $model->parent;
+            $this->model->nested_info = $this->model->parent;
 
             // max depth 체크
-            if ($this->model::$maxDepth < $model->depth) {
+            if ($this->model::$maxDepth < $this->model->depth) {
                 abort(422, trans('validation.max.numeric', ['attribute' => 'depth', 'max' => $this->model::$maxDepth]));
             }
-            $model->save();
+            $this->model->save();
 
             DB::commit();
         } catch (Exception $e) {
@@ -109,5 +109,21 @@ class CategoryRepository implements CategoryRepositoryInterface
     public function delete($model)
     {
         return $model->delete();
+    }
+
+    public function saveOrder()
+    {
+        /* DB 트랜젝션 시작 */
+        DB::beginTransaction();
+        try {
+            /* DB 트랜젝션 통과 */
+            $this->model::saveOrder($this->request);
+            DB::commit();
+        } catch (Exception $e) {
+            /* DB 트랜젝션 롤 */
+            DB::rollback();
+            throw $e;
+        }
+        return true;
     }
 }

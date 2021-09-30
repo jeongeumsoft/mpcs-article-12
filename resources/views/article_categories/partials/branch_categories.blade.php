@@ -19,7 +19,7 @@
     @if($branch->allChildren->count() > 0)
     <ul class="pt-1 collapse" style="list-style: none" id="branch_{{ $branch->id }}">
         @foreach($branch->allChildren as $branch)
-            @include('mpcs-article::categories.partials.branch_categories', $branch)
+            @include('mpcs-article::article_categories.partials.branch_categories', $branch)
         @endforeach
     </ul>
     @endif
