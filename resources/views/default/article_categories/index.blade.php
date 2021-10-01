@@ -10,7 +10,7 @@
 {{-- 검색폼 영역 --}}
 @section('crud_search')
     @component(Bootstrap5::theme('components.aside_crud_search'))
-        @include('mpcs-article::article_categories.partials.search')
+        @include(Article::theme('article_categories.partials.search'))
     @endcomponent
 @endsection
 
@@ -38,7 +38,7 @@
         @endslot
 
         {!!Form::open()->idPrefix('category_create_')!!}   
-        @include('mpcs-article::article_categories.partials.form')
+        @include(Article::theme('article_categories.partials.form'))
         {!!Form::close()!!}
     @endcomponent
 
@@ -50,7 +50,7 @@
         @endslot
 
         {!!Form::open()->idPrefix('category_edit_')!!}   
-        @include('mpcs-article::article_categories.partials.form')
+        @include(Article::theme('article_categories.partials.form'))
         {!!Form::close()!!}
     @endcomponent
 

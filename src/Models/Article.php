@@ -2,24 +2,230 @@
 
 namespace Exit11\Article\Models;
 
+use Exit11\Article\Facades\Article as Facade;
 use Illuminate\Database\Eloquent\Model;
 use Mpcs\Core\Facades\Core;
 use Mpcs\Core\Traits\ModelTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentTaggable\Taggable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class Article extends Model
 {
-    use ModelTrait;
+    use SoftDeletes, Sluggable, Taggable, ModelTrait;
 
     protected $table = 'articles';
+    protected $dates = ['created_at', 'updated_at', 'deleted_at', 'released_at'];
     public $timestamps = false;
     protected $guarded = ['id'];
     protected static $m_params = [
-        'default_load_relations' => [],
+        'default_load_relations' => ['articleCategories', 'articleFiles', 'tags'],
         'view_load_relations' => [],
-        'column_maps' => []
+        'column_maps' => [
+            // date : {컬럼명}
+            'from' => 'released_at',
+            'to' => 'released_at',
+        ]
     ];
     // $sortable 정의시 정렬기능을 제공할 필드는 필수 기입
-    // public $sortable = ['id', 'name', 'is_visible'];
+    public $sortable = ['id', 'title', 'view_count', 'released_at'];
+
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:i',
+        'updated_at' => 'datetime:Y-m-d H:i',
+        'deleted_at' => 'datetime:Y-m-d H:i',
+        'released_at' => 'datetime:Y-m-d H:i',
+        'status_released' => 'boolean',
+    ];
+
+    private $uploadDisk;
+    private $imageRootDir;
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->uploadDisk = Storage::disk('upload');
+        $this->imageRootDir = 'articles';
+    }
+
+
+    /**
+     * articleCategories
+     *
+     * @return void
+     */
+    public function articleCategories()
+    {
+        return $this->morphToMany(ArticleCategory::class, 'article_categorizable');
+    }
+
+    /**
+     * articleFiles
+     *
+     * @return void
+     */
+    public function articleFiles()
+    {
+        return $this->hasMany(ArticleFile::class, 'article_id');
+    }
+
+    /**
+     * getStatusReleasedAttribute
+     *
+     * @return void
+     */
+    public function getStatusReleasedAttribute()
+    {
+        $now = \Carbon\Carbon::now()->format('Y-m-d H:i:s');
+        $released = $this->attributes['released_at'];
+        return ($released && $released <= $now);
+    }
+
+    /**
+     * getViewCountAttribute
+     *
+     * @return void
+     */
+    public function getViewCountAttribute()
+    {
+        return number_format($this->attributes['view_count'] ?? 0);
+    }
+
+    /**
+     * setReleasedAtAttribute
+     *
+     * @param  mixed $date
+     * @return void
+     */
+    public function setReleasedAtAttribute($date)
+    {
+        $this->attributes['released_at'] = empty($date) ? null : Carbon::parse($date);
+    }
+
+    /**
+     * scopeReleased
+     *
+     * @param  mixed $query
+     * @return void
+     */
+    public function scopeReleased($query)
+    {
+        $now = \Carbon\Carbon::now()->format('Y-m-d H:i:s');
+        return $query->where('released_at', '<=', $now);
+    }
+
+    /**
+     * getUploadDiskAttribute
+     *
+     * @return void
+     */
+    public function getUploadDiskAttribute()
+    {
+        return $this->uploadDisk;
+    }
+
+    /**
+     * getRootDirAttribute
+     *
+     * @return void
+     */
+    public function getImageRootDirAttribute()
+    {
+        return $this->imageRootDir;
+    }
+
+    /**
+     * getFileUrlAttribute
+     *
+     * @return void
+     */
+    public function getImageFileUrlAttribute()
+    {
+        if ($this->image) {
+            return $this->upload_disk->url($this->image_root_dir . '/' . $this->image);
+        }
+        return Facade::noImage();
+    }
+
+    /**
+     * getFileUrlAttribute
+     *
+     * @return void
+     */
+    public function getThumbImageUrlAttribute()
+    {
+        if ($this->image) {
+            return $this->upload_disk->url($this->image_root_dir . '/thumb_' . $this->image);
+        }
+        return Facade::noImage();
+    }
+
+    /**
+     * getFileUrlAttribute
+     *
+     * @return void
+     */
+    public function getSmallImageUrlAttribute()
+    {
+        if ($this->image) {
+            return $this->upload_disk->url($this->image_root_dir . '/small_' . $this->image);
+        }
+        return Facade::noImage();
+    }
+
+    /**
+     * getFileUrlAttribute
+     *
+     * @return void
+     */
+    public function getMediumImageUrlAttribute()
+    {
+        if ($this->image) {
+            return $this->upload_disk->url($this->image_root_dir . '/medium_' . $this->image);
+        }
+        return Facade::noImage();
+    }
+
+    /**
+     * getImageAspectRatioAttribute
+     *
+     * @return void
+     */
+    public function getImageAspectRatioAttribute()
+    {
+        if ($this->image) {
+            $image = $this->upload_disk->get($this->image_root_dir . '/' . $this->image);
+            if ($image) {
+                $width = Image::make($image)->width();
+                $height = Image::make($image)->height();
+                $aspectRatio = ($height / $width) * 100;
+                return $aspectRatio;
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * sluggable
+     *
+     * @return void
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source'     => 'title',
+                'method' => function ($string, $separator) {
+                    return preg_replace('/[^0-9a-zA-Z가-힣ㄱ-ㅎㅏ]+/i', $separator, $string);
+                },
+                'onUpdate'  => true
+            ]
+        ];
+    }
+
 
     /**
      * boot

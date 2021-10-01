@@ -17,7 +17,9 @@ class ArticleController extends Controller
      */
     public function index(Request $request)
     {
-        $datas = $this->service->index();
+        $categories = [];
+        $tags = [];
+        return view(Article::theme('articles.index'), compact('categories', 'tags'))->withInput($request->flash());
     }
 
     /**
@@ -27,6 +29,7 @@ class ArticleController extends Controller
      */
     public function list(Request $request)
     {
-        // 
+        $datas = $this->service->index();
+        return view(Article::theme('articles.partials.list'), compact('datas'))->withInput($request->flash());
     }
 }

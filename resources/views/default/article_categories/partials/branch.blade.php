@@ -50,7 +50,7 @@
     @if($branch->allChildren->count() > 0)
     <ul class="pt-1 collapse nested-sortable" style="list-style: none" id="branch_{{ $branch->id }}">
         @foreach($branch->allChildren as $branch)
-            @include('mpcs-article::article_categories.partials.branch', $branch)
+            @include(Article::theme('article_categories.partials.branch'), $branch)
         @endforeach
     </ul>
     @endif

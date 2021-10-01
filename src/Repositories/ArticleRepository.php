@@ -4,9 +4,11 @@ namespace Exit11\Article\Repositories;
 
 use Exception;
 use Mpcs\Core\Facades\Core;
+use Exit11\Article\Facades\Article;
 use Exit11\Article\Models\Article as Model;
 use Illuminate\Support\Facades\DB;
 use Mpcs\Core\Traits\RepositoryTrait;
+use Illuminate\Support\Str;
 
 class ArticleRepository implements ArticleRepositoryInterface
 {
@@ -22,8 +24,8 @@ class ArticleRepository implements ArticleRepositoryInterface
     {
         $apiSelectParams = [
             // id, name [,'is_visible']
-            'item_list' => ['id', 'name'],
-            'attribute_name' => trans('cms.attributes.article')
+            'item_list' => ['id', 'title'],
+            'attribute_name' => trans('mpcs-article::word.attributes.article')
         ];
         $model = $this->model::search($enableRequestParam);
 
@@ -42,9 +44,51 @@ class ArticleRepository implements ArticleRepositoryInterface
     {
         DB::beginTransaction();
         try {
-            /* DB 트랜젝션 통과 */
 
-            // Your code
+            $this->model->title = $this->request['title'];
+            $this->model->summary = $this->request['summary'];
+            $this->model->content = $this->request['content'] ?? '';
+            $this->model->released_at = $this->request['released_at'];
+
+            /* 이미지 Base64 방식 저장 */
+            $requestImage = $this->request['thumbnail'] ?? null;
+            if ($requestImage) {
+                if (!empty($requestImage)) {
+                    if (substr($requestImage, 0, 10) === "data:image") {
+                        $base64ToFile = Article::base64ToFile($requestImage, $this->model->upload_disk, $this->model->image_root_dir);
+                        if ($base64ToFile) {
+                            $this->model->thumbnail = $base64ToFile;
+                        }
+                    } else {
+                        $this->model->thumbnail = $requestImage;
+                    }
+                    Article::generateThumb($this->model->image_root_dir, $this->model->thumbnail);
+                }
+            }
+
+            if ($this->model->save()) {
+                $this->model->articleCategories()->attach($this->request['categories'] ?? null);
+                $this->model->retag($this->request['tags'] ?? []);
+
+                /* 폼데이터 업로드 방식 : 메서드 post */
+                $articleFiles = $this->request['article_files'] ?? null;
+
+                foreach ((array) $articleFiles as $file) {
+                    if (is_file($file)) {
+                        $filename = round(microtime(true) * 1000) . "_" . Str::random(10) . "." . $file->clientExtension();
+
+                        $modelFile = $this->model->articleFiles()->create([
+                            'caption' => $file->getClientOriginalName(),
+                            'name' => $filename,
+                            'size' => $file->getSize(),
+                            'mime' => $file->getClientMimeType(),
+                        ]);
+                        $modelFile->upload_disk->putFileAs($modelFile->dir_path, $file, $filename, 'public');
+                    }
+                }
+            }
+
+
 
             DB::commit();
         } catch (Exception $e) {
@@ -61,10 +105,47 @@ class ArticleRepository implements ArticleRepositoryInterface
     {
         DB::beginTransaction();
         try {
-            /* DB 트랜젝션 통과 */
+            $model->title = $this->request['title'];
+            $model->summary = $this->request['summary'];
+            $model->content = $this->request['content'] ?? '';
+            $model->released_at = $this->request['released_at'];
 
-            // Your code
-            // $model->save();
+            /* 이미지 Base64 방식 저장 */
+            $requestImage = $this->request['thumbnail'] ?? $model->thumbnail;
+            if ($requestImage) {
+                if (substr($requestImage, 0, 10) === "data:image") {
+                    $base64ToFile = Article::base64ToFile($requestImage, $model->upload_disk, $model->image_root_dir);
+                    if ($base64ToFile) {
+                        $model->thumbnail = $base64ToFile;
+                    }
+                } else {
+                    $model->thumbnail = $requestImage;
+                }
+                Article::generateThumb($model->image_root_dir, $model->thumbnail);
+            }
+
+            if ($model->save()) {
+                $model->articleCategories()->sync($this->request['categories'] ?? null);
+                $model->retag($this->request['tags'] ?? []);
+
+                /* 폼데이터 업로드 방식 : 메서드 post */
+                $articleFiles = $this->request['article_files'] ?? null;
+
+                foreach ((array) $articleFiles as $file) {
+                    if (is_file($file)) {
+                        $filename = round(microtime(true) * 1000) . "_" . Str::random(10) . "." . $file->clientExtension();
+
+                        $modelFile = $model->articleFiles()->create([
+                            'caption' => $file->getClientOriginalName(),
+                            'name' => $filename,
+                            'size' => $file->getSize(),
+                            'mime' => $file->getClientMimeType(),
+                        ]);
+
+                        $modelFile->upload_disk->putFileAs($modelFile->dir_path, $file, $filename, 'public');
+                    }
+                }
+            }
 
             DB::commit();
         } catch (Exception $e) {

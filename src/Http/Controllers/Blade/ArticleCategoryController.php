@@ -3,6 +3,7 @@
 namespace Exit11\Article\Http\Controllers\Blade;
 
 use Mpcs\Core\Facades\Core;
+use Exit11\Article\Facades\Article;
 use Exit11\Article\Http\Controllers\Api\ArticleCategoryController as Controller;
 use Exit11\Article\Http\Requests\ArticleCategoryRequest as Request;
 use Exit11\Article\Models\ArticleCategory as Model;
@@ -20,7 +21,7 @@ class ArticleCategoryController extends Controller
         $categories = $categories->pluck('nested_str', 'id')->prepend('선택', '')->toArray();
 
         $types = Model::getAllowTypes();
-        return view('mpcs-article::article_categories.index', compact('categories', 'types'))->withInput($request->flash());
+        return view(Article::theme('article_categories.index'), compact('categories', 'types'))->withInput($request->flash());
     }
 
     /**
@@ -37,7 +38,7 @@ class ArticleCategoryController extends Controller
 
         $datas = $this->service->index();
 
-        return view('mpcs-article::article_categories.partials.list', compact('datas'))->withInput($request->flash());
+        return view(Article::theme('article_categories.partials.list'), compact('datas'))->withInput($request->flash());
     }
 
     /**
