@@ -11,6 +11,9 @@
                 @sortablelink('title', trans('mpcs-article::word.attr.title'))
             </th>
             <th class="text-center min-width-rem-6 d-none d-md-table-cell">
+                {{ trans('mpcs-article::word.attr.writer') }}
+            </th>
+            <th class="text-center min-width-rem-6 d-none d-md-table-cell">
                 @sortablelink('view_count', trans('mpcs-article::word.attr.view_count'))
             </th>
             <th class="text-center min-width-rem-10">
@@ -34,7 +37,7 @@
                 </td>
                 <td class="text-left d-block d-md-table-cell">
                     <div class="row no-gutters">
-                        @if($data->thumbnail)
+                        @if(Article::useThumbnail() && $data->thumbnail)
                             <div class="col-auto mr-2">
                                 <div class="embed-responsive embed-responsive-1by1" style="width: 80px; ">
                                     <img class="embed-responsive-item img-thumbnail" src="{{ $data->thumb_image_url }}" alt="{{ $data->title }}">
@@ -43,10 +46,10 @@
                         @endif
                         <div class="col">
                             <p data-name='categories' class="mb-0">
-                                @if(isset($data->categories))
-                                    @forelse($data->categories as $category)
+                                @if(isset($data->articleCategories))
+                                    @forelse($data->articleCategories as $category)
                                     <span class="badge bg-info">
-                                        {{ $category->name }}
+                                        {{ $category->nested_str }}
                                     </span>
                                     @empty
                                     @endforelse
@@ -63,6 +66,9 @@
                             </p>
                         </div>
                     </div>
+                </td>
+                <td data-name='user.name' class="d-none d-md-table-cell text-center">
+                    {{ $data->user->name }}
                 </td>
                 <td data-name='view_count' class="d-none d-md-table-cell text-center">
                     {{ $data->view_count }}

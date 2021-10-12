@@ -2,7 +2,7 @@
 
 namespace Exit11\Article\Repositories;
 
-interface ArticleRepositoryInterface
+interface ArticleFileRepositoryInterface
 {
     public function select($enableRequestParam, $isApiSelect);
 

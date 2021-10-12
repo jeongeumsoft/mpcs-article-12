@@ -15,6 +15,10 @@ return [
         'tags' => "태그",
         'status' => '상태',
         'view_count' => '조회수',
-        'article_files' => '첨부파일'
+        'article_files' => '첨부파일',
+        'content' => '내용',
+        'thumbnail' => '썸네일',
+        'attachments' => '첨부파일',
+        'writer' => '글쓴이',
     ],
 ];

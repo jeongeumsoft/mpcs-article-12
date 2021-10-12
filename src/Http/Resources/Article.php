@@ -18,6 +18,11 @@ class Article extends JsonResource
      */
     public function toArray($request)
     {
+        $lastSegment = last(request()->segments());
+        $isIndex = $lastSegment === 'articles';
+        $isEdit = $lastSegment === 'edit';
+        $isShow = !$isIndex && !$isIndex;
+
         return [
             'id' => $this->id,
             'title' => $this->title,
@@ -31,20 +36,17 @@ class Article extends JsonResource
             'medium_image_url' => $this->medium_image_url,
             'image_aspect_ratio' => $this->image_aspect_ratio,
             'view_count' => $this->view_count,
-            'article_categories[]' => $this->whenLoaded('articleCategories', function () {
-                return $this->categories->pluck('id')->toArray();
+            'user' => $this->whenLoaded('user', function () {
+                return $this->user;
             }),
-            'article_categories_name' => $this->whenLoaded('articleCategories', function () {
-                return $this->categories->pluck('name')->toArray();
+            'article_categories' => $this->whenLoaded('articleCategories', function () {
+                return new ArticleCategoryCollection($this->articleCategories);
             }),
-            'article_categories_slug' => $this->whenLoaded('articleCategories', function () {
-                return $this->categories->pluck('slug')->toArray();
-            }),
-            'tags[]' => $this->whenLoaded('tags', function () {
+            'tags' => $this->whenLoaded('tags', function () {
                 return $this->tagArray;
             }),
-            'article_files[]' => $this->whenLoaded('articleFiles', function () {
-                return $this->articleFiles;
+            'article_files' => $this->whenLoaded('articleFiles', function () {
+                return new ArticleFileCollection($this->articleFiles);
             }),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

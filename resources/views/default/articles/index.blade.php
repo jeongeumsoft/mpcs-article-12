@@ -9,6 +9,11 @@
 {{-- 목록 타이틀 --}}
 @section('crud_list_title', trans('mpcs-article::menu.articles'))
 
+{{-- 사이트메뉴 인클루드 --}}
+{{-- @section('aside_left_nav')
+    @include(Article::theme('articles.partials.list_categories'), ['datas' => $categories])
+@endsection --}}
+
 
 {{-- 검색폼 영역 --}}
 @section('crud_search')
@@ -35,21 +40,21 @@
 @section('crud_form')
 
     {{-- 생성 --}}
-    @component(Bootstrap5::theme('components.modal_crud_create'))        
-        {!!Form::open()->idPrefix('user_create_')!!}   
+    @component(Bootstrap5::theme('components.modal_crud_create'), ['modalSize' => 'modal-fullscreen'])        
+        {!!Form::open()->idPrefix('user_create_')->attrs(['class' => 'h-100'])!!}   
         @include(Article::theme('articles.partials.form'))
         {!!Form::close()!!}
     @endcomponent
     
     {{-- 수정 --}}
-    @component(Bootstrap5::theme('components.modal_crud_edit'))
-        {!!Form::open()->idPrefix('user_edit_')->method('put')!!}   
+    @component(Bootstrap5::theme('components.modal_crud_edit'), ['modalSize' => 'modal-fullscreen'])
+        {!!Form::open()->idPrefix('user_edit_')->method('put')->attrs(['class' => 'h-100'])!!}   
         @include(Article::theme('articles.partials.form'))
         {!!Form::close()!!}
     @endcomponent
     
     {{-- 보기 --}}
-    @component(Bootstrap5::theme('components.modal_crud_show'))
+    @component(Bootstrap5::theme('components.modal_crud_show'), ['modalSize' => 'modal-fullscreen'])
         {{-- 컨텐츠 인클루드 --}}
         @include(Article::theme('articles.partials.show'))
     @endcomponent
@@ -59,6 +64,21 @@
     @endcomponent
     
 @endsection
+
+
+
+{{-- 스크립트 템플릿 --}}
+@push('header_script')
+
+    {{-- 파일업로드 --}}
+    @component(Bootstrap5::theme('components.script_file_uploader'))
+    @endcomponent
+
+    {{-- 보기 : 카테고리, 첨부파일 --}}
+    @component(Article::theme('articles.partials.script_templates'))
+    @endcomponent
+@endpush
+
 
 @push('after_app_src_scripts')
 <script src="/vendor/mpcs-ui/bootstrap5/js/crud.js"></script>

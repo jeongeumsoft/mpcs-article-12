@@ -3,6 +3,7 @@
 namespace Exit11\Article;
 
 use Illuminate\Support\Facades\Storage;
+use MpcsUi\Bootstrap5\Facades\Bootstrap5;
 
 class Article
 {
@@ -27,6 +28,16 @@ class Article
         return config('mpcsarticle.category_max_depth');
     }
 
+    /**
+     * useThumbnail
+     *
+     * @return int
+     */
+    public static function useThumbnail()
+    {
+        return config('mpcsarticle.use_thumbnail') ?? false;
+    }
+
 
     /**
      * noImage
@@ -35,6 +46,6 @@ class Article
      */
     public static function noImage()
     {
-        return Storage::disk('upload')->url('noimage.jpg');
+        return Bootstrap5::noImage();
     }
 }

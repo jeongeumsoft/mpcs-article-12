@@ -18,6 +18,7 @@ class ArticleAuthServiceProvider extends ServiceProvider
     protected $policies = [
         Models\ArticleCategory::class => Policies\ArticleCategoryPolicy::class,
         Models\Article::class => Policies\ArticlePolicy::class,
+        Models\ArticleFile::class => Policies\ArticleFilePolicy::class,
     ];
 
     /**

@@ -11,6 +11,7 @@ use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class Article extends Model
 {
@@ -18,11 +19,10 @@ class Article extends Model
 
     protected $table = 'articles';
     protected $dates = ['created_at', 'updated_at', 'deleted_at', 'released_at'];
-    public $timestamps = false;
     protected $guarded = ['id'];
     protected static $m_params = [
-        'default_load_relations' => ['articleCategories', 'articleFiles', 'tags'],
-        'view_load_relations' => [],
+        //'default_load_relations' => ['articleCategories', 'articleFiles', 'tags'],
+        'default_load_relations' => ['articleCategories', 'articleFiles', 'user'],
         'column_maps' => [
             // date : {컬럼명}
             'from' => 'released_at',
@@ -53,6 +53,18 @@ class Article extends Model
 
 
     /**
+     * boot
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+        static::setMemberParams(self::$m_params);
+    }
+
+
+    /**
      * articleCategories
      *
      * @return void
@@ -70,6 +82,16 @@ class Article extends Model
     public function articleFiles()
     {
         return $this->hasMany(ArticleFile::class, 'article_id');
+    }
+
+    /**
+     * user
+     *
+     * @return void
+     */
+    public function user()
+    {
+        return $this->belongsTo('Mpcs\Core\Models\User', 'user_id');
     }
 
     /**
@@ -144,8 +166,8 @@ class Article extends Model
      */
     public function getImageFileUrlAttribute()
     {
-        if ($this->image) {
-            return $this->upload_disk->url($this->image_root_dir . '/' . $this->image);
+        if ($this->thumbnail) {
+            return $this->upload_disk->url($this->image_root_dir . '/' . $this->thumbnail);
         }
         return Facade::noImage();
     }
@@ -157,8 +179,8 @@ class Article extends Model
      */
     public function getThumbImageUrlAttribute()
     {
-        if ($this->image) {
-            return $this->upload_disk->url($this->image_root_dir . '/thumb_' . $this->image);
+        if ($this->thumbnail) {
+            return $this->upload_disk->url($this->image_root_dir . '/thumb_' . $this->thumbnail);
         }
         return Facade::noImage();
     }
@@ -170,8 +192,8 @@ class Article extends Model
      */
     public function getSmallImageUrlAttribute()
     {
-        if ($this->image) {
-            return $this->upload_disk->url($this->image_root_dir . '/small_' . $this->image);
+        if ($this->thumbnail) {
+            return $this->upload_disk->url($this->image_root_dir . '/small_' . $this->thumbnail);
         }
         return Facade::noImage();
     }
@@ -183,8 +205,8 @@ class Article extends Model
      */
     public function getMediumImageUrlAttribute()
     {
-        if ($this->image) {
-            return $this->upload_disk->url($this->image_root_dir . '/medium_' . $this->image);
+        if ($this->thumbnail) {
+            return $this->upload_disk->url($this->image_root_dir . '/medium_' . $this->thumbnail);
         }
         return Facade::noImage();
     }
@@ -196,8 +218,8 @@ class Article extends Model
      */
     public function getImageAspectRatioAttribute()
     {
-        if ($this->image) {
-            $image = $this->upload_disk->get($this->image_root_dir . '/' . $this->image);
+        if ($this->thumbnail) {
+            $image = $this->upload_disk->get($this->image_root_dir . '/' . $this->thumbnail);
             if ($image) {
                 $width = Image::make($image)->width();
                 $height = Image::make($image)->height();
@@ -224,17 +246,5 @@ class Article extends Model
                 'onUpdate'  => true
             ]
         ];
-    }
-
-
-    /**
-     * boot
-     *
-     * @return void
-     */
-    protected static function boot()
-    {
-        parent::boot();
-        // static::setMemberParams(self::$m_params);
     }
 }

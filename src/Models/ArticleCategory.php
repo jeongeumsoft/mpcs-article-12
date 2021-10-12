@@ -50,9 +50,21 @@ class ArticleCategory extends Model
     protected static function boot()
     {
         parent::boot();
+        static::setMemberParams(self::$m_params);
 
         self::$maxDepth = Article::getCategoryMaxDepth();
     }
+
+    /**
+     * articles
+     *
+     * @return void
+     */
+    public function articles()
+    {
+        return $this->morphedByMany('Exit11\Article\Models\Article', 'article_categorizable');
+    }
+
 
     /**
      * newCollection

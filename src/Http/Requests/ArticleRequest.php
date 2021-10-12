@@ -16,9 +16,16 @@ class ArticleRequest extends FormRequest
             return $rules;
         }
 
+        $id = $this->article->id ?? "";
         $rules = [
-            'POST' => [],
-            'PUT' => [],
+            'POST' => [
+                'released_at' => 'required',
+                'title' => 'required|max:100',
+            ],
+            'PUT' => [
+                'released_at' => 'sometimes|required',
+                'title' => 'sometimes|required|max:100',
+            ],
         ];
 
         return $rules[$this->method()] ?? [];

@@ -5,7 +5,7 @@ namespace Exit11\Article\Http\Controllers\Blade;
 use Exit11\Article\Http\Controllers\Api\ArticleController as Controller;
 use Exit11\Article\Http\Requests\ArticleRequest as Request;
 use Exit11\Article\Facades\Article;
-use Exit11\Article\Facades\Core;
+use Mpcs\Core\Facades\Core;
 
 class ArticleController extends Controller
 {
@@ -17,9 +17,10 @@ class ArticleController extends Controller
      */
     public function index(Request $request)
     {
-        $categories = [];
+        $categories = Core::dataSelect('article_categories', ['_withs' => ['allChildren', 'articles'], '_scopes' => ['nullParent'], 'is_visible' => true]);
+        $article_categories = Core::dataSelect('article_categories', ['is_visible' => true])->pluck('nested_str', 'id')->toArray();
         $tags = [];
-        return view(Article::theme('articles.index'), compact('categories', 'tags'))->withInput($request->flash());
+        return view(Article::theme('articles.index'), compact('categories', 'article_categories', 'tags'))->withInput($request->flash());
     }
 
     /**

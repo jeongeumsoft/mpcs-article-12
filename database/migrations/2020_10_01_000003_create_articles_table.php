@@ -21,6 +21,7 @@ class CreateArticlesTable extends Migration
             $table->LongText('content')->nullable();
             $table->string('thumbnail')->nullable();
             $table->integer('view_count')->unsigned()->default(0);
+            $table->unsignedBigInteger('user_id')->index();
             $table->timestamp('released_at')->nullable();
             $table->timestamps();
             $table->softDeletes();

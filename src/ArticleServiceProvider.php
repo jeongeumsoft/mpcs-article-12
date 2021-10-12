@@ -48,5 +48,6 @@ class ArticleServiceProvider extends ServiceProvider
         //$this->commands($this->commands);
         $this->app->bind('Exit11\Article\Repositories\ArticleCategoryRepositoryInterface', 'Exit11\Article\Repositories\ArticleCategoryRepository');
         $this->app->bind('Exit11\Article\Repositories\ArticleRepositoryInterface', 'Exit11\Article\Repositories\ArticleRepository');
+        $this->app->bind('Exit11\Article\Repositories\ArticleFileRepositoryInterface', 'Exit11\Article\Repositories\ArticleFileRepository');
     }
 }

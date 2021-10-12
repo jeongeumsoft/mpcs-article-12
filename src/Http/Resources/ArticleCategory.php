@@ -27,15 +27,18 @@ class ArticleCategory extends JsonResource
             'type_str' => $this->type_str,
             'is_visible' => $this->is_visible,
             'depth' => $this->depth,
+            'articles' => $this->whenLoaded('articles', function () {
+                return new ArticleCollection($this->articles);
+            }),
             'all_children' => $this->whenLoaded('allChildren', function () {
-                return new EntityCategoryCollection($this->allChildren);
+                return new ArticleCategoryCollection($this->allChildren);
             }),
             'children' => $this->whenLoaded('children', function () {
-                return new EntityCategoryCollection($this->children);
+                return new ArticleCategoryCollection($this->children);
             }),
+            'nested_str' => $this->nested_str,
             $this->mergeWhen($this->relationLoaded('allParent'), function () {
                 return [
-                    'nested_str' => $this->nested_str,
                     'nested_parent_str' => $this->nested_parent_str
                 ];
             }),

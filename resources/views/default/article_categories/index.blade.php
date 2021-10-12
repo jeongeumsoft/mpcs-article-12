@@ -1,10 +1,10 @@
 @extends(Bootstrap5::theme('layouts.crud'))
 
 {{-- 브라우저 타이틀 --}}
-@section('app_title', '카테고리관리')
+@section('app_title', trans('mpcs-article::menu.article_categories'))
 
 {{-- 목록 서브타이틀 --}}
-@section('crud_subtitle', '카테고리관리')
+@section('crud_subtitle', trans('mpcs-article::menu.article_categories'))
 
 
 {{-- 검색폼 영역 --}}
@@ -32,10 +32,6 @@
 @section('crud_form')
     {{-- 생성 --}}
     @component(Bootstrap5::theme('components.modal_crud_create'))
-        {{-- 제목 --}}
-        @slot('title')
-            카테고리 생성
-        @endslot
 
         {!!Form::open()->idPrefix('category_create_')!!}   
         @include(Article::theme('article_categories.partials.form'))
@@ -44,10 +40,6 @@
 
     {{-- 수정 --}}
     @component(Bootstrap5::theme('components.modal_crud_edit'))
-        {{-- 제목 --}}
-        @slot('title')
-            카테고리 수정
-        @endslot
 
         {!!Form::open()->idPrefix('category_edit_')!!}   
         @include(Article::theme('article_categories.partials.form'))
