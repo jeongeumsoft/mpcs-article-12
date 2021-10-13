@@ -30,12 +30,12 @@
                 <td data-name='id' class="text-md-center d-none d-md-table-cell">
                     {{ $data->id }}
                 </td>
-                <td data-name='status_released' class="text-left d-block d-md-table-cell">
+                <td data-name='status_released' class="text-start d-block d-md-table-cell">
                     <span class="badge bg-{{$data->status_released ? "success" : "warning"}}">
                         {{ $data->status_released ? trans("mpcs-article::word.attr.released") : trans("mpcs-article::word.attr.nonrelease") }}
                     </span>
                 </td>
-                <td class="text-left d-block d-md-table-cell">
+                <td class="text-start d-block d-md-table-cell">
                     <div class="row no-gutters">
                         @if(Article::useThumbnail() && $data->thumbnail)
                             <div class="col-auto mr-2">
@@ -76,13 +76,13 @@
                 <td data-name='released_at' class="d-none d-md-table-cell">
                     {{ $data->released_at }}
                 </td>
-                <td class="d-block d-md-table-cell text-right text-md-center">
+                <td class="d-block d-md-table-cell text-end text-md-center">
                     <button class="btn-crud-show btn btn-icon btn-success text-white align-middle"
-                        title="{{ trans('core::word.show') }}">
+                        title="{{ trans('ui-bootstrap5::word.button.show') }}">
                         <i class="mdi mdi-eye"></i>
                     </button>
                     <button class="btn-crud-delete btn btn-icon btn-danger text-white align-middle"
-                        title="{{ trans('core::word.delete') }}">
+                        title="{{ trans('ui-bootstrap5::word.button.delete') }}">
                         <i class="mdi mdi-trash-can"></i>
                     </button>
                 </td>

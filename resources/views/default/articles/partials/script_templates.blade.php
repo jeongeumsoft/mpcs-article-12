@@ -1,9 +1,11 @@
+{{-- Show : 카테고리명 --}}
 <script type="text/template" id="script-template-article_categories">
     <span class="badge rounded-pill bg-dark">
         {nested_str}
     </span> 
 </script>
 
+{{-- Show : Uploader --}}
 <script type="text/template" id="script-template-article_files">
     <li class="list-group-item d-flex justify-content-between align-items-center">
         <div class="col">
@@ -17,6 +19,7 @@
     </li>
 </script>
 
+{{-- Edit : Uploader --}}
 <script type="text/template" id="script-template-edit-article_files">
     <li data-template-wrap="item" class="list-group-item d-flex justify-content-between align-items-center mb-1">
         <div class="col">
