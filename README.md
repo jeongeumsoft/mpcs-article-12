@@ -1,5 +1,17 @@
 # Mpcs Core Extention : Article
 
+## provider 실행
+
+```
+php .\artisan vendor:publish --provider="Exit11\Article\ArticleServiceProvider"
+```
+
+## migrate 실행
+
+```
+php .\artisan migrate
+```
+
 ## config > mpcs.php 에 vendor 추가
 
 ```

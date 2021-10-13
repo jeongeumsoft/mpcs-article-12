@@ -25,8 +25,6 @@ class ArticleServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
             $this->publishes([__DIR__ . '/../config' => config_path()], 'config');
-            $this->publishes([__DIR__ . '/../dist/public' => public_path()], 'assets');
-            $this->publishes([__DIR__ . '/../dist/resources' => resource_path()], 'resources');
         }
 
         /* 라우터, 다국어 */
