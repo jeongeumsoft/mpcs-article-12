@@ -5,4 +5,9 @@ return [
 
     // 썸네일 사용여부
     'use_thumbnail' =>  env('ARTICLE_USE_THUMBNAIL', false),
+
+    // 아티클 메뉴제목 : trans($value)
+    'app_title' => null,
+    'subtitle' => null,
+    'list_title' => null,
 ];

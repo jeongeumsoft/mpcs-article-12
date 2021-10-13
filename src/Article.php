@@ -9,6 +9,17 @@ class Article
 {
 
     /**
+     * menuTitle
+     *
+     * @param  mixed $title
+     * @return void
+     */
+    public static function menuTitle($title = null)
+    {
+        return $title ? trans($title) : trans('mpcs-article::menu.articles');
+    }
+
+    /**
      * VIEW THEME 설정
      * @return string {default: 'default'}
      */

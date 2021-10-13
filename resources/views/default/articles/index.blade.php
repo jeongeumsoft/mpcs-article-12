@@ -1,13 +1,13 @@
 @extends(Bootstrap5::theme('layouts.crud'))
 
 {{-- 브라우저 타이틀 --}}
-@section('app_title', trans('mpcs-article::menu.articles'))
+@section('app_title', Article::menuTitle(config('mpcsarticle.app_title')))
 
 {{-- 목록 서브타이틀 --}}
-@section('crud_subtitle', trans('mpcs-article::menu.articles'))
+@section('crud_subtitle', Article::menuTitle(config('mpcsarticle.subtitle')))
 
 {{-- 목록 타이틀 --}}
-@section('crud_list_title', trans('mpcs-article::menu.articles'))
+@section('crud_list_title', Article::menuTitle(config('mpcsarticle.list_title')))
 
 {{-- 사이트메뉴 인클루드 --}}
 {{-- @section('aside_left_nav')
