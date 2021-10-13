@@ -18,11 +18,6 @@ class Article extends JsonResource
      */
     public function toArray($request)
     {
-        $lastSegment = last(request()->segments());
-        $isIndex = $lastSegment === 'articles';
-        $isEdit = $lastSegment === 'edit';
-        $isShow = !$isIndex && !$isIndex;
-
         return [
             'id' => $this->id,
             'title' => $this->title,
@@ -41,6 +36,9 @@ class Article extends JsonResource
             }),
             'article_categories' => $this->whenLoaded('articleCategories', function () {
                 return new ArticleCategoryCollection($this->articleCategories);
+            }),
+            'article_category_ids' => $this->whenLoaded('articleCategories', function () {
+                return $this->article_category_ids;
             }),
             'tags' => $this->whenLoaded('tags', function () {
                 return $this->tagArray;

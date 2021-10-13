@@ -46,6 +46,7 @@ class Article extends Model
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
+        static::setMemberParams(self::$m_params);
 
         $this->uploadDisk = Storage::disk('upload');
         $this->imageRootDir = 'articles';
@@ -246,5 +247,15 @@ class Article extends Model
                 'onUpdate'  => true
             ]
         ];
+    }
+
+    /**
+     * getArticleCategoryIdsAttribute
+     *
+     * @return void
+     */
+    public function getArticleCategoryIdsAttribute()
+    {
+        return $this->relationLoaded('articleCategories') ? $this->articleCategories->pluck('id')->toArray() : null;
     }
 }
