@@ -45,17 +45,17 @@
                             </div>
                         @endif
                         <div class="col">
-                            <p data-name='categories' class="mb-0">
-                                @if(isset($data->articleCategories))
+                            @if(isset($data->articleCategories))
+                                <p data-name='categories' class="mb-1">
                                     @forelse($data->articleCategories as $category)
                                     <span class="badge bg-info">
                                         {{ $category->nested_str }}
                                     </span>
                                     @empty
                                     @endforelse
-                                @endif
-                            </p>
-                            <p data-name='title' class="mt-2 mb-2">
+                                </p>
+                            @endif
+                            <p data-name='title' class="mb-0">
                                 <span class="badge badge-pill bg-dark mr-1 d-md-none">{{ $data->id }}</span>
                                 <span> {{ $data->title }} </span> <small class="d-md-none">({{ $data->view_count }})</small>
                                 @if($data->summary)
@@ -64,6 +64,16 @@
                                 </button>
                                 @endif
                             </p>
+                            @if(Article::useTag() && isset($data->tags))
+                                <p data-name='tags' class="mt-1 mb-0">
+                                    @forelse($data->tags as $tag)
+                                    <span class="badge rounded-pill border border-light text-dark">
+                                        #{{ $tag->name }}
+                                    </span>
+                                    @empty
+                                    @endforelse
+                                </p>
+                            @endif
                         </div>
                     </div>
                 </td>

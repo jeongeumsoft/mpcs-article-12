@@ -6,7 +6,10 @@
         {!!Form::text('released_at', trans('mpcs-article::word.attr.released_at'))->attrs(['data-type' => 'data-picker-datetime'])->placeholder(trans('mpcs-article::word.attr.released_at'))->wrapperAttrs(['class' => 'required'])!!} 
         {!!Form::select('article_category_ids', trans('mpcs-article::word.attr.categories'), $article_categories)->attrs(['data-type' => 'select-multiple'])->multiple()->placeholder(trans('mpcs-article::word.attr.categories'))!!}
         {!!Form::text('title', trans('mpcs-article::word.attr.title'))->placeholder(trans('mpcs-article::word.attr.title'))->wrapperAttrs(['class' => 'required']) !!}
-        {{-- {!!Form::select('tags', trans('mpcs-article::word.attr.tags'), $tags)->attrs(['data-type' => 'select-multiple'])->multiple()->placeholder(trans('mpcs-article::word.attr.tags'))!!} --}}
+
+        @if(Article::useTag())
+        {!!Form::text('tag_list', trans('mpcs-article::word.attr.tags'))->attrs(['data-type' => 'select-tag'])->placeholder(trans('mpcs-article::word.attr.tags'))!!}
+        @endif
         
         {{-- 이미지 업로드 --}}
         @if(Article::useThumbnail())

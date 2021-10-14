@@ -68,12 +68,11 @@ class ArticleRepository implements ArticleRepositoryInterface
 
             if ($this->model->save()) {
                 $this->model->articleCategories()->attach($this->request['article_category_ids'] ?? null);
+                $this->model->retag($this->request['tag_list'] ?? []);
 
                 if (isset($this->request['article_files'])) {
                     ArticleFile::whereIn('id', $this->request['article_files'])->update(['article_id' => $this->model->id]);
                 }
-
-                $this->model->retag($this->request['tags'] ?? []);
             }
             DB::commit();
         } catch (Exception $e) {
@@ -112,6 +111,7 @@ class ArticleRepository implements ArticleRepositoryInterface
 
             if ($model->save()) {
                 $model->articleCategories()->sync($this->request['article_category_ids'] ?? null);
+                $model->retag($this->request['tag_list'] ?? []);
 
                 if (isset($this->request['delete_article_files'])) {
                     ArticleFile::whereIn('id', $this->request['delete_article_files'])->update(['article_id' => null]);

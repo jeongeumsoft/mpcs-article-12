@@ -41,7 +41,10 @@ class Article extends JsonResource
                 return $this->article_category_ids;
             }),
             'tags' => $this->whenLoaded('tags', function () {
-                return $this->tagArray;
+                return $this->tags;
+            }),
+            'tag_list' => $this->whenLoaded('tags', function () {
+                return $this->tagList;
             }),
             'article_files' => $this->whenLoaded('articleFiles', function () {
                 return new ArticleFileCollection($this->articleFiles);

@@ -49,6 +49,17 @@ class Article
         return config('mpcsarticle.use_thumbnail') ?? false;
     }
 
+    /**
+     * useTag
+     *
+     * @return int
+     */
+    public static function useTag()
+    {
+        return config('mpcsarticle.use_tag') ?? false;
+    }
+
+
 
     /**
      * noImage

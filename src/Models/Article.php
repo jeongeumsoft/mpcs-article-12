@@ -22,7 +22,7 @@ class Article extends Model
     protected $guarded = ['id'];
     protected static $m_params = [
         //'default_load_relations' => ['articleCategories', 'articleFiles', 'tags'],
-        'default_load_relations' => ['articleCategories', 'articleFiles', 'user'],
+        'default_load_relations' => ['articleCategories', 'articleFiles', 'tags', 'user'],
         'column_maps' => [
             // date : {컬럼명}
             'from' => 'released_at',

@@ -1,7 +1,14 @@
 {{-- Show : 카테고리명 --}}
 <script type="text/template" id="script-template-article_categories">
-    <span class="badge rounded-pill bg-dark">
+    <span class="badge bg-info">
         {nested_str}
+    </span> 
+</script>
+
+{{-- Show : 태그 --}}
+<script type="text/template" id="script-template-tags">
+    <span class="badge rounded-pill border border-dark text-dark">
+        #{name}
     </span> 
 </script>
 
