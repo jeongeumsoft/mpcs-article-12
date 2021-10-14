@@ -21,7 +21,6 @@ class Article extends Model
     protected $dates = ['created_at', 'updated_at', 'deleted_at', 'released_at'];
     protected $guarded = ['id'];
     protected static $m_params = [
-        //'default_load_relations' => ['articleCategories', 'articleFiles', 'tags'],
         'default_load_relations' => ['articleCategories', 'articleFiles', 'tags', 'user'],
         'column_maps' => [
             // date : {컬럼명}
@@ -102,7 +101,7 @@ class Article extends Model
      */
     public function getStatusReleasedAttribute()
     {
-        $now = \Carbon\Carbon::now()->format('Y-m-d H:i:s');
+        $now = Carbon::now()->format('Y-m-d H:i:s');
         $released = $this->attributes['released_at'];
         return ($released && $released <= $now);
     }
@@ -136,7 +135,7 @@ class Article extends Model
      */
     public function scopeReleased($query)
     {
-        $now = \Carbon\Carbon::now()->format('Y-m-d H:i:s');
+        $now = Carbon::now()->format('Y-m-d H:i:s');
         return $query->where('released_at', '<=', $now);
     }
 

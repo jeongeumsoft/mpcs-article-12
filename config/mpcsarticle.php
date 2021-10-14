@@ -9,7 +9,19 @@ return [
     'use_tag' =>  env('ARTICLE_USE_TAG', false),
 
     // 아티클 메뉴제목 : trans($value)
-    'app_title' => null,
-    'subtitle' => null,
-    'list_title' => null,
+    'app_title' => [
+        'articles' => null,
+        'popups' => null,
+        'promotions' => null,
+    ],
+    'subtitle' => [
+        'articles' => null,
+        'popups' => null,
+        'promotions' => null,
+    ],
+    'list_title' => [
+        'articles' => null,
+        'popups' => null,
+        'promotions' => null,
+    ],
 ];

@@ -17,8 +17,8 @@ class ArticleController extends Controller
      */
     public function index(Request $request)
     {
-        $categories = Core::dataSelect('article_categories', ['_withs' => ['allChildren', 'articles'], '_scopes' => ['nullParent'], 'is_visible' => true]);
-        $article_categories = Core::dataSelect('article_categories', ['is_visible' => true])->pluck('nested_str', 'id')->toArray();
+        $categories = Core::dataSelect('article_categories', ['_vendor' => 'Exit11\Article', '_withs' => ['allChildren', 'articles'], '_scopes' => ['nullParent'], 'is_visible' => true]);
+        $article_categories = Core::dataSelect('article_categories', ['_vendor' => 'Exit11\Article', 'is_visible' => true])->pluck('nested_str', 'id')->toArray();
         $tags = [];
         return view(Article::theme('articles.index'), compact('categories', 'article_categories', 'tags'))->withInput($request->flash());
     }

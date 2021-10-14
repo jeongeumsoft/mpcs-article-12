@@ -15,7 +15,7 @@
         @if(Article::useThumbnail())
         <div data-type="image-upload" class="form-group">
             <label for="thumbnail" class="">{{trans('mpcs-article::word.attr.thumbnail')}}</label>
-            <div class="border rounded text-center p-2 my-1">
+            <div class="border rounded text-center p-2 my-1 mx-auto" style="max-width: 250px">
                 <img src="" class="w-100 upload-image" data-default-src="{{Article::noImage()}}" data-crud-edit-name="small_image_url" data-crud-edit-type="image">
             </div>
             <input type="file" class="d-none" accept=".png,.jpg,.gif" />

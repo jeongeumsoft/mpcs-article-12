@@ -14,9 +14,9 @@ class Article
      * @param  mixed $title
      * @return void
      */
-    public static function menuTitle($title = null)
+    public static function menuTitle($default, $title = null)
     {
-        return $title ? trans($title) : trans('mpcs-article::menu.articles');
+        return $title ? trans($title) : trans($default);
     }
 
     /**

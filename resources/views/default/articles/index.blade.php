@@ -1,13 +1,13 @@
 @extends(Bootstrap5::theme('layouts.crud'))
 
 {{-- 브라우저 타이틀 --}}
-@section('app_title', Article::menuTitle(config('mpcsarticle.app_title')))
+@section('app_title', Article::menuTitle('mpcs-article::menu.articles', config('mpcsarticle.app_title.articles')))
 
 {{-- 목록 서브타이틀 --}}
-@section('crud_subtitle', Article::menuTitle(config('mpcsarticle.subtitle')))
+@section('crud_subtitle', Article::menuTitle('mpcs-article::menu.articles', config('mpcsarticle.subtitle.articles')))
 
 {{-- 목록 타이틀 --}}
-@section('crud_list_title', Article::menuTitle(config('mpcsarticle.list_title')))
+@section('crud_list_title', Article::menuTitle('mpcs-article::menu.articles', config('mpcsarticle.list_title.articles')))
 
 {{-- 사이트메뉴 인클루드 --}}
 {{-- @section('aside_left_nav')
@@ -32,7 +32,7 @@
 
 {{-- 목록 그리드 영역 --}}
 @section('crud_grid')
-    {{-- @include(Bootstrap5::theme('users.partials.list')) --}}
+    {{-- @include(Bootstrap5::theme('articles.partials.list')) --}}
 @endsection
 
 
@@ -41,14 +41,14 @@
 
     {{-- 생성 --}}
     @component(Bootstrap5::theme('components.modal_crud_create'), ['modalSize' => 'modal-fullscreen'])        
-        {!!Form::open()->idPrefix('user_create_')->attrs(['class' => 'h-100'])!!}   
+        {!!Form::open()->idPrefix('create_')->attrs(['class' => 'h-100'])!!}   
         @include(Article::theme('articles.partials.form'))
         {!!Form::close()!!}
     @endcomponent
     
     {{-- 수정 --}}
     @component(Bootstrap5::theme('components.modal_crud_edit'), ['modalSize' => 'modal-fullscreen'])
-        {!!Form::open()->idPrefix('user_edit_')->method('put')->attrs(['class' => 'h-100'])!!}   
+        {!!Form::open()->idPrefix('edit_')->method('put')->attrs(['class' => 'h-100'])!!}   
         @include(Article::theme('articles.partials.form'))
         {!!Form::close()!!}
     @endcomponent

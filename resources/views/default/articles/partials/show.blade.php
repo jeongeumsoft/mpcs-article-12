@@ -45,7 +45,7 @@
 
 <dl class="dl">
     <dt class="col-12">{{ trans('mpcs-article::word.attr.content') }}</dt>
-    <dd class="col-12" data-crud-show-name="content"></dd>
+    <dd class="col-12 toastui-editor-contents" data-crud-show-name="content"></dd>
 </dl>
 
 {{-- CURD 스크립트--}}

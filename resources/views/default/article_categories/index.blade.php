@@ -33,7 +33,7 @@
     {{-- 생성 --}}
     @component(Bootstrap5::theme('components.modal_crud_create'))
 
-        {!!Form::open()->idPrefix('category_create_')!!}   
+        {!!Form::open()->idPrefix('create_')!!}   
         @include(Article::theme('article_categories.partials.form'))
         {!!Form::close()!!}
     @endcomponent
@@ -41,7 +41,7 @@
     {{-- 수정 --}}
     @component(Bootstrap5::theme('components.modal_crud_edit'))
 
-        {!!Form::open()->idPrefix('category_edit_')!!}   
+        {!!Form::open()->idPrefix('edit_')!!}   
         @include(Article::theme('article_categories.partials.form'))
         {!!Form::close()!!}
     @endcomponent
