@@ -21,11 +21,12 @@ class CreatePopupsTable extends Migration
             $table->LongText('content')->nullable();
             $table->string('image')->nullable();
             $table->string('background_color', 50)->nullable();
-            $table->string('uri')->nullable();
+            $table->string('url')->nullable();
             $table->boolean('target')->default(0);
-            $table->dateTime('period_start');
-            $table->dateTime('period_end');
+            $table->dateTime('period_from');
+            $table->dateTime('period_to');
             $table->boolean('is_visible')->default(0);
+            $table->unsignedBigInteger('user_id')->index();
             $table->softDeletes();
             $table->timestamps();
         });

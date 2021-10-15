@@ -14,6 +14,8 @@ Route::group([
     $router->resource('article_categories', 'ArticleCategoryController')->names('article_categories')->except(['create', 'destroy']);
     $router->resource('articles', 'ArticleController')->names('articles');
     $router->resource('article_files', 'ArticleFileController')->names('article_files')->except(['index', 'edit', 'update']);
+
+    $router->resource('popups', 'PopupController')->names('popups');
 });
 
 
@@ -25,10 +27,13 @@ Route::group([
     'middleware'    => config('mpcs.route.middleware'),
 ], function (Router $router) {
     $router->get('article_categories/list', 'ArticleCategoryController@list')->name('article_categories.list');
-    $router->get('article_categories/list_categories', 'ArticleCategoryController@listCategories')->name('article_categories.list_categories');
     $router->resource('article_categories', 'ArticleCategoryController')->except(['create', 'destroy']);
     $router->get('articles/list', 'ArticleController@list')->name('articles.list');
     $router->resource('articles', 'ArticleController');
+
+    $router->patch('popups/{popup}/orderable', 'PopupController@orderable')->name('popups.orderable');
+    $router->get('popups/list', 'PopupController@list')->name('popups.list');
+    $router->resource('popups', 'PopupController')->names('popups');
 });
 
 // Non Auth

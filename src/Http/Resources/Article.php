@@ -4,6 +4,7 @@ namespace Exit11\Article\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Mpcs\Core\Traits\ResourceTrait;
+use Illuminate\Support\Carbon;
 
 class Article extends JsonResource
 {
@@ -48,10 +49,10 @@ class Article extends JsonResource
             'article_files' => $this->whenLoaded('articleFiles', function () {
                 return new ArticleFileCollection($this->articleFiles);
             }),
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'released_at' => $this->released_at,
-            'deleted_at' => $this->deleted_at,
+            'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::parse($this->updated_at)->format('Y-m-d H:i:s'),
+            'released_at' => Carbon::parse($this->released_at)->format('Y-m-d H:i:s'),
+            'deleted_at' => Carbon::parse($this->deleted_at)->format('Y-m-d H:i:s'),
         ];
     }
 }

@@ -39,8 +39,8 @@
                     <div class="row no-gutters">
                         @if(Article::useThumbnail() && $data->thumbnail)
                             <div class="col-auto mr-2">
-                                <div class="embed-responsive embed-responsive-1by1" style="width: 80px; ">
-                                    <img class="embed-responsive-item img-thumbnail" src="{{ $data->thumb_image_url }}" alt="{{ $data->title }}">
+                                <div class="ratio ratio-1x1" style="width: 50px; ">
+                                    <img class="img-thumbnail" src="{{ $data->thumb_image_url }}" alt="{{ $data->title }}">
                                 </div>
                             </div>
                         @endif

@@ -45,7 +45,6 @@ class Article extends Model
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        static::setMemberParams(self::$m_params);
 
         $this->uploadDisk = Storage::disk('upload');
         $this->imageRootDir = 'articles';
