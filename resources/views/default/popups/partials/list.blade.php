@@ -66,7 +66,7 @@
                 <td data-name='id' class="text-md-center d-none d-md-table-cell">
                     {{ $data->id }}
                 </td>
-                <td data-name='type' class="d-none d-md-table-cell">
+                <td data-name='type' class="text-md-center d-none d-md-table-cell">
                     <span class="badge bg-{{($data->type == "TEXT") ? "success" : "warning"}}">
                         {{ $data->type }}
                     </span>
@@ -94,7 +94,7 @@
                 <td data-name='period_to' class="d-none d-md-table-cell">
                     {{ $data->period_to }}
                 </td>
-                <td data-name='status_released' class="text-start d-block d-md-table-cell">
+                <td data-name='status_released' class="text-start text-md-center d-block d-md-table-cell">
                     <span class="badge bg-{{$data->status_released ? "success" : "warning"}}">
                         {{ $data->status_released ? trans("mpcs-article::word.attr.released") : trans("mpcs-article::word.attr.nonrelease") }}
                     </span>

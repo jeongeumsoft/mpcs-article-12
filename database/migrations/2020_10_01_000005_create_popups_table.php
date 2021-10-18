@@ -27,7 +27,6 @@ class CreatePopupsTable extends Migration
             $table->dateTime('period_to');
             $table->boolean('is_visible')->default(0);
             $table->unsignedBigInteger('user_id')->index();
-            $table->softDeletes();
             $table->timestamps();
         });
     }
