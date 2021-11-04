@@ -27,6 +27,8 @@ return [
         'writer'            => '글쓴이',
         'background_color'  => '배경색',
         'image'             => '이미지',
+        'parent_category'   => '부모카테고리',
+        'list_type'         => '목록타입',
     ],
     'is_target_title'       => '링크주소 새창 열림 여부',
     'target_self'           => '현재창',

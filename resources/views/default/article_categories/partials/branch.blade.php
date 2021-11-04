@@ -2,7 +2,7 @@
     <div class="d-flex justify-content-between align-items-center">
         @if($branch->allChildren->count() > 0)
             <div class="col-auto">
-                <button class="btn btn-sm btn-icon p-0" data-bs-toggle="collapse" href="#branch_{{ $branch->id }}" aria-expanded="false" title="펼침/접힘">
+                <button class="btn btn-sm btn-icon p-0" data-bs-toggle="collapse" href="#branch_{{ $branch->id }}" aria-expanded="false">
                     <i class="mdi mdi-arrow-collapse-vertical"></i>
                 </button>
             </div>
@@ -38,10 +38,10 @@
                 @endif
             </div>
             <div class="col-auto">
-                <button class="btn-crud-edit btn btn-success text-white py-0 px-1 align-middle" title="편집">
+                <button class="btn-crud-edit btn btn-success text-white py-0 px-1 align-middle">
                     <i class="mdi mdi-pencil"></i>
                 </button>
-                <button class="btn-child-create btn btn-primary text-white py-0 px-1 align-middle" title="하위 생성">
+                <button class="btn-child-create btn btn-primary text-white py-0 px-1 align-middle">
                     <i class="mdi mdi-timeline-plus"></i>
                 </button>
             </div>

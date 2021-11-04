@@ -1,10 +1,10 @@
 @extends(Bootstrap5::theme('layouts.crud'))
 
 {{-- 브라우저 타이틀 --}}
-@section('app_title', trans('mpcs-article::menu.article_categories'))
+@section('app_title', Str::ucfirst(trans('mpcs-article::menu.article_categories')))
 
 {{-- 목록 서브타이틀 --}}
-@section('crud_subtitle', trans('mpcs-article::menu.article_categories'))
+@section('crud_subtitle', Str::ucfirst(trans('mpcs-article::menu.article_categories')))
 
 
 {{-- 검색폼 영역 --}}
@@ -22,7 +22,7 @@
         <span class="d-none d-sm-inline"> {{ trans('ui-bootstrap4::word.button.save_order') }} </span>
     </button> --}}
     <button class="btn-crud-create btn btn-primary font-weight-bold"><i class="mdi mdi-plus-circle-outline mr-1"></i>
-        {{ trans('ui-bootstrap5::word.create') }}
+        {{ Str::ucfirst(trans('ui-bootstrap5::word.create')) }}
     </button>
 @endsection
 

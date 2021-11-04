@@ -13,7 +13,7 @@
             <th class="text-center min-width-rem-6 d-none d-md-table-cell">
                 {{ trans('mpcs-article::word.attr.writer') }}
             </th>
-            <th class="text-center min-width-rem-6 d-none d-md-table-cell">
+            <th class="text-center min-width-rem-8 d-none d-md-table-cell">
                 @sortablelink('view_count', trans('mpcs-article::word.attr.view_count'))
             </th>
             <th class="text-center min-width-rem-10">

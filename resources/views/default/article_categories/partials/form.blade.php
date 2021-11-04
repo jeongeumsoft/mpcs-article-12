@@ -1,7 +1,7 @@
 {!! Form::text('id')->type('hidden') !!}
 
 <div class="form-group row">
-    <label class="col">{{ trans('ui-bootstrap5::word.is_visible_message') }} </label>
+    <label class="col">{{ Str::ucfirst(trans('ui-bootstrap5::word.is_visible_message')) }} </label>
     <div class="col-auto">
 
         <div class="form-check form-switch">
@@ -10,13 +10,13 @@
         </div>
     </div>
 </div>
-{!!Form::select('parent_id', '부모 카테고리', $categories)->attrs(['data-type' => 'select-one'])->wrapperAttrs(['class' => 'mb-3'])!!}
+{!!Form::select('parent_id', Str::ucfirst(trans('mpcs-article::word.attr.parent_category')), $categories)->attrs(['data-type' => 'select-one'])->wrapperAttrs(['class' => 'mb-3'])!!}
 
-{!! Form::text('name', trans('ui-bootstrap5::word.name'))
-->placeholder(trans('ui-bootstrap5::word.name'))
+{!! Form::text('name', Str::ucfirst(trans('ui-bootstrap5::word.name')))
+->placeholder(Str::ucfirst(trans('ui-bootstrap5::word.name')))
 ->wrapperAttrs(['class' => 'required']) !!}
 
-{!!Form::select('type', '목록타입', $types)->attrs(['data-type' => 'select-one'])->wrapperAttrs(['class' => 'mb-3'])!!}
+{!!Form::select('type', Str::ucfirst(trans('mpcs-article::word.attr.list_type')), $types)->attrs(['data-type' => 'select-one'])->wrapperAttrs(['class' => 'mb-3'])!!}
 
-{!! Form::text('description', trans('ui-bootstrap5::word.description'))
-->placeholder(trans('ui-bootstrap5::word.description')) !!}
+{!! Form::text('description', Str::ucfirst(trans('ui-bootstrap5::word.description')))
+->placeholder(Str::ucfirst(trans('ui-bootstrap5::word.description'))) !!}
