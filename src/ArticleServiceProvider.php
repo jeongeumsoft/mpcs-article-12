@@ -3,6 +3,7 @@
 namespace Exit11\Article;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 
 class ArticleServiceProvider extends ServiceProvider
 {
@@ -12,6 +13,7 @@ class ArticleServiceProvider extends ServiceProvider
      */
     protected $commands = [
         // Console\InstallCommand::class,
+        Commands\SeedCommand::class,
     ];
 
 
@@ -43,10 +45,22 @@ class ArticleServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //$this->commands($this->commands);
+        $this->commands($this->commands);
+        $this->registerEloquentFactoriesFrom(__DIR__ . '/../database/factories');
         $this->app->bind('Exit11\Article\Repositories\ArticleCategoryRepositoryInterface', 'Exit11\Article\Repositories\ArticleCategoryRepository');
         $this->app->bind('Exit11\Article\Repositories\ArticleRepositoryInterface', 'Exit11\Article\Repositories\ArticleRepository');
         $this->app->bind('Exit11\Article\Repositories\ArticleFileRepositoryInterface', 'Exit11\Article\Repositories\ArticleFileRepository');
         $this->app->bind('Exit11\Article\Repositories\PopupRepositoryInterface', 'Exit11\Article\Repositories\PopupRepository');
+    }
+
+    /**
+     * Register factories.
+     *
+     * @param  string  $path
+     * @return void
+     */
+    protected function registerEloquentFactoriesFrom($path)
+    {
+        $this->app->make(EloquentFactory::class)->load($path);
     }
 }
