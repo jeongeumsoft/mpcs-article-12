@@ -20,7 +20,8 @@ class ArticleTableSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
         Article::truncate();
-        factory(Article::class, 100)
+        DB::table('article_categorizables')->truncate();
+        factory(Article::class, 1000)
             ->create()
             ->each(function ($article) {
                 if (ArticleCategory::all()->count() > 0) {

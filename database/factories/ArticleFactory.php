@@ -16,6 +16,7 @@ use Intervention\Image\ImageManager;
 
 $factory->define(Article::class, function (Faker $faker) {
     $title = $faker->sentence();
+    $dateBetween = $faker->dateTimeBetween('-30 days', '+30 days', 'ASIA/SEOUL');
     $date = $faker->dateTimeThisMonth;
 
     // 이미지 랜덤 생성 FAKER
@@ -32,9 +33,9 @@ $factory->define(Article::class, function (Faker $faker) {
         'content' => $faker->paragraph(),
         //'thumbnail' => Bootstrap5::generateThumb('articles', $imageName),
         'view_count' => mt_rand(0, 1000000),
-        'released_at' => function () use ($date) {
+        'released_at' => function () use ($dateBetween) {
             // 상위 관계를 생성 할 때 체인을 중지 할 확률 50%
-            return mt_rand(0, 100) % 2 == 0 ? $date : null;
+            return mt_rand(0, 100) % 2 == 0 ? $dateBetween : null;
         },
         'user_id' => User::inRandomOrder()->first(),
         'created_at' => $date,
