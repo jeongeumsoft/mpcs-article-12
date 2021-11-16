@@ -135,6 +135,10 @@ class ArticleRepository implements ArticleRepositoryInterface
     // show the record with the given id
     public function get($model)
     {
+        // 뷰카운트 추가
+        $viewCount = $model->view_count;
+        $model->view_count = ++$viewCount;
+        $model->save();
         return $model->loadRelations();
     }
 

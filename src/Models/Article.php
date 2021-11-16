@@ -112,7 +112,7 @@ class Article extends Model
      */
     public function getViewCountAttribute()
     {
-        return number_format($this->attributes['view_count'] ?? 0);
+        return $this->attributes['view_count'] ?? 0;
     }
 
     /**

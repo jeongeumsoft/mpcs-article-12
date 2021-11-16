@@ -5,7 +5,7 @@
                 @sortablelink('id', 'ID')
             </th>
             <th class="text-center min-width-rem-4">
-                {{trans('mpcs-article::word.attr.status')}}
+                {{ trans('mpcs-article::word.attr.status') }}
             </th>
             <th class="text-center">
                 @sortablelink('title', trans('mpcs-article::word.attr.title'))
@@ -31,45 +31,49 @@
                     {{ $data->id }}
                 </td>
                 <td data-name='status_released' class="text-start d-block d-md-table-cell">
-                    <span class="badge bg-{{$data->status_released ? "success" : "warning"}}">
-                        {{ $data->status_released ? trans("mpcs-article::word.attr.released") : trans("mpcs-article::word.attr.nonrelease") }}
+                    <span class="badge bg-{{ $data->status_released ? 'success' : 'warning' }}">
+                        {{ $data->status_released ? trans('mpcs-article::word.attr.released') : trans('mpcs-article::word.attr.nonrelease') }}
                     </span>
                 </td>
                 <td class="text-start d-block d-md-table-cell">
                     <div class="row no-gutters">
-                        @if(Article::useThumbnail() && $data->thumbnail)
+                        @if (Article::useThumbnail() && $data->thumbnail)
                             <div class="col-auto mr-2">
                                 <div class="ratio ratio-1x1" style="width: 50px; ">
-                                    <img class="img-thumbnail" src="{{ $data->thumb_image_url }}" alt="{{ $data->title }}">
+                                    <img class="img-thumbnail" src="{{ $data->thumb_image_url }}"
+                                        alt="{{ $data->title }}">
                                 </div>
                             </div>
                         @endif
                         <div class="col">
-                            @if(isset($data->articleCategories))
+                            @if (isset($data->articleCategories))
                                 <p data-name='categories' class="mb-1">
                                     @forelse($data->articleCategories as $category)
-                                    <span class="badge bg-info">
-                                        {{ $category->nested_str }}
-                                    </span>
+                                        <span class="badge bg-info">
+                                            {{ $category->nested_str }}
+                                        </span>
                                     @empty
                                     @endforelse
                                 </p>
                             @endif
                             <p data-name='title' class="mb-0">
                                 <span class="badge badge-pill bg-dark mr-1 d-md-none">{{ $data->id }}</span>
-                                <span> {{ $data->title }} </span> <small class="d-md-none">({{ $data->view_count }})</small>
-                                @if($data->summary)
-                                <button type="button" class="btn p-0" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" title="{{$data->title}}" data-bs-content="{{$data->summary}}">
-                                    <i class="mdi mdi-information"></i>
-                                </button>
+                                <span> {{ $data->title }} </span> <small
+                                    class="d-md-none">({{ $data->view_count }})</small>
+                                @if ($data->summary)
+                                    <button type="button" class="btn p-0" data-bs-container="body"
+                                        data-bs-toggle="popover" data-bs-placement="top" title="{{ $data->title }}"
+                                        data-bs-content="{{ $data->summary }}">
+                                        <i class="mdi mdi-information"></i>
+                                    </button>
                                 @endif
                             </p>
-                            @if(Article::useTag() && isset($data->tags))
+                            @if (Article::useTag() && isset($data->tags))
                                 <p data-name='tags' class="mt-1 mb-0">
                                     @forelse($data->tags as $tag)
-                                    <span class="badge rounded-pill border border-light text-dark">
-                                        #{{ $tag->name }}
-                                    </span>
+                                        <span class="badge rounded-pill border border-light text-dark">
+                                            #{{ $tag->name }}
+                                        </span>
                                     @empty
                                     @endforelse
                                 </p>
@@ -81,7 +85,7 @@
                     {{ $data->user->name }}
                 </td>
                 <td data-name='view_count' class="d-none d-md-table-cell text-center">
-                    {{ $data->view_count }}
+                    {{ number_format($data->view_count) }}
                 </td>
                 <td data-name='released_at' class="d-none d-md-table-cell">
                     {{ $data->released_at }}
@@ -97,16 +101,16 @@
                     </button>
                 </td>
             </tr>
-        @empty
-            <tr>
-                <td colspan="6" class="text-center">{{ trans('ui-bootstrap5::word.crud.none_data') }}</td>
-            </tr>
-        @endforelse
-    </tbody>
-</table>
+            @empty
+                <tr>
+                    <td colspan="6" class="text-center">{{ trans('ui-bootstrap5::word.crud.none_data') }}</td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
 
-@isset($datas)
-    <div class="mt-3 d-flex justify-content-center">
-        {{ $datas->render(Bootstrap5::theme('partials.paginator')) }}
-    </div>
-@endisset
+    @isset($datas)
+        <div class="mt-3 d-flex justify-content-center">
+            {{ $datas->render(Bootstrap5::theme('partials.paginator')) }}
+        </div>
+    @endisset
