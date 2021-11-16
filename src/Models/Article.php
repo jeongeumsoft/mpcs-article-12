@@ -256,4 +256,20 @@ class Article extends Model
     {
         return $this->relationLoaded('articleCategories') ? $this->articleCategories->pluck('id')->toArray() : null;
     }
+
+    /**
+     * scopeCustom
+     *
+     * @return void
+     */
+    public function scopeCustom($query, $params)
+    {
+        if (isset($params['__released'])) {
+            $released = $params['__released'];
+            if ($released === "true") {
+                $now = Carbon::now()->format('Y-m-d H:i:s');
+                $query->where('released_at', '<=', $now);
+            }
+        }
+    }
 }
