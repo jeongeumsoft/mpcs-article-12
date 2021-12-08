@@ -6,8 +6,6 @@ use Exit11\Article\Facades\Article as Facade;
 use Illuminate\Database\Eloquent\Model;
 use Mpcs\Core\Facades\Core;
 use Mpcs\Core\Traits\ModelTrait;
-use Illuminate\Database\Eloquent\SoftDeletes;
-
 use Exit11\Article\Traits\Orderable;
 use Exit11\Article\Traits\OrderableTrait;
 use Illuminate\Support\Carbon;
@@ -15,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
 
 class Popup extends Model implements Orderable
 {
-    use SoftDeletes, ModelTrait, OrderableTrait;
+    use ModelTrait, OrderableTrait;
 
     protected $table = 'popups';
     protected $dates = ['created_at', 'updated_at', 'deleted_at', 'period_from', 'period_to'];
