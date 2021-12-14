@@ -105,4 +105,15 @@ class ArticleFileService
         }
         Core::crudAbort();
     }
+
+    /**
+     * download
+     *
+     * @param  mixed $model
+     * @return void
+     */
+    public function download($model)
+    {
+        return $this->repository->download($model);
+    }
 }

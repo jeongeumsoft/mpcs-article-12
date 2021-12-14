@@ -2,6 +2,8 @@
 
 namespace Exit11\Article\Repositories;
 
+use Mpcs\Core\Facades\Core;
+
 use Exit11\Article\Models\ArticleFile as Model;
 use Mpcs\Core\Traits\RepositoryTrait;
 use Illuminate\Support\Facades\DB;
@@ -75,5 +77,29 @@ class ArticleFileRepository implements ArticleFileRepositoryInterface
     public function delete($model)
     {
         return $model->delete();
+    }
+
+    /**
+     * download
+     *
+     * @param  mixed $model
+     * @return void
+     */
+    public function download($model)
+    {
+        $disk = $model->uploadDisk;
+
+        if ($disk->exists($model->file_path)) {
+            $model->download_count = $model->download_count + 1;
+            $model->save();
+
+            $headers = [
+                'Content-Type' => $model->mime,
+            ];
+
+            return $disk->download($model->file_path, $model->caption, $headers);
+        }
+
+        abort(404, Core::trans('errors.message.not_found_resource'));
     }
 }

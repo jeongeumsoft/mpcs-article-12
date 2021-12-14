@@ -95,4 +95,15 @@ class ArticleFileController extends Controller
     {
         return Core::responseJson($this->service->destroy($article_file));
     }
+
+    /**
+     * download
+     *
+     * @param  mixed $article_file
+     * @return void
+     */
+    public function download(Model $article_file)
+    {
+        return $this->service->download($article_file);
+    }
 }

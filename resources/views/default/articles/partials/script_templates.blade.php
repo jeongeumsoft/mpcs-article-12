@@ -19,7 +19,7 @@
             {caption} <span class="badge bg-body text-dark">{size}</span> 
         </div>
         <div class="col-auto">
-            <a class="btn btn-sm btn-icon btn-primary" href="{file_url}" download="{caption}">
+            <a class="btn btn-sm btn-icon btn-primary" href="{download_url}" download="{caption}">
                 <i class="mdi mdi-download"></i>
             </a>
         </div>
@@ -33,7 +33,7 @@
             {caption} <span class="badge bg-body text-dark">{size}</span> 
         </div>
         <div class="col-auto">
-            <a class="btn btn-sm btn-icon btn-primary" href="{file_url}" download="{caption}">
+            <a class="btn btn-sm btn-icon btn-primary" href="{download_url}" download="{caption}">
                 <i class="mdi mdi-download"></i>
             </a>
             <button data-template-btn="delete" data-template-target="item" data-template-field-name="delete_article_files[]" data-template-value="{id}" type="button" class="btn btn-sm btn-icon btn-danger">

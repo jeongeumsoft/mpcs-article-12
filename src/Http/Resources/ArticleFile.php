@@ -2,6 +2,8 @@
 
 namespace Exit11\Article\Http\Resources;
 
+use Mpcs\Core\Facades\Core;
+
 use Illuminate\Http\Resources\Json\JsonResource;
 use Mpcs\Core\Traits\ResourceTrait;
 
@@ -25,7 +27,7 @@ class ArticleFile extends JsonResource
             'mime' => $this->mime,
             'size' => $this->size,
             'download_count' => $this->download_count,
-            'file_url' => $this->file_url,
+            'download_url' => route(Core::getRouteName('article_files.download'), ['article_file' => $this->id]),
             'article' => $this->whenLoaded('article', function () {
                 return new ArticleCollection($this->article);
             }),

@@ -13,7 +13,8 @@ Route::group([
 ], function (Router $router) {
     $router->resource('article_categories', 'ArticleCategoryController')->names('article_categories')->except(['create', 'destroy']);
     $router->resource('articles', 'ArticleController')->names('articles');
-    $router->resource('article_files', 'ArticleFileController')->names('article_files')->except(['index', 'edit', 'update']);
+    $router->resource('article_files', 'ArticleFileController')->names('article_files')->only(['store', 'destroy']);
+    $router->get('article_files/{article_file}/download', 'ArticleFileController@download')->name('article_files.download');
 
     $router->resource('popups', 'PopupController')->names('popups');
 });
