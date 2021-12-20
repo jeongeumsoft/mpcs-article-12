@@ -30,6 +30,9 @@ class ArticleController extends Controller
      */
     public function list(Request $request)
     {
+        // 모델 조회시 옵션설정(페이징여부, 검색조건)
+        $this->addOption('_per_page', Article::getPerPage('blade.articles'));
+
         $datas = $this->service->index();
         return view(Article::theme('articles.partials.list'), compact('datas'))->withInput($request->flash());
     }

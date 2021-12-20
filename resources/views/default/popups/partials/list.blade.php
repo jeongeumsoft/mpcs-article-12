@@ -11,19 +11,19 @@
                 ID
             </th>
             <th class="text-center min-width-rem-4">
-                {{trans('mpcs-article::word.attr.type')}}
+                {{ trans('mpcs-article::word.attr.type') }}
             </th>
             <th class="text-center">
-                {{trans('mpcs-article::word.attr.title')}}
+                {{ trans('mpcs-article::word.attr.title') }}
             </th>
             <th class="text-center min-width-rem-10">
-                {{trans('mpcs-article::word.attr.period_from')}}
+                {{ trans('mpcs-article::word.attr.period_from') }}
             </th>
             <th class="text-center min-width-rem-10">
-                {{trans('mpcs-article::word.attr.period_to')}}
+                {{ trans('mpcs-article::word.attr.period_to') }}
             </th>
             <th class="text-center min-width-rem-3">
-                {{trans('mpcs-article::word.attr.status')}}
+                {{ trans('mpcs-article::word.attr.status') }}
             </th>
             <th class="text-center min-width-rem-6">
                 {{ trans('ui-bootstrap5::word.actions') }}
@@ -36,22 +36,27 @@
                 <td data-name='order' class="float-left float-md-none d-block d-md-table-cell">
                     <div class="btn-group">
                         <button type="button" class="btn btn-sm btn-outline-primary disabled">
-                            {{$data->order}}
+                            {{ $data->order }}
                         </button>
-                        <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="visually-hidden">Toggle Dropdown</span>
                         </button>
                         <div class="dropdown-menu text-center">
-                            <button class="btn-crud-orderable btn btn-sm" data-action="first" data-bs-toggle="tooltip" data-placement="top" title="{{trans('campsite.attr.move_to_first')}}">
+                            <button class="btn-crud-orderable btn btn-sm" data-action="first" data-bs-toggle="tooltip"
+                                data-placement="top" title="{{ trans('campsite.attr.move_to_first') }}">
                                 <i class="mdi mdi-chevron-double-up"></i>
                             </button>
-                            <button class="btn-crud-orderable btn btn-sm" data-action="up" data-bs-toggle="tooltip" data-placement="top" title="{{trans('campsite.attr.move_to_up')}}">
+                            <button class="btn-crud-orderable btn btn-sm" data-action="up" data-bs-toggle="tooltip"
+                                data-placement="top" title="{{ trans('campsite.attr.move_to_up') }}">
                                 <i class="mdi mdi-chevron-up"></i>
                             </button>
-                            <button class="btn-crud-orderable btn btn-sm" data-action="down" data-bs-toggle="tooltip" data-placement="top" title="{{trans('campsite.attr.move_to_down')}}">
+                            <button class="btn-crud-orderable btn btn-sm" data-action="down" data-bs-toggle="tooltip"
+                                data-placement="top" title="{{ trans('campsite.attr.move_to_down') }}">
                                 <i class="mdi mdi-chevron-down"></i>
                             </button>
-                            <button class="btn-crud-orderable btn btn-sm" data-action="last" data-bs-toggle="tooltip" data-placement="top" title="{{trans('campsite.attr.move_to_last')}}">
+                            <button class="btn-crud-orderable btn btn-sm" data-action="last" data-bs-toggle="tooltip"
+                                data-placement="top" title="{{ trans('campsite.attr.move_to_last') }}">
                                 <i class="mdi mdi-chevron-double-down"></i>
                             </button>
                         </div>
@@ -59,7 +64,8 @@
                 </td>
                 <td class="text-right text-md-center d-block d-md-table-cell" data-name='is_visible'>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" name="list_checked_visible" {{ $data->is_visible ? 'checked' : '' }}>
+                        <input class="form-check-input" type="checkbox" name="list_checked_visible"
+                            {{ $data->is_visible ? 'checked' : '' }}>
                         <label class="form-check-label"></label>
                     </div>
                 </td>
@@ -67,16 +73,17 @@
                     {{ $data->id }}
                 </td>
                 <td data-name='type' class="text-md-center d-none d-md-table-cell">
-                    <span class="badge bg-{{($data->type == "TEXT") ? "success" : "warning"}}">
+                    <span class="badge bg-{{ $data->type == 'TEXT' ? 'success' : 'warning' }}">
                         {{ $data->type }}
                     </span>
                 </td>
                 <td class="text-start d-block d-md-table-cell">
                     <div class="row no-gutters align-items-center">
-                        @if($data->image)
+                        @if ($data->image)
                             <div class="col-auto mr-2">
                                 <div class="ratio ratio-1x1" style="width: 40px; ">
-                                    <img class="embed-responsive-item img-thumbnail" src="{{ $data->image_file_url }}" alt="{{ $data->title }}">
+                                    <img class="embed-responsive-item img-thumbnail"
+                                        src="{{ $data->image_file_url }}" alt="{{ $data->title }}">
                                 </div>
                             </div>
                         @endif
@@ -95,8 +102,8 @@
                     {{ $data->period_to }}
                 </td>
                 <td data-name='status_released' class="text-start text-md-center d-block d-md-table-cell">
-                    <span class="badge bg-{{$data->status_released ? "success" : "warning"}}">
-                        {{ $data->status_released ? trans("mpcs-article::word.attr.released") : trans("mpcs-article::word.attr.nonrelease") }}
+                    <span class="badge bg-{{ $data->status_released ? 'success' : 'warning' }}">
+                        {{ $data->status_released ? trans('mpcs-article::word.attr.released') : trans('mpcs-article::word.attr.nonrelease') }}
                     </span>
                 </td>
                 <td class="d-block d-md-table-cell text-end text-md-center">

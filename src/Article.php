@@ -60,6 +60,19 @@ class Article
     }
 
 
+    /**
+     * perPage
+     *
+     * @param  mixed $configString
+     * @param  mixed $default
+     * @return void
+     */
+    public static function getPerPage($configString, $default = 15)
+    {
+        return config('mpcsarticle.per_page.' . $configString) ?? $default;
+    }
+
+
 
     /**
      * noImage

@@ -24,4 +24,15 @@ return [
         'popups' => null,
         'promotions' => null,
     ],
+
+    // 관리자 콘솔 페이지 갯수
+    'per_page' => [
+        'api' => [
+            'articles' => 15,
+        ],
+        'blade' => [
+            'articles' => 10,
+            'popups' => 10,
+        ],
+    ],
 ];

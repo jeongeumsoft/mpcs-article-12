@@ -28,6 +28,7 @@ class SeedCommand extends Command
         if (!app()->environment(['production'])) {
             if ($this->confirm($confirmMessage)) {
                 $this->call('db:seed', ['--class' => "Exit11\Article\Seeds\ArticleTableSeeder"]);
+                $this->call('db:seed', ['--class' => "Exit11\Article\Seeds\PopupTableSeeder"]);
             }
         } else {
             $this->error('운영환경에서는 실행할 수 없습니다.');

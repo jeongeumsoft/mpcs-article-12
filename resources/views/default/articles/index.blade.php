@@ -7,7 +7,7 @@
 @section('crud_subtitle', Article::menuTitle('mpcs-article::menu.articles', config('mpcsarticle.subtitle.articles')))
 
 {{-- 목록 타이틀 --}}
-@section('crud_list_title', Article::menuTitle('mpcs-article::menu.articles', config('mpcsarticle.list_title.articles')))
+{{-- @section('crud_list_title', Article::menuTitle('mpcs-article::menu.articles', config('mpcsarticle.list_title.articles'))) --}}
 
 {{-- 사이트메뉴 인클루드 --}}
 {{-- @section('aside_left_nav')
@@ -36,23 +36,23 @@
 @endsection
 
 
-{{-- CRUD 모달 폼 영역--}}
+{{-- CRUD 모달 폼 영역 --}}
 @section('crud_form')
 
     {{-- 생성 --}}
-    @component(Bootstrap5::theme('components.modal_crud_create'), ['modalSize' => 'modal-fullscreen'])        
-        {!!Form::open()->idPrefix('create_')->attrs(['class' => 'h-100'])!!}   
+    @component(Bootstrap5::theme('components.modal_crud_create'), ['modalSize' => 'modal-fullscreen'])
+        {!! Form::open()->idPrefix('create_')->attrs(['class' => 'h-100']) !!}
         @include(Article::theme('articles.partials.form'))
-        {!!Form::close()!!}
+        {!! Form::close() !!}
     @endcomponent
-    
+
     {{-- 수정 --}}
     @component(Bootstrap5::theme('components.modal_crud_edit'), ['modalSize' => 'modal-fullscreen'])
-        {!!Form::open()->idPrefix('edit_')->method('put')->attrs(['class' => 'h-100'])!!}   
+        {!! Form::open()->idPrefix('edit_')->method('put')->attrs(['class' => 'h-100']) !!}
         @include(Article::theme('articles.partials.form'))
-        {!!Form::close()!!}
+        {!! Form::close() !!}
     @endcomponent
-    
+
     {{-- 보기 --}}
     @component(Bootstrap5::theme('components.modal_crud_show'), ['modalSize' => 'modal-fullscreen'])
         {{-- 컨텐츠 인클루드 --}}
@@ -62,7 +62,7 @@
     {{-- 삭제 --}}
     @component(Bootstrap5::theme('components.modal_crud_delete'))
     @endcomponent
-    
+
 @endsection
 
 
@@ -81,10 +81,10 @@
 
 
 @push('after_app_src_scripts')
-<script src="/vendor/mpcs-ui/bootstrap5/js/crud.js"></script>
+    <script src="/vendor/mpcs-ui/bootstrap5/js/crud.js"></script>
 @endpush
 
-{{-- CURD 스크립트 추가--}}
+{{-- CURD 스크립트 추가 --}}
 @push('after_app_scripts')
     <script>
         window.CRUD.init();

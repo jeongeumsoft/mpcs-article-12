@@ -3,7 +3,7 @@
 namespace Exit11\Article\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-
+use Exit11\Article\Facades\Article;
 use Mpcs\Core\Traits\ControllerTrait;
 use Exit11\Article\Http\Requests\ArticleRequest as Request;
 use Exit11\Article\Services\ArticleService as Service;
@@ -30,6 +30,8 @@ class ArticleController extends Controller
      */
     public function index(Request $request)
     {
+        // 모델 조회시 옵션설정(페이징여부, 검색조건)
+        $this->addOption('_per_page', Article::getPerPage('api.articles'));
         return new ResourceCollection($this->service->index());
     }
 
