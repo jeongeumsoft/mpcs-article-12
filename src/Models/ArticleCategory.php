@@ -23,7 +23,7 @@ class ArticleCategory extends Model
     // $sortable 정의시 정렬기능을 제공할 필드는 필수 기입
     public $sortable = ['id', 'name', 'is_visible'];
     public $defaultSortable = [
-        'name' => 'asc',
+        'order' => 'asc',
     ];
 
     public $appends = ['nested_str'];
