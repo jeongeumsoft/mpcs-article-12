@@ -41,20 +41,30 @@ class ArticleCategoryRepository implements ArticleCategoryRepositoryInterface
         DB::beginTransaction();
         try {
             /* DB 트랜젝션 통과 */
-            $this->model->name = $this->request['name'];
-            $this->model->description = $this->request['description'] ?? null;
-            $this->model->parent_id = $this->request['parent_id'] ?? null;
-            $this->model->type = $this->request['type'];
-            $this->model->is_visible = $this->request['is_visible'] ?? false;
-            $this->model->save();
 
-            // nested_info: depth(, nested_ids)
-            $this->model->nested_info = $this->model->parent;
+            // 기본 정보 저장
+            $parentId = $this->request['parent_id'] ?? null;
+            $order = $this->model::where('parent_id', $parentId)->max('order') + 1;
+
+            if ($parentId) {
+                $depth = $this->model::where('id', $parentId)->value('depth');
+                $depth = (int)$depth + 1;
+            } else {
+                $depth = 1;
+            }
 
             // max depth 체크
-            if ($this->model::$maxDepth < $this->model->depth) {
+            if ($this->model::$maxDepth < $depth) {
                 abort(422, trans('validation.max.numeric', ['attribute' => 'depth', 'max' => $this->model::$maxDepth]));
             }
+
+            $this->model->name = $this->request['name'];
+            $this->model->description = $this->request['description'] ?? null;
+            $this->model->parent_id = $parentId;
+            $this->model->type = $this->request['type'];
+            $this->model->is_visible = $this->request['is_visible'] ?? false;
+            $this->model->order = $order;
+            $this->model->depth = $depth;
             $this->model->save();
 
             DB::commit();
@@ -73,14 +83,28 @@ class ArticleCategoryRepository implements ArticleCategoryRepositoryInterface
         DB::beginTransaction();
         try {
             /* DB 트랜젝션 통과 */
+
+            // 기본 정보 저장
+            $parentId = $this->request['parent_id'] ?? null;
+            $order = $this->model::where('parent_id', $parentId)->max('order') + 1;
+
+            if ($parentId) {
+                $depth = $this->model::where('id', $parentId)->value('depth');
+                $depth = (int)$depth + 1;
+            } else {
+                $depth = 1;
+            }
+
+            // max depth 체크
+            if ($this->model::$maxDepth < $depth) {
+                abort(422, trans('validation.max.numeric', ['attribute' => 'depth', 'max' => $this->model::$maxDepth]));
+            }
+
             $model->name = $this->request['name'];
             $model->description = $this->request['description'] ?? null;
             $model->parent_id = $this->request['parent_id'] ?? null;
             $model->type = $this->request['type'];
             $model->is_visible = $this->request['is_visible'] ?? false;
-
-            // nested_info: depth(, nested_ids)
-            $model->nested_info = $model->parent;
 
             // max depth 체크
             if ($this->model::$maxDepth < $model->depth) {

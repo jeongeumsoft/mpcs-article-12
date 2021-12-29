@@ -73,7 +73,6 @@ class Article
     }
 
 
-
     /**
      * noImage
      *

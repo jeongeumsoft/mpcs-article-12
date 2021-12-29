@@ -120,7 +120,8 @@ class ArticleCategoryService
     {
         if ($this->repository->saveOrder()) {
             return [
-                'flag' => true,
+                'title' => "순서 저장 성공",
+                'message' => "메뉴 순서가 저장되었습니다.",
                 'status' => 200,
             ];
         }

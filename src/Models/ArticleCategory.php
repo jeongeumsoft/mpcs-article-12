@@ -6,6 +6,7 @@ use Mpcs\Core\Facades\Core;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Mpcs\Core\Traits\ModelTrait;
+use MpcsUi\Bootstrap5\Traits\NestedSortableTrait;
 use Exit11\Article\CustomCollection;
 use Cviebrock\EloquentSluggable\Sluggable;
 
@@ -13,7 +14,7 @@ use Exit11\Article\Facades\Article;
 
 class ArticleCategory extends Model
 {
-    use SoftDeletes, Sluggable, ModelTrait;
+    use SoftDeletes, Sluggable, ModelTrait, NestedSortableTrait;
 
     protected $table = 'article_categories';
     public $timestamps = false;
@@ -94,26 +95,6 @@ class ArticleCategory extends Model
 
         $this->attributes['depth'] = $depth;
         // $this->attributes['nested_ids'] = $nestedIdx;
-    }
-
-    /**
-     * getNestedStrAttribute
-     *
-     * @return void
-     */
-    public function getNestedStrAttribute()
-    {
-        return Core::getAllNestedNames($this);
-    }
-
-    /**
-     * getNestedParentStrAttribute
-     *
-     * @return void
-     */
-    public function getNestedParentStrAttribute()
-    {
-        return Core::getAllNestedNames($this->parent_id ? $this->allParent : null);
     }
 
     /**

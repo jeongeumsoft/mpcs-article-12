@@ -18,7 +18,7 @@ class ArticleCategoryRequest extends FormRequest
         }
 
         $id = $this->category->id ?? "";
-        $parentId = request()->parent_id ?? $this->parante_id;
+        $parentId = request()->parent_id ?? $this->parant_id;
 
         $rules = [
             'POST' => [

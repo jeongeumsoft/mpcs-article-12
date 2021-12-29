@@ -27,6 +27,7 @@ Route::group([
     'namespace'     => 'Exit11\Article\Http\Controllers\Blade',
     'middleware'    => config('mpcs.route.middleware'),
 ], function (Router $router) {
+    $router->patch('article_categories/save_order', 'ArticleCategoryController@saveOrder')->name('article_categories.save_order');
     $router->get('article_categories/list', 'ArticleCategoryController@list')->name('article_categories.list');
     $router->resource('article_categories', 'ArticleCategoryController')->except(['destroy']);
     $router->get('articles/list', 'ArticleController@list')->name('articles.list');
