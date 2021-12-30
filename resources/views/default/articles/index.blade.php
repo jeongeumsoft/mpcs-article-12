@@ -25,8 +25,12 @@
 
 {{-- 헤더 버튼 그룹 --}}
 @section('crud_button_group')
-    <button class="btn-crud-create btn btn-primary font-weight-bold"><i class="mdi mdi-account-plus mr-1"></i>
-        {{ Str::title(trans('ui-bootstrap5::word.create')) }}</button>
+    @can('create', Exit11\Article\Models\Article::class)
+        <button class="btn-crud-create btn btn-primary font-weight-bold">
+            <i class="mdi mdi-account-plus mr-1"></i>
+            {{ Str::title(trans('ui-bootstrap5::word.create')) }}
+        </button>
+    @endcan
 @endsection
 
 

@@ -34,8 +34,8 @@ Route::group([
 
 // Non Auth Api Route
 Route::group([
-    'as'            => "api_web",
-    'prefix'        => "api_web",
+    'as'            => "web_api",
+    'prefix'        => "web_api",
     'namespace'     => 'Exit11\Article\Http\Controllers\Api',
     'middleware'    => ['web'],
 ], function (Router $router) {

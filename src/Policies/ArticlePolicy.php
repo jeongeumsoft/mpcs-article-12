@@ -21,7 +21,7 @@ class ArticlePolicy
      */
     public function before($user, $ability)
     {
-        if ($user->isAdministrator()) {
+        if ($user->isAdministrator() || $user->cans(['article.manage'])) {
             return true;
         }
     }

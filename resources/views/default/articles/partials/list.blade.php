@@ -91,14 +91,18 @@
                     {{ $data->released_at }}
                 </td>
                 <td class="d-block d-md-table-cell text-end text-md-center">
-                    <button class="btn-crud-show btn btn-icon btn-success text-white align-middle"
-                        title="{{ trans('ui-bootstrap5::word.button.show') }}">
-                        <i class="mdi mdi-eye"></i>
-                    </button>
-                    <button class="btn-crud-delete btn btn-icon btn-danger text-white align-middle"
-                        title="{{ trans('ui-bootstrap5::word.button.delete') }}">
-                        <i class="mdi mdi-trash-can"></i>
-                    </button>
+                    @can('view', $data)
+                        <button class="btn-crud-show btn btn-icon btn-success text-white align-middle"
+                            title="{{ trans('ui-bootstrap5::word.button.show') }}">
+                            <i class="mdi mdi-eye"></i>
+                        </button>
+                    @endcan
+                    @can('delete', $data)
+                        <button class="btn-crud-delete btn btn-icon btn-danger text-white align-middle"
+                            title="{{ trans('ui-bootstrap5::word.button.delete') }}">
+                            <i class="mdi mdi-trash-can"></i>
+                        </button>
+                    @endcan
                 </td>
             </tr>
             @empty

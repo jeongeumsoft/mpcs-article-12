@@ -34,6 +34,7 @@ class ArticleCategoryPolicy
      */
     public function viewAny(User $user)
     {
+        // 
     }
 
     /**
@@ -56,6 +57,8 @@ class ArticleCategoryPolicy
      */
     public function create(User $user)
     {
+        $isAllow = $user->cans(['article.categories.create']);
+        return Core::responsePolicy($isAllow);
     }
 
     /**
@@ -67,6 +70,8 @@ class ArticleCategoryPolicy
      */
     public function update(User $user, Model $model)
     {
+        $isAllow = $user->cans(['article.categories.update']);
+        return Core::responsePolicy($isAllow);
     }
 
     /**
@@ -78,6 +83,8 @@ class ArticleCategoryPolicy
      */
     public function delete(User $user, Model $model)
     {
+        $isAllow = $user->cans(['article.categories.deleted']);
+        return Core::responsePolicy($isAllow);
     }
 
     /**

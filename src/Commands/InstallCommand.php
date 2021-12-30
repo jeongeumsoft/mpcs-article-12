@@ -3,8 +3,6 @@
 namespace Exit11\Article\Commands;
 
 use Illuminate\Console\Command;
-use Exit11\Article\Commands\CommandTrait;
-use Exit11\Article\Commands\MakePatternCommand;
 
 class InstallCommand extends Command
 {
@@ -36,32 +34,23 @@ class InstallCommand extends Command
         $this->isForce = true;
         $this->isReset = true;
 
-        $confirmMessage = 'Core를 설치하시겠습니까? DB가 초기화되어, 유실될 수 있습니다. 설치를 계속 진행하시겠습니까?';
-        $confirmMessage .= PHP_EOL . '(리소스는 덮어쓰기 됩니다.)';
+        $confirmMessage = 'Article Package를 설치하시겠습니까?';
+        $confirmMessage .= PHP_EOL . '(DB Table 생성, Permission 구성 및 초기 데이터 생성)';
 
         if (!app()->environment(['production'])) {
             if ($this->confirm($confirmMessage)) {
 
-                // cviebrock/eloquent-sluggable publish
-                // $this->call('vendor:publish', [
-                //     '--provider' => 'Cviebrock\EloquentSluggable\ServiceProvider',
-                //     '--tag' => 'config',
-                //     '--force' => $this->isForce
-                // ]);
+                // publish
+                $this->call('vendor:publish', [
+                    '--provider' => 'Exit11\Article\ArticleServiceProvider',
+                    '--force' => $this->isForce
+                ]);
 
-                // $this->line('<info>Publish cviebrock/eloquent-sluggable package configuration file:</info> config/sluggable.php');
+                $this->call('db:seed', ['--class' => "Exit11\Article\Seeds\ArticleInstallSeeder"]);
 
-                // // cviebrock/eloquent-taggable publish
-                // $this->call('vendor:publish', [
-                //     '--provider' => 'Cviebrock\EloquentTaggable\ServiceProvider',
-                //     '--tag' => 'config',
-                //     '--force' => $this->isForce
-                // ]);
-
-                // $this->line('<info>Publish cviebrock/eloquent-taggable package configuration file:</info> config/taggable.php');
-
-                // $this->call('cache:clear');
-                // $this->call('config:cache');
+                $this->line('<info>Inserted Article Permission</info>');
+                $this->call('cache:clear');
+                $this->call('config:cache');
             }
         } else {
             $this->error('운영환경에서는 실행할 수 없습니다.');
