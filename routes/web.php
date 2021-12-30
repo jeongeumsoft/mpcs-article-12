@@ -15,8 +15,6 @@ Route::group([
     $router->resource('articles', 'ArticleController')->names('articles');
     $router->resource('article_files', 'ArticleFileController')->names('article_files')->only(['store', 'destroy']);
     $router->get('article_files/{article_file}/download', 'ArticleFileController@download')->name('article_files.download');
-
-    $router->resource('popups', 'PopupController')->names('popups');
 });
 
 
@@ -32,10 +30,6 @@ Route::group([
     $router->resource('article_categories', 'ArticleCategoryController')->except(['destroy']);
     $router->get('articles/list', 'ArticleController@list')->name('articles.list');
     $router->resource('articles', 'ArticleController');
-
-    $router->patch('popups/{popup}/orderable', 'PopupController@orderable')->name('popups.orderable');
-    $router->get('popups/list', 'PopupController@list')->name('popups.list');
-    $router->resource('popups', 'PopupController')->names('popups');
 });
 
 // Non Auth Api Route
@@ -46,5 +40,4 @@ Route::group([
     'middleware'    => ['web'],
 ], function (Router $router) {
     $router->resource('articles', 'ArticleController')->names('articles')->only(['index', 'show']);
-    $router->resource('popups', 'PopupController')->names('popups')->only(['index', 'show']);
 });

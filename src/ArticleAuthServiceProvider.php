@@ -19,7 +19,6 @@ class ArticleAuthServiceProvider extends ServiceProvider
         Models\ArticleCategory::class => Policies\ArticleCategoryPolicy::class,
         Models\Article::class => Policies\ArticlePolicy::class,
         Models\ArticleFile::class => Policies\ArticleFilePolicy::class,
-        Models\Popup::class => Policies\PopupPolicy::class,
     ];
 
     /**

@@ -11,17 +11,14 @@ return [
     // 아티클 메뉴제목 : trans($value)
     'app_title' => [
         'articles' => null,
-        'popups' => null,
         'promotions' => null,
     ],
     'subtitle' => [
         'articles' => null,
-        'popups' => null,
         'promotions' => null,
     ],
     'list_title' => [
         'articles' => null,
-        'popups' => null,
         'promotions' => null,
     ],
 
@@ -32,7 +29,6 @@ return [
         ],
         'blade' => [
             'articles' => 10,
-            'popups' => 10,
         ],
     ],
 ];
