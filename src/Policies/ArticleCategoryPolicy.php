@@ -21,7 +21,7 @@ class ArticleCategoryPolicy
      */
     public function before($user, $ability)
     {
-        if ($user->isAdministrator()) {
+        if ($user->isAdministrator() || ($user->cans(['article.categories.manage']) === true)) {
             return true;
         }
     }
@@ -34,7 +34,8 @@ class ArticleCategoryPolicy
      */
     public function viewAny(User $user)
     {
-        // 
+        $isAllow = $user->cans(['article.categories.list']);
+        return Core::responsePolicy($isAllow);
     }
 
     /**
@@ -46,7 +47,8 @@ class ArticleCategoryPolicy
      */
     public function view(User $user, Model $model)
     {
-        //
+        $isAllow = $user->cans(['article.categories.view']);
+        return Core::responsePolicy($isAllow);
     }
 
     /**
@@ -96,5 +98,6 @@ class ArticleCategoryPolicy
      */
     public function forceDelete(User $user, Model $model)
     {
+        // 
     }
 }

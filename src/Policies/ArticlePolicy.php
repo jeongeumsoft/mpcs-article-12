@@ -21,7 +21,7 @@ class ArticlePolicy
      */
     public function before($user, $ability)
     {
-        if ($user->isAdministrator() || $user->cans(['article.manage'])) {
+        if ($user->isAdministrator() || ($user->cans(['article.manage']) === true)) {
             return true;
         }
     }
@@ -98,5 +98,6 @@ class ArticlePolicy
      */
     public function forceDelete(User $user, Model $model)
     {
+        //
     }
 }
