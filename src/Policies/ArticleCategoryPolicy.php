@@ -21,7 +21,7 @@ class ArticleCategoryPolicy
      */
     public function before($user, $ability)
     {
-        if ($user->isAdministrator() || ($user->cans(['article.categories.manage']) === true)) {
+        if ($user->isAdministrator() || ($user->cans(['article.category.manage']) === true)) {
             return true;
         }
     }
@@ -34,7 +34,7 @@ class ArticleCategoryPolicy
      */
     public function viewAny(User $user)
     {
-        $isAllow = $user->cans(['article.categories.list']);
+        $isAllow = $user->cans(['article.category.list']);
         return Core::responsePolicy($isAllow);
     }
 
@@ -47,7 +47,7 @@ class ArticleCategoryPolicy
      */
     public function view(User $user, Model $model)
     {
-        $isAllow = $user->cans(['article.categories.view']);
+        $isAllow = $user->cans(['article.category.view']);
         return Core::responsePolicy($isAllow);
     }
 
@@ -59,7 +59,7 @@ class ArticleCategoryPolicy
      */
     public function create(User $user)
     {
-        $isAllow = $user->cans(['article.categories.create']);
+        $isAllow = $user->cans(['article.category.create']);
         return Core::responsePolicy($isAllow);
     }
 
@@ -72,7 +72,7 @@ class ArticleCategoryPolicy
      */
     public function update(User $user, Model $model)
     {
-        $isAllow = $user->cans(['article.categories.update']);
+        $isAllow = $user->cans(['article.category.update']);
         return Core::responsePolicy($isAllow);
     }
 
@@ -85,7 +85,7 @@ class ArticleCategoryPolicy
      */
     public function delete(User $user, Model $model)
     {
-        $isAllow = $user->cans(['article.categories.deleted']);
+        $isAllow = $user->cans(['article.category.deleted']);
         return Core::responsePolicy($isAllow);
     }
 
