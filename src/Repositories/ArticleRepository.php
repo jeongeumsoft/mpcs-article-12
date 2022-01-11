@@ -47,6 +47,7 @@ class ArticleRepository implements ArticleRepositoryInterface
             $this->model->title = $this->request['title'];
             $this->model->summary = $this->request['summary'] ?? null;
             $this->model->content = $this->request['content'] ?? null;
+            $this->model->html = $this->request['html'] ?? null;
             $this->model->released_at = $this->request['released_at'];
             $this->model->user_id = Core::user()->id;
 
@@ -92,6 +93,7 @@ class ArticleRepository implements ArticleRepositoryInterface
             $model->title = $this->request['title'];
             $model->summary = $this->request['summary'] ?? $model->summary;
             $model->content = $this->request['content'] ?? $model->content;
+            $model->html = $this->request['html'] ?? $model->html;
             $model->released_at = $this->request['released_at'];
             $model->user_id = Core::user()->id;
 
