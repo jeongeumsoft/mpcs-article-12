@@ -9,14 +9,31 @@ class ArticleCategory extends JsonResource
 {
     use ResourceTrait;
 
+    public $params;
+
+    /**
+     * Create a new resource instance.
+     *
+     * @param  mixed  $resource
+     * @return void
+     */
+    public function __construct($resource, $params = null)
+    {
+        parent::__construct($resource);
+        $this->params = $params;
+    }
+
     /**
      * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public function toArray($request)
+    public function toArray($request, $params = null)
     {
+        if (!$params || !is_array($params)) {
+            $params = $this->params;
+        }
         return [
             'id' => $this->id,
             'parent_id' => $this->parent_id,
@@ -30,18 +47,13 @@ class ArticleCategory extends JsonResource
             'articles' => $this->whenLoaded('articles', function () {
                 return new ArticleCollection($this->articles);
             }),
-            'all_children' => $this->whenLoaded('allChildren', function () {
-                return new ArticleCategoryCollection($this->allChildren);
+            'all_children' => $this->whenLoaded('allChildren', function () use ($params) {
+                return new ArticleCategoryCollection($this->allChildren, $params);
             }),
-            'children' => $this->whenLoaded('children', function () {
-                return new ArticleCategoryCollection($this->children);
+            'children' => $this->whenLoaded('children', function () use ($params) {
+                return new ArticleCategoryCollection($this->children, $params);
             }),
             'nested_str' => $this->nested_str,
-            $this->mergeWhen($this->relationLoaded('allParent'), function () {
-                return [
-                    'nested_parent_str' => $this->nested_parent_str
-                ];
-            }),
         ];
     }
 }

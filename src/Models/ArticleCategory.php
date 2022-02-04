@@ -26,7 +26,7 @@ class ArticleCategory extends Model
         'order' => 'asc',
     ];
 
-    public $appends = ['nested_str'];
+    public $appends = ['nested_str', 'type_str'];
 
     protected static $m_params = [
         'default_load_relations' => ['allParent', 'allChildren']
@@ -105,6 +105,11 @@ class ArticleCategory extends Model
     public static function getAllowTypes()
     {
         return collect(static::$typeStrings);
+    }
+
+    public function getTypeStrAttribute()
+    {
+        return static::$typeStrings[$this->attributes['type']];
     }
 
     /**

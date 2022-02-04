@@ -6,8 +6,8 @@ use Mpcs\Core\Facades\Core;
 
 // Api Route
 Route::group([
-    'as'          => Core::getConfigString('route_name_prefix'),
-    'prefix'        => Core::getConfig('url_prefix'),
+    'as'            => Core::getRouteNamePrefix('api'),
+    'prefix'        => Core::getUrlPrefix('api'),
     'namespace'     => 'Exit11\Article\Http\Controllers\Api',
     'middleware'    => Core::getConfig('route.middleware'),
 ], function (Router $router) {
@@ -20,10 +20,10 @@ Route::group([
 
 // Blade Route
 Route::group([
-    'as'          => Core::getConfigString('ui_route_name_prefix'),
-    'prefix'        => Core::getConfig('ui_url_prefix'),
+    'as'            => Core::getRouteNamePrefix('ui'),
+    'prefix'        => Core::getUrlPrefix('ui'),
     'namespace'     => 'Exit11\Article\Http\Controllers\Blade',
-    'middleware'    => config('mpcs.route.middleware'),
+    'middleware'    => Core::getConfig('route.middleware'),
 ], function (Router $router) {
     $router->patch('article_categories/save_order', 'ArticleCategoryController@saveOrder')->name('article_categories.save_order');
     $router->get('article_categories/list', 'ArticleCategoryController@list')->name('article_categories.list');
@@ -32,12 +32,13 @@ Route::group([
     $router->resource('articles', 'ArticleController');
 });
 
-// Non Auth Api Route
 Route::group([
-    'as'            => "web_api",
-    'prefix'        => "web_api",
-    'namespace'     => 'Exit11\Article\Http\Controllers\Api',
-    'middleware'    => ['web'],
+    'as'            => Core::getRouteNamePrefix('open_api'),
+    'prefix'        => Core::getUrlPrefix('open_api'),
+    'namespace'     => 'Exit11\Article\Http\Controllers\OpenApi',
+    'middleware'    => Core::getConfig('route.open_api.middleware'),
 ], function (Router $router) {
-    $router->resource('articles', 'ArticleController')->names('articles')->only(['index', 'show']);
+    if (Core::getConfig('enable_open_api', 'mpcsarticle')) {
+        $router->resource('articles', 'ArticleController')->names('articles')->only(['index', 'show']);
+    }
 });
