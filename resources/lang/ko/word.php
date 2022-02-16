@@ -29,6 +29,7 @@ return [
         'url'               => '링크주소',
         'view_count'        => '조회수',
         'writer'            => '글쓴이',
+        'push_title'        => '새글 알림',
     ],
     'choose_a_file'         => '파일선택',
     'is_target_title'       => '링크주소 새창 열림 여부',

@@ -3,6 +3,21 @@
 
 <div class="row h-100">
     <div class="col-12 col-sm-4 col-lg-3">
+
+        @if (class_exists('PushSse') && config('mpcspushsse.enabled') && $formType === 'create')
+            <div class="form-group row">
+                <label
+                    class="col">{{ Str::ucfirst(trans('ui-bootstrap5::word.is_push_notification_message')) }}
+                </label>
+                <div class="col-auto">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" name="is_push_notification">
+                        <label class="form-check-label"></label>
+                    </div>
+                </div>
+            </div>
+        @endif
+
         {!! Form::text('released_at', trans('mpcs-article::word.attr.released_at'))->attrs(['data-type' => 'data-picker-datetime'])->placeholder(trans('mpcs-article::word.attr.released_at'))->wrapperAttrs(['class' => 'required']) !!}
         {!! Form::select('article_category_ids', trans('mpcs-article::word.attr.categories'), $article_categories)->attrs(['data-type' => 'select-multiple'])->multiple()->placeholder(trans('mpcs-article::word.attr.categories')) !!}
         {!! Form::text('title', trans('mpcs-article::word.attr.title'))->placeholder(trans('mpcs-article::word.attr.title'))->wrapperAttrs(['class' => 'required']) !!}

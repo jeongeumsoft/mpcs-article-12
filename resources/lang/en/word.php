@@ -29,6 +29,7 @@ return [
         'url'               => 'Url',
         'view_count'        => 'View count',
         'writer'            => 'Writer',
+        'push_title'        => 'New article',
     ],
     'choose_a_file'         => 'Choose a file',
     'is_target_title'       => 'Link address, new window is open.',
