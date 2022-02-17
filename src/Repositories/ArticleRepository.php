@@ -7,7 +7,6 @@ use Mpcs\Core\Facades\Core;
 use MpcsUi\Bootstrap5\Facades\Bootstrap5;
 use Exit11\Article\Models\Article as Model;
 use Exit11\Article\Models\ArticleFile;
-use Exit11\PushSse\Facades\PushSse;
 use Illuminate\Support\Facades\DB;
 use Mpcs\Core\Traits\RepositoryTrait;
 
@@ -94,7 +93,7 @@ class ArticleRepository implements ArticleRepositoryInterface
                 $is_push_notification = $is_push_notification ? true : false;
                 // $uidxs = [];
                 // array_push($uidxs, Core::user()->uidx);
-                PushSse::sseQueue($pushMessage, trans('mpcs-article::word.attr.push_title'), [
+                \PushSse::sseQueue($pushMessage, trans('mpcs-article::word.attr.push_title'), [
                     'is_private' => false,
                     'notification' => $is_push_notification,
                     'pushed_at' => $this->model->released_at,
