@@ -76,43 +76,42 @@ class ArticleRepository implements ArticleRepositoryInterface
                 }
             }
 
-
-            // PushSse 클래스가 있는지 확인
-            if (class_exists('Exit11\PushSse\Facades\PushSse') && config('mpcspushsse.enabled')) {
-                // PushSse 클래스가 있으면 푸시 전송
-
-                $category = $this->model->articleCategories->first();
-                $categoryName = $category->name ?? null;
-
-                $pushMessage = $this->model->title;
-                if ($categoryName) {
-                    $pushMessage = "[" . $categoryName . "] " . $pushMessage;
-                }
-
-                $is_push_notification = $this->request['is_push_notification'] ?? false;
-                $is_push_notification = $is_push_notification ? true : false;
-                // $uidxs = [];
-                // array_push($uidxs, Core::user()->uidx);
-                \PushSse::sseQueue($pushMessage, trans('mpcs-article::word.attr.push_title'), [
-                    'is_private' => false,
-                    'notification' => $is_push_notification,
-                    'pushed_at' => $this->model->released_at,
-                    'params' => json_encode([
-                        'id'    => $this->model->id,
-                        'title' => $this->model->title,
-                        'summary' => $this->model->summary,
-                        'article_category_ids' => json_encode($this->model->article_category_ids),
-                        'released_at' => $this->model->released_at,
-                    ]),
-                    // 'uuids' => $uidxs,
-                ], "pushSseArticle");
-            }
-
             DB::commit();
         } catch (Exception $e) {
             /* DB 트랜젝션 롤 */
             DB::rollback();
             throw $e;
+        }
+
+        // PushSse 클래스가 있는지 확인
+        if (class_exists('Exit11\PushSse\Facades\PushSse') && config('mpcspushsse.enabled')) {
+            // PushSse 클래스가 있으면 푸시 전송
+
+            $category = $this->model->articleCategories->first();
+            $categoryName = $category->name ?? null;
+
+            $pushMessage = $this->model->title;
+            if ($categoryName) {
+                $pushMessage = "[" . $categoryName . "] " . $pushMessage;
+            }
+
+            $is_push_notification = $this->request['is_push_notification'] ?? false;
+            $is_push_notification = $is_push_notification ? true : false;
+            // $uidxs = [];
+            // array_push($uidxs, Core::user()->uidx);
+            \PushSse::sseQueue($pushMessage, trans('mpcs-article::word.attr.push_title'), [
+                'is_private' => false,
+                'notification' => $is_push_notification,
+                'pushed_at' => $this->model->released_at,
+                'params' => json_encode([
+                    'id'    => $this->model->id,
+                    'title' => $this->model->title,
+                    'summary' => $this->model->summary,
+                    'article_category_ids' => json_encode($this->model->article_category_ids),
+                    'released_at' => $this->model->released_at,
+                ]),
+                // 'uuids' => $uidxs,
+            ], "pushSseArticle");
         }
 
         return $this->model->loadRelations();
