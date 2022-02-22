@@ -36,7 +36,7 @@ class ArticleRepository implements ArticleRepositoryInterface
     public function all()
     {
         $model = $this->model::search()->sortable();
-        return $model->with($this->model::getDefaultLoadRelations())->paging();
+        return $model->with($this->model::getDefaultLoadRelations())->paging()->onEachSide(2);
     }
 
     // create a new record in the database
