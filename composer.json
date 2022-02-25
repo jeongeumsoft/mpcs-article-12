@@ -9,6 +9,7 @@
     }
   ],
   "require": {
+    "cviebrock/eloquent-taggable": "6.0.2",
     "mpcs-ui/bootstrap5": "~0.1.0|dev-master",
     "mpcs/core": "~0.1.0|dev-master"
   },
