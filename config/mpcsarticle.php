@@ -9,6 +9,11 @@ return [
 
     // 썸네일 사용여부
     'use_thumbnail' =>  env('ARTICLE_USE_THUMBNAIL', false),
+    'thumbnail' => [
+        'width' => 512,
+        'height' => 512,
+    ],
+
     // 태그 사용여부
     'use_tag' =>  env('ARTICLE_USE_TAG', false),
 

@@ -46,14 +46,18 @@
     {{-- 생성 --}}
     @component(Bootstrap5::theme('components.modal_crud_create'), ['modalSize' => 'modal-fullscreen'])
         {!! Form::open()->idPrefix('create_')->attrs(['class' => 'h-100']) !!}
-        @include(Article::theme('articles.partials.form'), ['formType' => 'create'])
+        @include(Article::theme('articles.partials.form'), [
+            'formType' => 'create',
+        ])
         {!! Form::close() !!}
     @endcomponent
 
     {{-- 수정 --}}
     @component(Bootstrap5::theme('components.modal_crud_edit'), ['modalSize' => 'modal-fullscreen'])
         {!! Form::open()->idPrefix('edit_')->method('put')->attrs(['class' => 'h-100']) !!}
-        @include(Article::theme('articles.partials.form'), ['formType' => 'edit'])
+        @include(Article::theme('articles.partials.form'), [
+            'formType' => 'edit',
+        ])
         {!! Form::close() !!}
     @endcomponent
 
@@ -66,6 +70,13 @@
     {{-- 삭제 --}}
     @component(Bootstrap5::theme('components.modal_crud_delete'))
     @endcomponent
+
+
+    @if (Article::useThumbnail())
+        {{-- Cropper --}}
+        @component(Bootstrap5::theme('components.modal_cropper_editor'))
+        @endcomponent
+    @endif
 
 @endsection
 
