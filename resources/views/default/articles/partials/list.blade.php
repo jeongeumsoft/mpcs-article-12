@@ -32,17 +32,19 @@
                 </td>
                 <td data-name='status_released' class="text-start d-block d-md-table-cell">
                     <span class="badge bg-{{ $data->status_released ? 'success' : 'warning' }}">
-                        {{ $data->status_released ? trans('mpcs-article::word.attr.released') : trans('mpcs-article::word.attr.nonrelease') }}
+                        {{ $data->status_released? trans('mpcs-article::word.attr.released'): trans('mpcs-article::word.attr.nonrelease') }}
                     </span>
                 </td>
                 <td class="text-start d-block d-md-table-cell">
-                    <div class="row no-gutters">
+                    <div class="row no-gutters align-items-center">
                         @if (Article::useThumbnail() && $data->thumbnail)
                             <div class="col-auto mr-2">
-                                <div class="ratio ratio-1x1" style="width: 50px; ">
-                                    <img class="img-thumbnail" src="{{ $data->thumb_image_url }}"
-                                        alt="{{ $data->title }}">
-                                </div>
+                                <button type="button" class="btn p-0" data-bs-toggle="popover"
+                                    data-bs-html="true" data-bs-content='<img class="img-fluid"
+                                    src="{{ $data->small_image_url }}" alt="{{ $data->title }}">'>
+                                    <img class="img-thumbnail" style="width: 40px; height: 40px;"
+                                        src="{{ $data->small_image_url }}" alt="{{ $data->title }}">
+                                </button>
                             </div>
                         @endif
                         <div class="col">
