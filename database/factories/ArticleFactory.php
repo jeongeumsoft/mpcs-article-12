@@ -5,7 +5,7 @@
  **/
 
 use Exit11\Article\Models\Article;
-use Mpcs\Core\Models\User;
+use App\Models\User;
 
 use Faker\Generator as Faker;
 

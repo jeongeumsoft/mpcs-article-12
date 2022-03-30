@@ -2,7 +2,6 @@
 
 namespace Exit11\Article\Http\Requests;
 
-use Illuminate\Validation\Rule;
 use Mpcs\Core\Traits\RequestTrait;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -10,15 +9,12 @@ class ArticleCategoryRequest extends FormRequest
 {
     use RequestTrait;
 
-    public function rules()
+    public function rules($params = null)
     {
-        $rules = $this->getRequestRules();
-        if ($rules != null) {
-            return $rules;
+        $info = $this->getRequestInfo($params);
+        if ($info->rules) {
+            return $info->rules;
         }
-
-        $id = $this->category->id ?? "";
-        $parentId = request()->parent_id ?? $this->parant_id;
 
         $rules = [
             'POST' => [

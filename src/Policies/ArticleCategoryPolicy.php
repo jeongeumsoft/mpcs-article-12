@@ -2,7 +2,7 @@
 
 namespace Exit11\Article\Policies;
 
-use Mpcs\Core\Models\User;
+use App\Models\User;
 use Exit11\Article\Models\ArticleCategory as Model;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Mpcs\Core\Facades\Core;
@@ -29,7 +29,7 @@ class ArticleCategoryPolicy
     /**
      * Determine whether the user can view any temps.
      *
-     * @param  \Mpcs\Core\Models\User  $user
+     * @param  \App\Models\User  $user
      * @return mixed
      */
     public function viewAny(User $user)
@@ -41,7 +41,7 @@ class ArticleCategoryPolicy
     /**
      * Determine whether the user can view the temp.
      *
-     * @param  \Mpcs\Core\Models\User  $user
+     * @param  \App\Models\User  $user
      * @param  \App\Temp  $temp
      * @return mixed
      */
@@ -54,7 +54,7 @@ class ArticleCategoryPolicy
     /**
      * Determine whether the user can create temps.
      *
-     * @param  \Mpcs\Core\Models\User  $user
+     * @param  \App\Models\User  $user
      * @return mixed
      */
     public function create(User $user)
@@ -66,7 +66,7 @@ class ArticleCategoryPolicy
     /**
      * Determine whether the user can update the temp.
      *
-     * @param  \Mpcs\Core\Models\User  $user
+     * @param  \App\Models\User  $user
      * @param  \App\Temp  $temp
      * @return mixed
      */
@@ -79,7 +79,7 @@ class ArticleCategoryPolicy
     /**
      * Determine whether the user can delete the temp.
      *
-     * @param  \Mpcs\Core\Models\User  $user
+     * @param  \App\Models\User  $user
      * @param  \App\Temp  $temp
      * @return mixed
      */
@@ -92,7 +92,7 @@ class ArticleCategoryPolicy
     /**
      * Determine whether the user can permanently delete the temp.
      *
-     * @param  \Mpcs\Core\Models\User  $user
+     * @param  \App\Models\User  $user
      * @param  \App\Temp  $temp
      * @return mixed
      */

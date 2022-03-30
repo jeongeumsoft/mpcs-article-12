@@ -9,14 +9,13 @@ class ArticleRequest extends FormRequest
 {
     use RequestTrait;
 
-    public function rules()
+    public function rules($params = null)
     {
-        $rules = $this->getRequestRules();
-        if ($rules != null) {
-            return $rules;
+        $info = $this->getRequestInfo($params);
+        if ($info->rules) {
+            return $info->rules;
         }
 
-        $id = $this->article->id ?? "";
         $rules = [
             'POST' => [
                 'released_at' => 'required',
