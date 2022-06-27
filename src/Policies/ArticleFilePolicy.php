@@ -21,7 +21,7 @@ class ArticleFilePolicy
      */
     public function before($user, $ability)
     {
-        if ($user->isAdministrator()) {
+        if ($user->isAdministrator() || ($user->cans(['article.manage']) === true)) {
             return true;
         }
     }
@@ -34,6 +34,8 @@ class ArticleFilePolicy
      */
     public function viewAny(User $user)
     {
+        $isAllow = $user->cans(['article.list']);
+        return Core::responsePolicy($isAllow);
     }
 
     /**
@@ -45,7 +47,8 @@ class ArticleFilePolicy
      */
     public function view(User $user, Model $model)
     {
-        //
+        $isAllow = $user->cans(['article.view']);
+        return Core::responsePolicy($isAllow);
     }
 
     /**
@@ -56,6 +59,8 @@ class ArticleFilePolicy
      */
     public function create(User $user)
     {
+        $isAllow = $user->cans(['article.create']);
+        return Core::responsePolicy($isAllow);
     }
 
     /**
@@ -67,6 +72,8 @@ class ArticleFilePolicy
      */
     public function update(User $user, Model $model)
     {
+        $isAllow = $user->cans(['article.edit']);
+        return Core::responsePolicy($isAllow);
     }
 
     /**
@@ -78,6 +85,8 @@ class ArticleFilePolicy
      */
     public function delete(User $user, Model $model)
     {
+        $isAllow = $user->cans(['article.delete']);
+        return Core::responsePolicy($isAllow);
     }
 
     /**
