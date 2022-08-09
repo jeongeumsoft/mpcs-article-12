@@ -1,12 +1,12 @@
 <?php
 
-namespace Exit11\Article\Repositories;
+namespace Mpcs\Article\Repositories;
 
 use Exception;
 use Mpcs\Core\Facades\Core;
-use MpcsUi\Bootstrap5\Facades\Bootstrap5;
-use Exit11\Article\Models\Article as Model;
-use Exit11\Article\Models\ArticleFile;
+use Mpcs\Bootstrap5\Facades\Bootstrap5;
+use Mpcs\Article\Models\Article as Model;
+use Mpcs\Article\Models\ArticleFile;
 use Illuminate\Support\Facades\DB;
 use Mpcs\Core\Traits\RepositoryTrait;
 
@@ -84,7 +84,7 @@ class ArticleRepository implements ArticleRepositoryInterface
         }
 
         // PushSse 클래스가 있는지 확인
-        if (class_exists('Exit11\PushSse\Facades\PushSse') && config('mpcspushsse.enabled')) {
+        if (class_exists('Mpcs\PushSse\Facades\PushSse') && config('mpcspushsse.enabled')) {
             // PushSse 클래스가 있으면 푸시 전송
 
             $category = $this->model->articleCategories->first();

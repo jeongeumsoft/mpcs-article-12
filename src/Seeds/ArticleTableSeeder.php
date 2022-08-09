@@ -1,12 +1,12 @@
 <?php
 
-namespace Exit11\Article\Seeds;
+namespace Mpcs\Article\Seeds;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-use Exit11\Article\Models\Article;
-use Exit11\Article\Models\ArticleCategory;
+use Mpcs\Article\Models\Article;
+use Mpcs\Article\Models\ArticleCategory;
 
 class ArticleTableSeeder extends Seeder
 {

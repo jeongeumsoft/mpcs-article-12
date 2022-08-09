@@ -1,17 +1,17 @@
 <?php
 
-namespace Exit11\Article\Http\Controllers\Api;
+namespace Mpcs\Article\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 
 use Mpcs\Core\Traits\ControllerTrait;
 use Mpcs\Core\Facades\Core;
 
-use Exit11\Article\Http\Requests\ArticleCategoryRequest as Request;
-use Exit11\Article\Services\ArticleCategoryService as Service;
-use Exit11\Article\Models\ArticleCategory as Model;
-use Exit11\Article\Http\Resources\ArticleCategory as Resource;
-use Exit11\Article\Http\Resources\ArticleCategoryCollection as ResourceCollection;
+use Mpcs\Article\Http\Requests\ArticleCategoryRequest as Request;
+use Mpcs\Article\Services\ArticleCategoryService as Service;
+use Mpcs\Article\Models\ArticleCategory as Model;
+use Mpcs\Article\Http\Resources\ArticleCategory as Resource;
+use Mpcs\Article\Http\Resources\ArticleCategoryCollection as ResourceCollection;
 
 class ArticleCategoryController extends Controller
 {

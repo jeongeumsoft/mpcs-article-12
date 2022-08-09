@@ -32,7 +32,6 @@
 @section('crud_form')
     {{-- 생성 --}}
     @component(Bootstrap5::theme('components.modal_crud_create'))
-
         {!! Form::open()->idPrefix('create_') !!}
         @include(Article::theme('article_categories.partials.form'))
         {!! Form::close() !!}
@@ -40,7 +39,6 @@
 
     {{-- 수정 --}}
     @component(Bootstrap5::theme('components.modal_crud_edit'))
-
         {!! Form::open()->idPrefix('edit_') !!}
         @include(Article::theme('article_categories.partials.form'))
         {!! Form::close() !!}
@@ -49,7 +47,7 @@
 @endsection
 
 @push('after_app_src_scripts')
-    <script src="/vendor/mpcs-ui/bootstrap5/js/crud.js"></script>
+    <script src="/vendor/mpcs/bootstrap5/js/crud.js"></script>
 @endpush
 
 {{-- CURD 스크립트 추가 --}}

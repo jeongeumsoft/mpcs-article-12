@@ -1,9 +1,9 @@
 <?php
 
-namespace Exit11\Article\Policies;
+namespace Mpcs\Article\Policies;
 
 use App\Models\User;
-use Exit11\Article\Models\ArticleFile as Model;
+use Mpcs\Article\Models\ArticleFile as Model;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Mpcs\Core\Facades\Core;
 

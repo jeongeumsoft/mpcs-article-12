@@ -1,8 +1,8 @@
 <?php
 
-namespace Exit11\Article\Models;
+namespace Mpcs\Article\Models;
 
-use Exit11\Article\Facades\Article as Facade;
+use Mpcs\Article\Facades\Article as Facade;
 use Illuminate\Database\Eloquent\Model;
 use Mpcs\Core\Facades\Core;
 use Mpcs\Core\Traits\ModelTrait;
@@ -234,7 +234,7 @@ class Article extends Model
      *
      * @return void
      */
-    public function sluggable()
+    public function sluggable(): array
     {
         return [
             'slug' => [

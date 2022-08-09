@@ -1,6 +1,6 @@
 <?php
 
-namespace Exit11\Article;
+namespace Mpcs\Article;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory as EloquentFactory;
@@ -52,9 +52,9 @@ class ArticleServiceProvider extends ServiceProvider
 
         $this->commands($this->commands);
         $this->registerEloquentFactoriesFrom(__DIR__ . '/../database/factories');
-        $this->app->bind('Exit11\Article\Repositories\ArticleCategoryRepositoryInterface', 'Exit11\Article\Repositories\ArticleCategoryRepository');
-        $this->app->bind('Exit11\Article\Repositories\ArticleRepositoryInterface', 'Exit11\Article\Repositories\ArticleRepository');
-        $this->app->bind('Exit11\Article\Repositories\ArticleFileRepositoryInterface', 'Exit11\Article\Repositories\ArticleFileRepository');
+        $this->app->bind('Mpcs\Article\Repositories\ArticleCategoryRepositoryInterface', 'Mpcs\Article\Repositories\ArticleCategoryRepository');
+        $this->app->bind('Mpcs\Article\Repositories\ArticleRepositoryInterface', 'Mpcs\Article\Repositories\ArticleRepository');
+        $this->app->bind('Mpcs\Article\Repositories\ArticleFileRepositoryInterface', 'Mpcs\Article\Repositories\ArticleFileRepository');
     }
 
     /**

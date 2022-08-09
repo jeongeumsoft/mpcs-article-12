@@ -1,17 +1,17 @@
 <?php
 
-namespace Exit11\Article\Http\Controllers\Api;
+namespace Mpcs\Article\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 
 use Mpcs\Core\Traits\ControllerTrait;
 use Mpcs\Core\Facades\Core;
 
-use Exit11\Article\Http\Requests\ArticleFileRequest as Request;
-use Exit11\Article\Services\ArticleFileService as Service;
-use Exit11\Article\Models\ArticleFile as Model;
-use Exit11\Article\Http\Resources\ArticleFile as Resource;
-use Exit11\Article\Http\Resources\ArticleFileCollection as ResourceCollection;
+use Mpcs\Article\Http\Requests\ArticleFileRequest as Request;
+use Mpcs\Article\Services\ArticleFileService as Service;
+use Mpcs\Article\Models\ArticleFile as Model;
+use Mpcs\Article\Http\Resources\ArticleFile as Resource;
+use Mpcs\Article\Http\Resources\ArticleFileCollection as ResourceCollection;
 
 class ArticleFileController extends Controller
 {

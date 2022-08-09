@@ -1,12 +1,12 @@
 <?php
 
-namespace Exit11\Article\Http\Controllers\Blade;
+namespace Mpcs\Article\Http\Controllers\Blade;
 
 use Mpcs\Core\Facades\Core;
-use Exit11\Article\Facades\Article;
-use Exit11\Article\Http\Controllers\Api\ArticleCategoryController as Controller;
-use Exit11\Article\Http\Requests\ArticleCategoryRequest as Request;
-use Exit11\Article\Models\ArticleCategory as Model;
+use Mpcs\Article\Facades\Article;
+use Mpcs\Article\Http\Controllers\Api\ArticleCategoryController as Controller;
+use Mpcs\Article\Http\Requests\ArticleCategoryRequest as Request;
+use Mpcs\Article\Models\ArticleCategory as Model;
 
 class ArticleCategoryController extends Controller
 {

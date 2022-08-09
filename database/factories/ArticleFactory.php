@@ -4,12 +4,12 @@
  * @var \Illuminate\Database\Eloquent\Factory $factory 
  **/
 
-use Exit11\Article\Models\Article;
+use Mpcs\Article\Models\Article;
 use App\Models\User;
 
 use Faker\Generator as Faker;
 
-use MpcsUi\Bootstrap5\Bootstrap5;
+use Mpcs\Bootstrap5\Bootstrap5;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManager;

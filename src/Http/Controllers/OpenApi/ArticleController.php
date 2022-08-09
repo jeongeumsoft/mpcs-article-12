@@ -1,12 +1,12 @@
 <?php
 
-namespace Exit11\Article\Http\Controllers\OpenApi;
+namespace Mpcs\Article\Http\Controllers\OpenApi;
 
-use Exit11\Article\Http\Controllers\Api\ArticleController as Controller;
-use Exit11\Article\Facades\Article;
-use Exit11\Article\Http\Resources\ArticleCollection as ResourceCollection;
-use Exit11\Article\Http\Requests\ArticleRequest as Request;
-use Exit11\Article\Models\ArticleCategory;
+use Mpcs\Article\Http\Controllers\Api\ArticleController as Controller;
+use Mpcs\Article\Facades\Article;
+use Mpcs\Article\Http\Resources\ArticleCollection as ResourceCollection;
+use Mpcs\Article\Http\Requests\ArticleRequest as Request;
+use Mpcs\Article\Models\ArticleCategory;
 
 class ArticleController extends Controller
 {

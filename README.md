@@ -6,14 +6,14 @@
 ### composer-dev.json
 {
     "require": {
-        "exit11/article": "dev-develop"
+        "mpcs/article": "dev-develop"
     },
 
     "repositories": [
         {
-            "name": "exit11/article",
+            "name": "mpcs/article",
             "type": "path",
-            "url": "packages/exit11/article"
+            "url": "packages/mpcs/article"
         }
     ]
 
@@ -24,9 +24,9 @@
 
     "repositories": [
         {
-            "name": "exit11/article",
+            "name": "mpcs/article",
             "type": "vcs",
-            "url": "git@github.com:exit11/mpcs-article.git"
+            "url": "git@github.com:mpcs/mpcs-article.git"
         }
     ]
 
@@ -38,12 +38,12 @@
 
 ### 패키지 개발 설치시
 
-git clone https://github.com/exit11/mpcs-article.git .\packages\exit11\article
-env COMPOSER=composer-dev.json composer require exit11/article --dev
+git clone https://github.com/mpcs/mpcs-article.git .\packages\mpcs\article
+env COMPOSER=composer-dev.json composer require mpcs/article --dev
 
 ### 프로젝트 설치시
 
-composer require exit11/article
+composer require mpcs/article
 
 ### 설치 후 실행
 php .\artisan mpcs-article:install

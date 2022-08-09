@@ -1,8 +1,8 @@
 <?php
 
-namespace Exit11\Article\Repositories;
+namespace Mpcs\Article\Repositories;
 
-use Exit11\Article\Models\ArticleCategory as Model;
+use Mpcs\Article\Models\ArticleCategory as Model;
 use Mpcs\Core\Traits\RepositoryTrait;
 use Illuminate\Support\Facades\DB;
 use Exception;

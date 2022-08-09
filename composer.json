@@ -1,5 +1,5 @@
 {
-  "name": "exit11/article",
+  "name": "mpcs/article",
   "description": "mpcs core : article extention",
   "type": "library",
   "authors": [
@@ -9,8 +9,8 @@
     }
   ],
   "require": {
-    "cviebrock/eloquent-taggable": "6.0.2",
-    "mpcs-ui/bootstrap5": "~0.1.0|dev-master",
+    "cviebrock/eloquent-taggable": "^9.0",
+    "mpcs/bootstrap5": "~0.1.0|dev-master",
     "mpcs/core": "~0.1.0|dev-master"
   },
   "require-dev": {
@@ -18,19 +18,19 @@
   },
   "autoload": {
     "psr-4": {
-      "Exit11\\Article\\": "src/"
+      "Mpcs\\Article\\": "src/"
     }
   },
   "extra": {
     "laravel": {
       "providers": [
-        "Exit11\\Article\\ArticleServiceProvider",
-        "Exit11\\Article\\ArticleAuthServiceProvider",
-        "Exit11\\Article\\ArticleEventServiceProvider",
-        "Exit11\\Article\\ArticleBroadcastServiceProvider"
+        "Mpcs\\Article\\ArticleServiceProvider",
+        "Mpcs\\Article\\ArticleAuthServiceProvider",
+        "Mpcs\\Article\\ArticleEventServiceProvider",
+        "Mpcs\\Article\\ArticleBroadcastServiceProvider"
       ],
       "aliases": {
-        "Article": "Exit11\\Article\\Facades\\Article"
+        "Article": "Mpcs\\Article\\Facades\\Article"
       }
     }
   }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Exit11\Article\Commands;
+namespace Mpcs\Article\Commands;
 
 use Illuminate\Console\Command;
 
@@ -42,11 +42,11 @@ class InstallCommand extends Command
 
                 // publish
                 $this->call('vendor:publish', [
-                    '--provider' => 'Exit11\Article\ArticleServiceProvider',
+                    '--provider' => 'Mpcs\Article\ArticleServiceProvider',
                     '--force' => $this->isForce
                 ]);
 
-                $this->call('db:seed', ['--class' => "Exit11\Article\Seeds\ArticleInstallSeeder"]);
+                $this->call('db:seed', ['--class' => "Mpcs\Article\Seeds\ArticleInstallSeeder"]);
 
                 $this->line('<info>Inserted Article Permission</info>');
                 $this->call('cache:clear');

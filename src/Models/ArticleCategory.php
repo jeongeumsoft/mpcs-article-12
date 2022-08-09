@@ -1,16 +1,16 @@
 <?php
 
-namespace Exit11\Article\Models;
+namespace Mpcs\Article\Models;
 
 use Mpcs\Core\Facades\Core;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Mpcs\Core\Traits\ModelTrait;
-use MpcsUi\Bootstrap5\Traits\NestedSortableTrait;
-use Exit11\Article\CustomCollection;
+use Mpcs\Bootstrap5\Traits\NestedSortableTrait;
+use Mpcs\Article\CustomCollection;
 use Cviebrock\EloquentSluggable\Sluggable;
 
-use Exit11\Article\Facades\Article;
+use Mpcs\Article\Facades\Article;
 
 class ArticleCategory extends Model
 {
@@ -63,7 +63,7 @@ class ArticleCategory extends Model
      */
     public function articles()
     {
-        return $this->morphedByMany('Exit11\Article\Models\Article', 'article_categorizable');
+        return $this->morphedByMany('Mpcs\Article\Models\Article', 'article_categorizable');
     }
 
 
@@ -117,7 +117,7 @@ class ArticleCategory extends Model
      *
      * @return void
      */
-    public function sluggable()
+    public function sluggable(): array
     {
         return [
             'slug' => [

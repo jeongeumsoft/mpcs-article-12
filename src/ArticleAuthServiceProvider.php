@@ -1,9 +1,9 @@
 <?php
 
-namespace Exit11\Article;
+namespace Mpcs\Article;
 
-use Exit11\Article\Models;
-use Exit11\Article\Policies;
+use Mpcs\Article\Models;
+use Mpcs\Article\Policies;
 use Mpcs\Core\Facades\Core;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;

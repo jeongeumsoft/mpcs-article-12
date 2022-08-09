@@ -1,9 +1,9 @@
 <?php
 
-namespace Exit11\Article\Services;
+namespace Mpcs\Article\Services;
 
 use Mpcs\Core\Facades\Core;
-use Exit11\Article\Repositories\ArticleFileRepositoryInterface as RepositoryInterface;
+use Mpcs\Article\Repositories\ArticleFileRepositoryInterface as RepositoryInterface;
 use Mpcs\Core\Traits\ServiceTrait;
 
 class ArticleFileService

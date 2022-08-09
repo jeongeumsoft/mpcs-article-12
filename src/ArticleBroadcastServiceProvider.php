@@ -1,6 +1,6 @@
 <?php
 
-namespace Exit11\Article;
+namespace Mpcs\Article;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Broadcast;

@@ -1,10 +1,10 @@
 <?php
 
-namespace Exit11\Article\Repositories;
+namespace Mpcs\Article\Repositories;
 
 use Mpcs\Core\Facades\Core;
 
-use Exit11\Article\Models\ArticleFile as Model;
+use Mpcs\Article\Models\ArticleFile as Model;
 use Mpcs\Core\Traits\RepositoryTrait;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;

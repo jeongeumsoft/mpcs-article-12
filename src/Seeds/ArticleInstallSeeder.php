@@ -1,6 +1,6 @@
 <?php
 
-namespace Exit11\Article\Seeds;
+namespace Mpcs\Article\Seeds;
 
 use Illuminate\Database\Seeder;
 

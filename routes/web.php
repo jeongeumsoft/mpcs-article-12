@@ -8,7 +8,7 @@ use Mpcs\Core\Facades\Core;
 Route::group([
     'as'            => Core::getRouteNamePrefix('api'),
     'prefix'        => Core::getUrlPrefix('api'),
-    'namespace'     => 'Exit11\Article\Http\Controllers\Api',
+    'namespace'     => 'Mpcs\Article\Http\Controllers\Api',
     'middleware'    => Core::getConfig('route.middleware'),
 ], function (Router $router) {
     $router->resource('article_categories', 'ArticleCategoryController')->names('article_categories')->except(['destroy']);
@@ -22,7 +22,7 @@ Route::group([
 Route::group([
     'as'            => Core::getRouteNamePrefix('ui'),
     'prefix'        => Core::getUrlPrefix('ui'),
-    'namespace'     => 'Exit11\Article\Http\Controllers\Blade',
+    'namespace'     => 'Mpcs\Article\Http\Controllers\Blade',
     'middleware'    => Core::getConfig('route.middleware'),
 ], function (Router $router) {
     $router->patch('article_categories/save_order', 'ArticleCategoryController@saveOrder')->name('article_categories.save_order');
@@ -35,7 +35,7 @@ Route::group([
 Route::group([
     'as'            => Core::getRouteNamePrefix('open_api'),
     'prefix'        => Core::getUrlPrefix('open_api'),
-    'namespace'     => 'Exit11\Article\Http\Controllers\OpenApi',
+    'namespace'     => 'Mpcs\Article\Http\Controllers\OpenApi',
     'middleware'    => Core::getConfig('route.open_api.middleware'),
 ], function (Router $router) {
     if (Core::getConfig('enable_open_api', 'mpcsarticle')) {

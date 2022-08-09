@@ -1,11 +1,11 @@
 <?php
 
-namespace Exit11\Article\Models;
+namespace Mpcs\Article\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Mpcs\Core\Traits\ModelTrait;
 use Illuminate\Support\Facades\Storage;
-use MpcsUi\Bootstrap5\Facades\Bootstrap5;
+use Mpcs\Bootstrap5\Facades\Bootstrap5;
 
 class ArticleFile extends Model
 {

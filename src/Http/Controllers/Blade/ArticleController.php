@@ -1,10 +1,10 @@
 <?php
 
-namespace Exit11\Article\Http\Controllers\Blade;
+namespace Mpcs\Article\Http\Controllers\Blade;
 
-use Exit11\Article\Http\Controllers\Api\ArticleController as Controller;
-use Exit11\Article\Http\Requests\ArticleRequest as Request;
-use Exit11\Article\Facades\Article;
+use Mpcs\Article\Http\Controllers\Api\ArticleController as Controller;
+use Mpcs\Article\Http\Requests\ArticleRequest as Request;
+use Mpcs\Article\Facades\Article;
 use Mpcs\Core\Facades\Core;
 
 class ArticleController extends Controller
@@ -17,8 +17,8 @@ class ArticleController extends Controller
      */
     public function index(Request $request)
     {
-        $categories = Core::dataSelect('article_categories', ['_vendor' => 'Exit11\Article', '_withs' => ['allChildren', 'articles'], '_scopes' => ['nullParent'], 'is_visible' => true]);
-        $article_categories = Core::dataSelect('article_categories', ['_vendor' => 'Exit11\Article', 'is_visible' => true])->pluck('nested_str', 'id')->toArray();
+        $categories = Core::dataSelect('article_categories', ['_vendor' => 'Mpcs\Article', '_withs' => ['allChildren', 'articles'], '_scopes' => ['nullParent'], 'is_visible' => true]);
+        $article_categories = Core::dataSelect('article_categories', ['_vendor' => 'Mpcs\Article', 'is_visible' => true])->pluck('nested_str', 'id')->toArray();
         $tags = [];
         return view(Article::theme('articles.index'), compact('categories', 'article_categories', 'tags'))->withInput($request->flash());
     }

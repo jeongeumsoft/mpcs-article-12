@@ -1,6 +1,6 @@
 <?php
 
-namespace Exit11\Article\Facades;
+namespace Mpcs\Article\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
@@ -8,6 +8,6 @@ class Article extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return \Exit11\Article\Article::class;
+        return \Mpcs\Article\Article::class;
     }
 }

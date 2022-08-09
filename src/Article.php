@@ -1,9 +1,9 @@
 <?php
 
-namespace Exit11\Article;
+namespace Mpcs\Article;
 
 use Illuminate\Support\Facades\Storage;
-use MpcsUi\Bootstrap5\Facades\Bootstrap5;
+use Mpcs\Bootstrap5\Facades\Bootstrap5;
 
 class Article
 {

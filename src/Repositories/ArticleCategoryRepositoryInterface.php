@@ -1,6 +1,6 @@
 <?php
 
-namespace Exit11\Article\Repositories;
+namespace Mpcs\Article\Repositories;
 
 interface ArticleCategoryRepositoryInterface
 {
