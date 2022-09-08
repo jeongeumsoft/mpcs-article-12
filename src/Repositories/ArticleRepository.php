@@ -44,9 +44,10 @@ class ArticleRepository implements ArticleRepositoryInterface
     {
         DB::beginTransaction();
         try {
+            $this->model->article_category_id = $this->request['article_category_id'];
             $this->model->title = $this->request['title'];
             $this->model->summary = $this->request['summary'] ?? null;
-            $this->model->content = $this->request['content'] ?? null;
+            $this->model->markdown = $this->request['markdown'] ?? null;
             $this->model->html = $this->request['html'] ?? null;
             $this->model->released_at = $this->request['released_at'];
             $this->model->user_id = Core::user()->id;
@@ -68,7 +69,6 @@ class ArticleRepository implements ArticleRepositoryInterface
             }
 
             if ($this->model->save()) {
-                $this->model->articleCategories()->attach($this->request['article_category_ids'] ?? null);
                 $this->model->retag($this->request['tag_list'] ?? []);
 
                 if (isset($this->request['article_files'])) {
@@ -107,7 +107,7 @@ class ArticleRepository implements ArticleRepositoryInterface
                     'id'    => $this->model->id,
                     'title' => $this->model->title,
                     'summary' => $this->model->summary,
-                    'article_category_ids' => json_encode($this->model->article_category_ids),
+                    'article_category_id' => $this->model->article_category_id,
                     'released_at' => $this->model->released_at,
                 ]),
                 // 'uuids' => $uidxs,
@@ -122,9 +122,10 @@ class ArticleRepository implements ArticleRepositoryInterface
     {
         DB::beginTransaction();
         try {
+            $model->article_category_id = $this->request['article_category_id'];
             $model->title = $this->request['title'];
             $model->summary = $this->request['summary'] ?? $model->summary;
-            $model->content = $this->request['content'] ?? $model->content;
+            $model->markdown = $this->request['markdown'] ?? $model->content;
             $model->html = $this->request['html'] ?? $model->html;
             $model->released_at = $this->request['released_at'];
             $model->user_id = Core::user()->id;
@@ -144,7 +145,6 @@ class ArticleRepository implements ArticleRepositoryInterface
             }
 
             if ($model->save()) {
-                $model->articleCategories()->sync($this->request['article_category_ids'] ?? null);
                 $model->retag($this->request['tag_list'] ?? []);
 
                 if (isset($this->request['delete_article_files'])) {

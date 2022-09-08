@@ -5,6 +5,7 @@
  **/
 
 use Mpcs\Article\Models\Article;
+use Mpcs\Article\Models\ArticleCategory;
 use App\Models\User;
 
 use Faker\Generator as Faker;
@@ -28,9 +29,10 @@ $factory->define(Article::class, function (Faker $faker) {
     // $manager->make($image)->save(storage_path('app/public/uploads/articles/' . $imageName));
 
     return [
+        'article_category_id' => ArticleCategory::inRandomOrder()->first(),
         'title' => $title,
         'summary' => $faker->paragraph(),
-        'content' => $content,
+        'markdown' => $content,
         'html' => $content,
         //'thumbnail' => Bootstrap5::generateThumb('articles', $imageName),
         'view_count' => mt_rand(0, 1000000),

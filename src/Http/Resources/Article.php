@@ -23,7 +23,7 @@ class Article extends JsonResource
             'title' => $this->title,
             'slug' => $this->slug,
             'summary' => $this->summary,
-            'content' => $this->content,
+            'markdown' => $this->markdown,
             'html' => $this->html,
             'thumbnail' => $this->thumbnail,
             'image_file_url' => $this->image_file_url,
@@ -35,12 +35,6 @@ class Article extends JsonResource
             'view_count' => number_format($this->view_count),
             'user' => $this->whenLoaded('user', function () {
                 return $this->user;
-            }),
-            'article_categories' => $this->whenLoaded('articleCategories', function () {
-                return new ArticleCategoryCollection($this->articleCategories);
-            }),
-            'article_category_ids' => $this->whenLoaded('articleCategories', function () {
-                return $this->article_category_ids;
             }),
             'tags' => $this->whenLoaded('tags', function () {
                 return $this->tags;

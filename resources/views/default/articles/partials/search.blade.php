@@ -2,7 +2,11 @@
 <div class="row">
     <div class="col">
         {!! Form::text('type')->type('hidden') !!}
-        {!! Form::select('articleCategories__R__', 'Categories', Arr::prepend($article_categories, trans('mpcs-article::word.attr.categories'), ''))->attrs(['data-type' => 'select-one']) !!}
+        {{-- {!! Form::select(
+            'article_category_id',
+            'Categories',
+            Arr::prepend($article_categories, trans('mpcs-article::word.attr.categories'), ''),
+        )->attrs(['data-type' => 'select-one']) !!} --}}
         {!! Form::text('title', 'Title')->placeholder(trans('mpcs-article::word.attr.title')) !!}
         {!! Form::text('content', 'content')->placeholder(trans('mpcs-article::word.attr.content')) !!}
         <div class="input-group mb-3">

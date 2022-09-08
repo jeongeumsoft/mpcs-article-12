@@ -6,8 +6,7 @@
 
         @if (class_exists('PushSse') && config('mpcspushsse.enabled') && $formType === 'create')
             <div class="form-group row">
-                <label
-                    class="col">{{ Str::ucfirst(trans('ui-bootstrap5::word.is_push_notification_message')) }}
+                <label class="col">{{ Str::ucfirst(trans('ui-bootstrap5::word.is_push_notification_message')) }}
                 </label>
                 <div class="col-auto">
                     <div class="form-check form-switch">
@@ -17,9 +16,9 @@
                 </div>
             </div>
         @endif
-
+        {!! Form::select('article_category_id', trans('mpcs-article::word.attr.categories'), $article_categories)->attrs(['data-type' => 'select-one'])->placeholder(trans('mpcs-article::word.attr.categories')) !!}
         {!! Form::text('released_at', trans('mpcs-article::word.attr.released_at'))->attrs(['data-type' => 'data-picker-datetime'])->placeholder(trans('mpcs-article::word.attr.released_at'))->wrapperAttrs(['class' => 'required']) !!}
-        {!! Form::select('article_category_ids', trans('mpcs-article::word.attr.categories'), $article_categories)->attrs(['data-type' => 'select-multiple'])->multiple()->placeholder(trans('mpcs-article::word.attr.categories')) !!}
+
 
         @if (Article::useTag())
             {!! Form::text('tag_list', trans('mpcs-article::word.attr.tags'))->attrs(['data-type' => 'select-tag'])->placeholder(trans('mpcs-article::word.attr.tags')) !!}
@@ -71,11 +70,13 @@
     </div>
     <div class="col-12 col-sm-8 col-lg">
         {!! Form::text('title', trans('mpcs-article::word.attr.title'))->placeholder(trans('mpcs-article::word.attr.title'))->wrapperAttrs(['class' => 'required']) !!}
-        {!! Form::textarea('summary', trans('mpcs-article::word.attr.summary'))->placeholder(trans('mpcs-article::word.attr.summary')) !!}
+        {!! Form::textarea('summary', trans('mpcs-article::word.attr.summary'))->placeholder(
+            trans('mpcs-article::word.attr.summary'),
+        ) !!}
         {{-- 에디터 --}}
         <div data-type="editor" style="height: calc(100vh - 320px)">
-            <div class="editor-wrap" data-crud-edit-type="editor" data-crud-edit-name="content"></div>
-            <input type="hidden" data-get-lang="markdown" name="content">
+            <div class="editor-wrap" data-crud-edit-type="editor" data-crud-edit-name="markdown"></div>
+            <input type="hidden" data-get-lang="markdown" name="markdown">
             <input type="hidden" data-get-lang="html" name="html">
         </div>
     </div>

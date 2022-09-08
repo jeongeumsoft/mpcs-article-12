@@ -63,7 +63,7 @@ class ArticleCategory extends Model
      */
     public function articles()
     {
-        return $this->morphedByMany('Mpcs\Article\Models\Article', 'article_categorizable');
+        return $this->hasMany('Mpcs\Article\Models\Article', 'article_category_id');
     }
 
 

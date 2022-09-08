@@ -7,13 +7,14 @@
 @section('crud_subtitle', Article::menuTitle('mpcs-article::menu.articles', config('mpcsarticle.subtitle.articles')))
 
 {{-- 목록 타이틀 --}}
-{{-- @section('crud_list_title', Article::menuTitle('mpcs-article::menu.articles', config('mpcsarticle.list_title.articles'))) --}}
+@section('crud_list_title', $currentCategory->name)
+
 
 {{-- 사이트메뉴 인클루드 --}}
-{{-- @section('aside_left_nav')
-    @include(Article::theme('articles.partials.list_categories'), ['datas' => $categories])
-@endsection --}}
-
+@section('aside_left_nav')
+    {{-- blade-formatter-disable-next-line --}}
+    @include(Article::theme('articles.partials.list_categories'), ['categories' => $categories])
+@endsection
 
 {{-- 검색폼 영역 --}}
 @section('crud_search')

@@ -21,7 +21,7 @@ class Article extends Model
     protected $dates = ['created_at', 'updated_at', 'deleted_at', 'released_at'];
     protected $guarded = ['id'];
     protected static $m_params = [
-        'default_load_relations' => ['articleCategories', 'articleFiles', 'tags', 'user'],
+        'default_load_relations' => ['articleCategory', 'articleFiles', 'tags', 'user'],
         'column_maps' => [
             // date : {컬럼명}
             'from' => 'released_at',
@@ -68,9 +68,9 @@ class Article extends Model
      *
      * @return void
      */
-    public function articleCategories()
+    public function articleCategory()
     {
-        return $this->morphToMany(ArticleCategory::class, 'article_categorizable');
+        return $this->belongsTo(ArticleCategory::class, 'article_category_id');
     }
 
     /**
@@ -245,16 +245,6 @@ class Article extends Model
                 'onUpdate'  => true
             ]
         ];
-    }
-
-    /**
-     * getArticleCategoryIdsAttribute
-     *
-     * @return void
-     */
-    public function getArticleCategoryIdsAttribute()
-    {
-        return $this->relationLoaded('articleCategories') ? $this->articleCategories->pluck('id')->toArray() : null;
     }
 
     /**

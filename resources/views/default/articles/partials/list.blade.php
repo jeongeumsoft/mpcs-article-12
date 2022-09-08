@@ -32,15 +32,15 @@
                 </td>
                 <td data-name='status_released' class="text-start d-block d-md-table-cell">
                     <span class="badge bg-{{ $data->status_released ? 'success' : 'warning' }}">
-                        {{ $data->status_released? trans('mpcs-article::word.attr.released'): trans('mpcs-article::word.attr.nonrelease') }}
+                        {{ $data->status_released ? trans('mpcs-article::word.attr.released') : trans('mpcs-article::word.attr.nonrelease') }}
                     </span>
                 </td>
                 <td class="text-start d-block d-md-table-cell">
                     <div class="row no-gutters align-items-center">
                         @if (Article::useThumbnail() && $data->thumbnail)
                             <div class="col-auto mr-2">
-                                <button type="button" class="btn p-0" data-bs-toggle="popover"
-                                    data-bs-html="true" data-bs-content='<img class="img-fluid"
+                                <button type="button" class="btn p-0" data-bs-toggle="popover" data-bs-html="true"
+                                    data-bs-content='<img class="img-fluid"
                                     src="{{ $data->small_image_url }}" alt="{{ $data->title }}">'>
                                     <img class="img-thumbnail" style="width: 40px; height: 40px;"
                                         src="{{ $data->small_image_url }}" alt="{{ $data->title }}">
@@ -107,16 +107,16 @@
                     @endcan
                 </td>
             </tr>
-            @empty
-                <tr>
-                    <td colspan="6" class="text-center">{{ trans('ui-bootstrap5::word.crud.none_data') }}</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
+        @empty
+            <tr>
+                <td colspan="6" class="text-center">{{ trans('ui-bootstrap5::word.crud.none_data') }}</td>
+            </tr>
+        @endforelse
+    </tbody>
+</table>
 
-    @isset($datas)
-        <div class="mt-3 d-flex justify-content-center">
-            {{ $datas->render(Bootstrap5::theme('partials.paginator')) }}
-        </div>
-    @endisset
+@isset($datas)
+    <div class="mt-3 d-flex justify-content-center">
+        {{ $datas->render(Bootstrap5::theme('partials.paginator')) }}
+    </div>
+@endisset

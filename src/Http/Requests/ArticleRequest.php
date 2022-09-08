@@ -18,10 +18,12 @@ class ArticleRequest extends FormRequest
 
         $rules = [
             'POST' => [
+                'article_category_id' => 'required',
                 'released_at' => 'required',
                 'title' => 'required|max:100',
             ],
             'PUT' => [
+                'article_category_id' => 'sometimes|required',
                 'released_at' => 'sometimes|required',
                 'title' => 'sometimes|required|max:100',
             ],
