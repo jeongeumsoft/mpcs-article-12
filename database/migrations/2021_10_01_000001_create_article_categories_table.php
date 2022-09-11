@@ -14,8 +14,8 @@ class CreateArticleCategoriesTable extends Migration
     public function up()
     {
         Schema::create('article_categories', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('parent_id')->unsigned()->nullable()->index();
+            $table->smallIncrements('id');
+            $table->unsignedSmallInteger('parent_id')->nullable()->index();
             $table->integer('order')->default(0);
             $table->string('name', 100);
             $table->string('slug', 100)->index();
@@ -23,6 +23,7 @@ class CreateArticleCategoriesTable extends Migration
             $table->tinyInteger('type')->unsigned()->default(1);
             $table->boolean('is_visible')->default(0);
             $table->unsignedTinyInteger('depth')->default(1);
+            $table->timestamps();
             $table->softDeletes();
         });
     }

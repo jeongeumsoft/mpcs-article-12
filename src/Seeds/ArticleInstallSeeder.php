@@ -5,6 +5,7 @@ namespace Mpcs\Article\Seeds;
 use Illuminate\Database\Seeder;
 
 use Mpcs\Core\Models\Permission;
+use Mpcs\Article\Models\ArticleCategory;
 
 class ArticleInstallSeeder extends Seeder
 {
@@ -113,6 +114,20 @@ class ArticleInstallSeeder extends Seeder
                 'is_visible'  => 1,
                 'created_at'  => date("Y-m-d H:i:s"),
                 'updated_at'  => date("Y-m-d H:i:s"),
+            ],
+        ]);
+
+        // 메인페이지 팝업 생성
+        ArticleCategory::insertOrIgnore([
+            [
+                'order'       => 1,
+                'name'        => 'Pages',
+                'slug'        => 'Pages',
+                'description' => 'Web pages',
+                'type'        => 5,
+                'is_visible'  => 1,
+                'depth'       => 1,
+                'deleted_at'  => null,
             ],
         ]);
     }
