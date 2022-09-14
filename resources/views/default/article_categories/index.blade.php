@@ -53,6 +53,8 @@
 {{-- CURD 스크립트 추가 --}}
 @push('after_app_scripts')
     <script>
-        window.CRUD.sortable();
+        window.CRUD.sortable(undefined, {
+            chidrenOffsetElement: 'li'
+        });
     </script>
 @endpush
