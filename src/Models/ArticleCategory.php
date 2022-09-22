@@ -38,9 +38,8 @@ class ArticleCategory extends Model
     public static $typeStrings = [
         1 => 'list',
         2 => 'zine',
-        3 => 'galley',
-        4 => 'movie',
-        5 => 'blog',
+        3 => 'thumbnail',
+        4 => 'blog',
     ];
 
     /**

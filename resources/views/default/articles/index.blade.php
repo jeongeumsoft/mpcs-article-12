@@ -1,10 +1,10 @@
 @extends(Bootstrap5::theme('layouts.crud'))
 
 {{-- 브라우저 타이틀 --}}
-@section('app_title', Article::menuTitle('mpcs-article::menu.articles', config('mpcsarticle.app_title.articles')))
+@section('app_title', Str::ucfirst(trans('mpcs-article::menu.articles')))
 
 {{-- 목록 서브타이틀 --}}
-@section('crud_subtitle', Article::menuTitle('mpcs-article::menu.articles', config('mpcsarticle.subtitle.articles')))
+@section('crud_subtitle', Str::ucfirst(trans('mpcs-article::menu.articles')))
 
 {{-- 목록 타이틀 --}}
 @section('crud_list_title', $currentCategory->name)
@@ -13,7 +13,10 @@
 {{-- 사이트메뉴 인클루드 --}}
 @section('aside_left_nav')
     {{-- blade-formatter-disable-next-line --}}
-    @include(Article::theme('articles.partials.list_categories'), ['categories' => $categories])
+    @include(Article::theme('articles.partials.list_categories'), [
+    'categories' => $categories,
+    'currentCategoryId' => $currentCategory->id,
+    ])
 @endsection
 
 {{-- 검색폼 영역 --}}
@@ -103,6 +106,10 @@
 {{-- CURD 스크립트 추가 --}}
 @push('after_app_scripts')
     <script>
-        window.CRUD.init();
+        window.CRUD.init(undefined, {
+            initListParams: {
+                'article_category_id': '{{ $currentCategory->id }}',
+            },
+        });
     </script>
 @endpush

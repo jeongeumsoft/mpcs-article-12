@@ -9,17 +9,6 @@ class Article
 {
 
     /**
-     * menuTitle
-     *
-     * @param  mixed $title
-     * @return void
-     */
-    public static function menuTitle($default, $title = null)
-    {
-        return $title ? trans($title) : trans($default);
-    }
-
-    /**
      * VIEW THEME 설정
      * @return string {default: 'default'}
      */
@@ -67,9 +56,9 @@ class Article
      * @param  mixed $default
      * @return void
      */
-    public static function getPerPage($configString, $default = 15)
+    public static function getPerPage()
     {
-        return config('mpcsarticle.per_page.' . $configString) ?? $default;
+        return config('mpcsarticle.per_page') ?? 15;
     }
 
 

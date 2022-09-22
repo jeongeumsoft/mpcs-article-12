@@ -117,14 +117,37 @@ class ArticleInstallSeeder extends Seeder
             ],
         ]);
 
-        // 메인페이지 팝업 생성
+        // 카테고리 생성
         ArticleCategory::insertOrIgnore([
             [
                 'order'       => 1,
+                'parent_id'   => null,
                 'name'        => 'Pages',
                 'slug'        => 'Pages',
                 'description' => 'Web pages',
-                'type'        => 5,
+                'type'        => 4,
+                'is_visible'  => 1,
+                'depth'       => 1,
+                'deleted_at'  => null,
+            ],
+            [
+                'order'       => 2,
+                'parent_id'   => null,
+                'name'        => 'Community',
+                'slug'        => 'Community',
+                'description' => 'Community',
+                'type'        => 1,
+                'is_visible'  => 1,
+                'depth'       => 1,
+                'deleted_at'  => null,
+            ],
+            [
+                'order'       => 1,
+                'parent_id'   => 2,
+                'name'        => 'Notice',
+                'slug'        => 'Notice',
+                'description' => 'Notice',
+                'type'        => 1,
                 'is_visible'  => 1,
                 'depth'       => 1,
                 'deleted_at'  => null,

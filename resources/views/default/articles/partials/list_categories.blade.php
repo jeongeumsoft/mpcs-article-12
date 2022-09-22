@@ -10,7 +10,13 @@
     </div>
     <div id="articleCategoriesWrap" class="panel-body p-1 collapse show">
         <ul class="nested-list-group">
-            @each(Article::theme('articles.partials.branch_categories'), $categories, 'branch')
+            @forelse($categories as $branch)
+                @include(Article::theme('articles.partials.branch_categories'), [
+                    'branch' => $branch,
+                    'currentCategoryId' => $currentCategory->id,
+                ])
+            @empty
+            @endforelse
         </ul>
     </div>
 </div>

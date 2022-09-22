@@ -17,27 +17,6 @@ return [
     // 태그 사용여부
     'use_tag' =>  env('ARTICLE_USE_TAG', false),
 
-    // 아티클 메뉴제목 : trans($value)
-    'app_title' => [
-        'articles' => null,
-        'promotions' => null,
-    ],
-    'subtitle' => [
-        'articles' => null,
-        'promotions' => null,
-    ],
-    'list_title' => [
-        'articles' => null,
-        'promotions' => null,
-    ],
-
     // 관리자 콘솔 페이지 갯수
-    'per_page' => [
-        'api' => [
-            'articles' => 15,
-        ],
-        'blade' => [
-            'articles' => 10,
-        ],
-    ],
+    'per_page' => 15,
 ];
