@@ -37,6 +37,7 @@ class ArticleServiceProvider extends ServiceProvider
             $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
         });
 
+        // Core::dataSelect() 형성시 '_vendor' => 'namepsace' 제외 처리 가능
         Core::setPackageModelVendors(__NAMESPACE__, __DIR__);
     }
 

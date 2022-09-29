@@ -10,7 +10,7 @@ use Mpcs\Bootstrap5\Traits\NestedSortableTrait;
 use Mpcs\Article\CustomCollection;
 use Cviebrock\EloquentSluggable\Sluggable;
 
-use Mpcs\Article\Facades\Article;
+use Mpcs\Article\Facades\Article as Facade;
 
 class ArticleCategory extends Model
 {
@@ -52,7 +52,7 @@ class ArticleCategory extends Model
         parent::boot();
         static::setMemberParams(self::$m_params);
 
-        self::$maxDepth = Article::getCategoryMaxDepth();
+        self::$maxDepth = Facade::getCategoryMaxDepth();
     }
 
     /**
@@ -62,7 +62,7 @@ class ArticleCategory extends Model
      */
     public function articles()
     {
-        return $this->hasMany('Mpcs\Article\Models\Article', 'article_category_id');
+        return $this->hasMany(Article::class, 'article_category_id');
     }
 
 
