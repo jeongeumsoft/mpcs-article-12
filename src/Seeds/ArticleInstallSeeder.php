@@ -149,7 +149,7 @@ class ArticleInstallSeeder extends Seeder
                 'description' => 'Notice',
                 'type'        => 1,
                 'is_visible'  => 1,
-                'depth'       => 1,
+                'depth'       => 2,
                 'deleted_at'  => null,
             ],
         ]);

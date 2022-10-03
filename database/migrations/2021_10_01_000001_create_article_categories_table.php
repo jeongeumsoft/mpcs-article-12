@@ -18,7 +18,7 @@ class CreateArticleCategoriesTable extends Migration
             $table->unsignedSmallInteger('parent_id')->nullable()->index();
             $table->integer('order')->default(0);
             $table->string('name', 100);
-            $table->string('slug', 100)->index();
+            $table->string('slug', 100)->unique();
             $table->text('description')->nullable();
             $table->tinyInteger('type')->unsigned()->default(1);
             $table->boolean('is_visible')->default(0);
