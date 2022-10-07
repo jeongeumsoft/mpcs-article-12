@@ -22,8 +22,9 @@ class ArticleFile extends JsonResource
         return [
             'id' => $this->id,
             'article_id' => $this->article_id,
-            'caption' => $this->caption,
+            'original_name' => $this->original_name,
             'name' => $this->name,
+            'caption' => $this->caption,
             'mime' => $this->mime,
             'size' => $this->size,
             'download_count' => $this->download_count,

@@ -45,7 +45,7 @@ class ArticleFileRepository implements ArticleFileRepositoryInterface
             $articleFile = $this->request['upload_file'] ?? null;
             if (is_file($articleFile)) {
                 $filename = round(microtime(true) * 1000) . "_" . Str::random(10) . "." . $articleFile->clientExtension();
-                $this->model->caption = $articleFile->getClientOriginalName();
+                $this->model->original_name = $articleFile->getClientOriginalName();
                 $this->model->name = $filename;
                 $this->model->size = $articleFile->getSize();
                 $this->model->mime = $articleFile->getClientMimeType();

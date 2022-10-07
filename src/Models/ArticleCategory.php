@@ -40,6 +40,9 @@ class ArticleCategory extends Model
         2 => 'zine',
         3 => 'thumbnail',
         4 => 'blog',
+        5 => 'gallery',
+        6 => 'vod',
+        7 => 'pdf',
     ];
 
     /**

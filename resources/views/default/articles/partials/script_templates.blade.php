@@ -21,10 +21,10 @@
     @{{#each this}}
     <li class="list-group-item d-flex justify-content-between align-items-center">
         <div class="col">
-            @{{caption}} <span class="badge bg-body text-dark">@{{size}}</span> 
+            @{{original_name}} <span class="badge bg-body text-dark">@{{size}}</span> 
         </div>
         <div class="col-auto">
-            <a class="btn btn-sm btn-icon btn-primary" href="@{{download_url}}" download="@{{caption}}">
+            <a class="btn btn-sm btn-icon btn-primary" href="@{{download_url}}" download="@{{original_name}}">
                 <i class="mdi mdi-download"></i>
             </a>
         </div>

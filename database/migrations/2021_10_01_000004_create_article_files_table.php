@@ -16,8 +16,9 @@ class CreateArticleFilesTable extends Migration
         Schema::create('article_files', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('article_id')->index()->unsigned()->nullable();
-            $table->string('caption');
+            $table->string('original_name');
             $table->string('name');
+            $table->string('caption')->nullable();
             $table->string('size');
             $table->string('mime');
             $table->integer('download_count')->unsigned()->default(0);
