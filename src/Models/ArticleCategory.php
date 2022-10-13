@@ -36,13 +36,14 @@ class ArticleCategory extends Model
     public static $maxDepth;
 
     public static $typeStrings = [
-        1 => 'list',
-        2 => 'zine',
-        3 => 'thumbnail',
-        4 => 'blog',
-        5 => 'gallery',
-        6 => 'vod',
-        7 => 'pdf',
+        1 => 'page',
+        2 => 'list',
+        3 => 'zine',
+        4 => 'thumbnail',
+        5 => 'blog',
+        6 => 'gallery',
+        7 => 'vod',
+        8 => 'pdf',
     ];
 
     /**
@@ -65,7 +66,7 @@ class ArticleCategory extends Model
      */
     public function articles()
     {
-        return $this->hasMany(Article::class, 'article_category_id');
+        return $this->hasMany(Article::class, 'article_category_id')->released()->orderBy('created_at', 'desc');
     }
 
 

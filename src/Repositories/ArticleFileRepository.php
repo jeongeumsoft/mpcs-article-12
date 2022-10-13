@@ -3,6 +3,7 @@
 namespace Mpcs\Article\Repositories;
 
 use Mpcs\Core\Facades\Core;
+use Mpcs\Bootstrap5\Facades\Bootstrap5;
 
 use Mpcs\Article\Models\ArticleFile as Model;
 use Mpcs\Core\Traits\RepositoryTrait;
@@ -51,6 +52,11 @@ class ArticleFileRepository implements ArticleFileRepositoryInterface
                 $this->model->mime = $articleFile->getClientMimeType();
                 $this->model->save();
                 $this->model->upload_disk->putFileAs($this->model->dir_path, $articleFile, $filename, 'public');
+
+                // 첨부파일이 이미지파일일 경우 썸네일 형성
+                if (getimagesize($articleFile)) {
+                    Bootstrap5::generateThumb($this->model->root_dir, $this->model->name);
+                }
             }
             DB::commit();
         } catch (Exception $e) {

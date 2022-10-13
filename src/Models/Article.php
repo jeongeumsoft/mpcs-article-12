@@ -39,6 +39,15 @@ class Article extends Model
         'status_released' => 'boolean',
     ];
 
+    protected $appends = [
+        'status_released',
+        'thumb_image_url',
+        'small_image_url',
+        'medium_image_url',
+        'large_image_url',
+        'image_aspect_ratio'
+    ];
+
     private $uploadDisk;
     private $imageRootDir;
 
@@ -172,40 +181,53 @@ class Article extends Model
     }
 
     /**
-     * getFileUrlAttribute
+     * getThumbImageUrlAttribute
      *
      * @return void
      */
     public function getThumbImageUrlAttribute()
     {
         if ($this->thumbnail) {
-            return $this->upload_disk->url($this->image_root_dir . '/thumb_' . $this->thumbnail);
+            return $this->upload_disk->url($this->image_root_dir . '/thumbnails/thumb_' . $this->thumbnail);
         }
         return Facade::noImage();
     }
 
     /**
-     * getFileUrlAttribute
+     * getSmallImageUrlAttribute
      *
      * @return void
      */
     public function getSmallImageUrlAttribute()
     {
         if ($this->thumbnail) {
-            return $this->upload_disk->url($this->image_root_dir . '/small_' . $this->thumbnail);
+            return $this->upload_disk->url($this->image_root_dir . '/thumbnails/small_' . $this->thumbnail);
         }
         return Facade::noImage();
     }
 
     /**
-     * getFileUrlAttribute
+     * getMediumImageUrlAttribute
      *
      * @return void
      */
     public function getMediumImageUrlAttribute()
     {
         if ($this->thumbnail) {
-            return $this->upload_disk->url($this->image_root_dir . '/medium_' . $this->thumbnail);
+            return $this->upload_disk->url($this->image_root_dir . '/thumbnails/medium_' . $this->thumbnail);
+        }
+        return Facade::noImage();
+    }
+
+    /**
+     * getLargeImageUrlAttribute
+     *
+     * @return void
+     */
+    public function getLargeImageUrlAttribute()
+    {
+        if ($this->thumbnail) {
+            return $this->upload_disk->url($this->image_root_dir . '/thumbnails/large_' . $this->thumbnail);
         }
         return Facade::noImage();
     }

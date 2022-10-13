@@ -4,6 +4,8 @@
         @php
             // 자식 중 공개 체크된 것만...
             $isVisibleBranch = $branch->allChildren->where('is_visible', true);
+            $isVisibleBranchIds = $isVisibleBranch->pluck('id')->toArray();
+            $isShow = in_array($currentCategory->id, $isVisibleBranchIds);
         @endphp
         @if ($isVisibleBranch->count() > 0)
             <div class="col-auto">
@@ -14,18 +16,24 @@
             </div>
         @endif
         <div class="col ps-2">
+            <span class="badge bg-dark">{{ $branch->id }}</span>
             <span data-name="name" class="setting-name breadcrumb-wrap">{{ $branch->name }}</span>
-            <small class="text-muted">({{ $branch->articles->count() }})</small>
+            @if ($isVisibleBranch->count() == 0)
+                <small class="text-muted">({{ $branch->articles->count() }})</small>
+            @endif
         </div>
         <div class="col-auto">
-            <button type="button" data-list-param="article_category_id" data-list-title="{{ $branch->name }}"
-                data-list-value="{{ $branch->id }}" class="btn btn-info text-white py-0 px-1">
-                <i class="mdi mdi-format-list-bulleted"></i>
-            </button>
+            <span class="badge bg-light text-dark">{{ $branch->type_str }}</span>
+            @if ($isVisibleBranch->count() == 0)
+                <a href="{{ route(Bootstrap5::routePrefix() . '.articles.index', ['article_category_id' => $branch->id]) }}"
+                    class="btn btn-info text-white py-0 px-1">
+                    <i class="mdi mdi-format-list-bulleted"></i>
+                </a>
+            @endif
         </div>
     </div>
     @if ($isVisibleBranch->count() > 0)
-        <ul class="pt-1 collapse" style="list-style: none" id="branch_{{ $branch->id }}">
+        <ul class="pt-1 collapse {{ $isShow ? 'show' : '' }}" style="list-style: none" id="branch_{{ $branch->id }}">
             @forelse ($isVisibleBranch as $branch)
                 @include(Article::theme('articles.partials.branch_categories'), [
                     'branch' => $branch,

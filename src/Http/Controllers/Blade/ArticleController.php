@@ -18,11 +18,11 @@ class ArticleController extends Controller
     public function index(Request $request)
     {
         $categories = Core::dataSelect('article_categories', ['_vendor' => 'Mpcs\Article', '_withs' => ['allChildren', 'articles'], '_scopes' => ['nullParent'], 'is_visible' => true]);
-        $article_categories = Core::dataSelect('article_categories', ['_vendor' => 'Mpcs\Article', 'is_visible' => true])->pluck('nested_str', 'id')->toArray();
+        $article_categories = Core::dataSelect('article_categories', ['_vendor' => 'Mpcs\Article', 'is_visible' => true]);
         $tags = [];
 
         // 그룹이 형성되지 않았을 경우
-        if ($categories->count() == 0) {
+        if ($article_categories->count() == 0) {
             // 토스트메세지 전달
             Core::toast([
                 'message' => "Article category is not created. Please contact the administrator.",
@@ -32,11 +32,14 @@ class ArticleController extends Controller
             return redirect()->route(Core::getConfig('ui_route_name_prefix') . ".home");
         }
 
-        if (!$request->article_category_id) {
-            $currentCategory = $categories->where('id', $categories->first()->id)->first();
-        } else {
-            $currentCategory = $categories->where('id', $request->article_category_id)->first();
+        $currentCategory = $article_categories->where('id', $request->article_category_id)->first();
+
+        // 그룹지정없이 들어올 경우 강제 리다이렉트
+        if (!$request->article_category_id || !$currentCategory) {
+            return redirect()->route(Core::getConfig('ui_route_name_prefix') . '.articles.index', ['article_category_id' => $article_categories->first()->id]);
         }
+
+        $article_categories = $article_categories->pluck('nested_str', 'id')->toArray();
 
         return view(Facade::theme('articles.index'), compact('categories', 'article_categories', 'currentCategory', 'tags'))->withInput($request->flash());
     }
