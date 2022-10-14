@@ -23,6 +23,10 @@ class ArticleFile extends Model
         'updated_at' => 'datetime:Y-m-d H:i',
     ];
 
+    protected $appends = [
+        'file_url',
+    ];
+
     private $uploadDisk;
     private $rootDir;
 
