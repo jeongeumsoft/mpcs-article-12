@@ -21,13 +21,12 @@ class ArticleController extends Controller
     public function index(Request $request)
     {
         // 모델 조회시 옵션설정(페이징여부, 검색조건)
-        $this->addOption('_per_page', Facade::getPerPage());
-
+        $article_category = ArticleCategory::find($request->article_categories);
+        $this->addOption('_per_page', $article_category->per_page);
         if ($request->article_categories) {
-            $category = ArticleCategory::find($request->article_categories);
-            return (new ResourceCollection($this->service->index()))->additional(['category' => $category]);
-        } else {
-            return new ResourceCollection($this->service->index());
+            $this->addOption('article_category_id', $request->article_categories);
         }
+
+        return new ResourceCollection($this->service->index());
     }
 }

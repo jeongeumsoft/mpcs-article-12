@@ -32,6 +32,7 @@ Route::group([
     $router->resource('articles', 'ArticleController');
 });
 
+// Open API
 Route::group([
     'as'            => Core::getRouteNamePrefix('open_api'),
     'prefix'        => Core::getUrlPrefix('open_api'),

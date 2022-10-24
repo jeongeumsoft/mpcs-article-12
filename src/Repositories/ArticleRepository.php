@@ -27,7 +27,7 @@ class ArticleRepository implements ArticleRepositoryInterface
             'item_list' => ['id', 'title'],
             'attribute_name' => trans('mpcs-article::word.attr.article')
         ];
-        $model = $this->model::allow()->search($enableRequestParam);
+        $model = $this->model::search($enableRequestParam);
 
         return $this->getSelectFormatter($model, $isApiSelect, $apiSelectParams);
     }

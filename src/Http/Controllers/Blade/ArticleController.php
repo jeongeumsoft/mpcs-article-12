@@ -17,8 +17,14 @@ class ArticleController extends Controller
      */
     public function index(Request $request)
     {
-        $categories = Core::dataSelect('article_categories', ['_vendor' => 'Mpcs\Article', '_withs' => ['allChildren', 'articles'], '_scopes' => ['nullParent'], 'is_visible' => true]);
-        $article_categories = Core::dataSelect('article_categories', ['_vendor' => 'Mpcs\Article', 'is_visible' => true]);
+        $categories = Core::dataSelect('article_categories', [
+            '_withs' => ['allChildren', 'articles'],
+            '_scopes' => ['nullParent'],
+            'is_visible' => true
+        ]);
+        $article_categories = Core::dataSelect('article_categories', [
+            'is_visible' => true
+        ]);
         $tags = [];
 
         // 그룹이 형성되지 않았을 경우

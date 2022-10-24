@@ -59,7 +59,6 @@ class Article extends Model
         $this->imageRootDir = 'articles';
     }
 
-
     /**
      * boot
      *

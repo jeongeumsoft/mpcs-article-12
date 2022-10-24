@@ -29,6 +29,7 @@ class ArticleFile extends JsonResource
             'size' => $this->size,
             'download_count' => $this->download_count,
             'download_url' => route(Core::getRouteName('article_files.download'), ['article_file' => $this->id]),
+            'file_url' => $this->file_url,
             'article' => $this->whenLoaded('article', function () {
                 return new ArticleCollection($this->article);
             }),
