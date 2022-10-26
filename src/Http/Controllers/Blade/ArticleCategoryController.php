@@ -21,7 +21,8 @@ class ArticleCategoryController extends Controller
         $categories = $categories->pluck('nested_str', 'id')->prepend('선택', '')->toArray();
 
         $types = Model::getAllowTypes();
-        return view(Article::theme('article_categories.index'), compact('categories', 'types'))->withInput($request->flash());
+        $pageStyles = Model::getAllowPageStyles();
+        return view(Article::theme('article_categories.index'), compact('categories', 'types', 'pageStyles'))->withInput($request->flash());
     }
 
     /**

@@ -46,6 +46,12 @@ class ArticleCategory extends Model
         8 => 'pdf',
     ];
 
+    public static $pageStyleStrings = [
+        1 => 'paginator',
+        2 => 'next page',
+        3 => 'infinity scroll',
+    ];
+
     /**
      * boot
      *
@@ -113,6 +119,16 @@ class ArticleCategory extends Model
     public function getTypeStrAttribute()
     {
         return static::$typeStrings[$this->attributes['type']];
+    }
+
+    /**
+     * getAllowPageStyles
+     *
+     * @return void
+     */
+    public static function getAllowPageStyles()
+    {
+        return collect(static::$pageStyleStrings);
     }
 
     /**

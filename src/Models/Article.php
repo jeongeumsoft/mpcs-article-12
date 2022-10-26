@@ -13,6 +13,8 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
+use Illuminate\Support\Str;
+
 class Article extends Model
 {
     use SoftDeletes, Sluggable, Taggable, ModelTrait;
@@ -45,7 +47,8 @@ class Article extends Model
         'small_image_url',
         'medium_image_url',
         'large_image_url',
-        'image_aspect_ratio'
+        'image_aspect_ratio',
+        'preview_text',
     ];
 
     private $uploadDisk;
@@ -99,6 +102,18 @@ class Article extends Model
     public function user()
     {
         return $this->belongsTo('App\Models\User', 'user_id');
+    }
+
+
+    /**
+     * getPreviewTextAttribute
+     *
+     * @return void
+     */
+    public function getPreviewTextAttribute()
+    {
+        $preview_text = $this->summary ?? strip_tags($this->html);
+        return Str::limit(strip_tags($preview_text), 100, ' ...');
     }
 
     /**

@@ -25,6 +25,7 @@ class Article extends JsonResource
             'summary' => $this->summary,
             'markdown' => $this->markdown,
             'html' => $this->html,
+            'preview_text' => $this->preview_text,
             'thumbnail' => $this->thumbnail,
             'image_file_url' => $this->image_file_url,
             'thumb_image_url' => $this->thumb_image_url,

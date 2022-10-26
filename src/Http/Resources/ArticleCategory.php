@@ -41,7 +41,10 @@ class ArticleCategory extends JsonResource
             'slug' => $this->slug,
             'description' => $this->description,
             'order' => $this->order,
+            'type' => $this->type,
             'type_str' => $this->type_str,
+            'page_style' => $this->page_style,
+            'per_page' => $this->per_page,
             'is_visible' => $this->is_visible,
             'depth' => $this->depth,
             'articles' => $this->whenLoaded('articles', function () {

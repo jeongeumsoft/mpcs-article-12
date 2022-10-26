@@ -62,6 +62,8 @@ class ArticleCategoryRepository implements ArticleCategoryRepositoryInterface
             $this->model->description = $this->request['description'] ?? null;
             $this->model->parent_id = $parentId;
             $this->model->type = $this->request['type'];
+            $this->model->page_style = $this->request['page_style'];
+            $this->model->per_page = $this->request['per_page'];
             $this->model->is_visible = $this->request['is_visible'] ?? false;
             $this->model->order = $order;
             $this->model->depth = $depth;
@@ -104,6 +106,8 @@ class ArticleCategoryRepository implements ArticleCategoryRepositoryInterface
             $model->description = $this->request['description'] ?? null;
             $model->parent_id = $this->request['parent_id'] ?? null;
             $model->type = $this->request['type'];
+            $model->page_style = $this->request['page_style'];
+            $model->per_page = $this->request['per_page'];
             $model->is_visible = $this->request['is_visible'] ?? false;
 
             // max depth 체크

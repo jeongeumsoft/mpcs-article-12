@@ -20,6 +20,11 @@
 
 {!! Form::text('name', Str::ucfirst(trans('ui-bootstrap5::word.name')))->placeholder(Str::ucfirst(trans('ui-bootstrap5::word.name')))->wrapperAttrs(['class' => 'required']) !!}
 
-{!! Form::select('type', Str::ucfirst(trans('mpcs-article::word.attr.list_type')), $types)->attrs(['data-type' => 'select-one'])->wrapperAttrs(['class' => 'mb-3']) !!}
+{!! Form::select('type', Str::ucfirst(trans('mpcs-article::word.attr.list_type')), $types)->attrs(['data-type' => 'select-one'])->wrapperAttrs(['class' => 'required mb-3']) !!}
 
-{!! Form::text('description', Str::ucfirst(trans('ui-bootstrap5::word.description')))->placeholder(Str::ucfirst(trans('ui-bootstrap5::word.description'))) !!}
+{!! Form::select('page_style', Str::ucfirst(trans('mpcs-article::word.attr.page_style')), $pageStyles)->attrs(['data-type' => 'select-one'])->wrapperAttrs(['class' => 'required mb-3']) !!}
+{!! Form::text('per_page', Str::ucfirst(trans('mpcs-article::word.attr.per_page')))->type('number')->placeholder(Str::ucfirst(trans('mpcs-article::word.attr.per_page')))->wrapperAttrs(['class' => 'required']) !!}
+
+{!! Form::text('description', Str::ucfirst(trans('ui-bootstrap5::word.description')))->placeholder(
+    Str::ucfirst(trans('ui-bootstrap5::word.description')),
+) !!}

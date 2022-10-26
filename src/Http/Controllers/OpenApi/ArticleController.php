@@ -27,6 +27,6 @@ class ArticleController extends Controller
             $this->addOption('article_category_id', $request->article_categories);
         }
 
-        return new ResourceCollection($this->service->index());
+        return new ResourceCollection($this->service->index()->onEachSide(1));
     }
 }
