@@ -2,22 +2,19 @@
 
 namespace Mpcs\Article\Models;
 
-use Mpcs\Article\Facades\Article as Facade;
 use Illuminate\Database\Eloquent\Model;
-use Mpcs\Core\Facades\Core;
 use Mpcs\Core\Traits\ModelTrait;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Facades\Image;
-
+use Mpcs\Bootstrap5\Traits\ResponsiveImageTrait;
 use Illuminate\Support\Str;
 
 class Article extends Model
 {
-    use SoftDeletes, Sluggable, Taggable, ModelTrait;
+    use SoftDeletes, Sluggable, Taggable, ModelTrait, ResponsiveImageTrait;
 
     protected $table = 'articles';
     protected $dates = ['created_at', 'updated_at', 'deleted_at', 'released_at'];
@@ -172,100 +169,6 @@ class Article extends Model
     }
 
     /**
-     * getRootDirAttribute
-     *
-     * @return void
-     */
-    public function getImageRootDirAttribute()
-    {
-        return $this->imageRootDir;
-    }
-
-    /**
-     * getFileUrlAttribute
-     *
-     * @return void
-     */
-    public function getImageFileUrlAttribute()
-    {
-        if ($this->thumbnail) {
-            return $this->upload_disk->url($this->image_root_dir . '/' . $this->thumbnail);
-        }
-        return Facade::noImage();
-    }
-
-    /**
-     * getThumbImageUrlAttribute
-     *
-     * @return void
-     */
-    public function getThumbImageUrlAttribute()
-    {
-        if ($this->thumbnail) {
-            return $this->upload_disk->url($this->image_root_dir . '/thumbnails/thumb_' . $this->thumbnail);
-        }
-        return Facade::noImage();
-    }
-
-    /**
-     * getSmallImageUrlAttribute
-     *
-     * @return void
-     */
-    public function getSmallImageUrlAttribute()
-    {
-        if ($this->thumbnail) {
-            return $this->upload_disk->url($this->image_root_dir . '/thumbnails/small_' . $this->thumbnail);
-        }
-        return Facade::noImage();
-    }
-
-    /**
-     * getMediumImageUrlAttribute
-     *
-     * @return void
-     */
-    public function getMediumImageUrlAttribute()
-    {
-        if ($this->thumbnail) {
-            return $this->upload_disk->url($this->image_root_dir . '/thumbnails/medium_' . $this->thumbnail);
-        }
-        return Facade::noImage();
-    }
-
-    /**
-     * getLargeImageUrlAttribute
-     *
-     * @return void
-     */
-    public function getLargeImageUrlAttribute()
-    {
-        if ($this->thumbnail) {
-            return $this->upload_disk->url($this->image_root_dir . '/thumbnails/large_' . $this->thumbnail);
-        }
-        return Facade::noImage();
-    }
-
-    /**
-     * getImageAspectRatioAttribute
-     *
-     * @return void
-     */
-    public function getImageAspectRatioAttribute()
-    {
-        if ($this->thumbnail) {
-            $image = $this->upload_disk->get($this->image_root_dir . '/' . $this->thumbnail);
-            if ($image) {
-                $width = Image::make($image)->width();
-                $height = Image::make($image)->height();
-                $aspectRatio = ($height / $width) * 100;
-                return $aspectRatio;
-            }
-        }
-        return 0;
-    }
-
-    /**
      * sluggable
      *
      * @return void
@@ -281,6 +184,16 @@ class Article extends Model
                 'onUpdate'  => true
             ]
         ];
+    }
+
+    /**
+     * responsiveImagable
+     *
+     * @return void
+     */
+    public function responsiveImagable()
+    {
+        return $this->attributes['thumbnail'] ? $this->attributes['thumbnail'] : null;
     }
 
     /**

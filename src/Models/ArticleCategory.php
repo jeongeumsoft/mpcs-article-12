@@ -66,6 +66,17 @@ class ArticleCategory extends Model
     }
 
     /**
+     * setIsThumbnailSizeAttribute
+     *
+     * @param  mixed $value
+     * @return void
+     */
+    public function setIsThumbnailSizeAttribute($value)
+    {
+        $this->attributes['is_thumbnail_size'] = Core::isTrue($value);
+    }
+
+    /**
      * articles
      *
      * @return void

@@ -43,7 +43,7 @@
                                     data-bs-content='<img class="img-fluid"
                                     src="{{ $data->small_image_url }}" alt="{{ $data->title }}">'>
                                     <img class="img-thumbnail" style="width: 40px; height: 40px;"
-                                        src="{{ $data->small_image_url }}" alt="{{ $data->title }}">
+                                        src="{{ $data->thumb_image_url }}" alt="{{ $data->title }}">
                                 </button>
                             </div>
                         @endif

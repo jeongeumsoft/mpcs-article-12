@@ -20,10 +20,23 @@
 <script type="text/template" id="script-template-article_files">
     @{{#each this}}
     <li class="list-group-item d-flex justify-content-between align-items-center">
+        @{{#if is_image_type}}
+        <div class="col-auto mr-2">
+            <button type="button" class="btn p-0 me-1" data-bs-toggle="popover" data-bs-html="true"
+                data-bs-content='<img class="img-fluid"
+                src="@{{small_image_url}}" alt="@{{title}}">'>
+                <img class="img-thumbnail" style="width: 40px; height: 40px;"
+                    src="@{{thumb_image_url}}" alt="@{{title}}">
+            </button>
+        </div>
+        @{{/if}}
         <div class="col">
             @{{original_name}} <span class="badge bg-body text-dark">@{{size}}</span> 
         </div>
         <div class="col-auto">
+            <a class="btn btn-sm btn-icon btn-danger" href="@{{file_url}}" target="_blank">
+                <i class="mdi mdi-eye"></i>
+            </a>
             <a class="btn btn-sm btn-icon btn-primary" href="@{{download_url}}" download="@{{original_name}}">
                 <i class="mdi mdi-download"></i>
             </a>

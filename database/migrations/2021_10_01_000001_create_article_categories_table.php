@@ -23,6 +23,7 @@ class CreateArticleCategoriesTable extends Migration
             $table->tinyInteger('type')->unsigned()->default(1);
             $table->tinyInteger('page_style')->unsigned()->default(1);
             $table->tinyInteger('per_page')->unsigned()->default(15);
+            $table->boolean('is_thumbnail_size')->default(0);
             $table->boolean('is_visible')->default(0);
             $table->unsignedTinyInteger('depth')->default(1);
             $table->timestamps();

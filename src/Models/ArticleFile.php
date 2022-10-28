@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Mpcs\Core\Traits\ModelTrait;
 use Illuminate\Support\Facades\Storage;
 use Mpcs\Bootstrap5\Facades\Bootstrap5;
+use Mpcs\Bootstrap5\Traits\ResponsiveImageTrait;
+use Illuminate\Support\Str;
 
 class ArticleFile extends Model
 {
-    use ModelTrait;
+    use ModelTrait, ResponsiveImageTrait;
 
     protected $table = 'article_files';
     protected $dates = ['created_at', 'updated_at'];
@@ -25,10 +27,17 @@ class ArticleFile extends Model
 
     protected $appends = [
         'file_url',
+        'is_image_type',
+        'thumb_image_url',
+        'small_image_url',
+        'medium_image_url',
+        'large_image_url',
+        'image_aspect_ratio',
     ];
 
     private $uploadDisk;
     private $rootDir;
+    private $imageRootDir;
 
     public function __construct(array $attributes = [])
     {
@@ -36,6 +45,7 @@ class ArticleFile extends Model
 
         $this->uploadDisk = Storage::disk('upload');
         $this->rootDir = 'article_files';
+        $this->imageRootDir = 'article_files';
     }
 
 
@@ -134,5 +144,26 @@ class ArticleFile extends Model
     public function getFileFullPathAttribute()
     {
         return $this->upload_disk->path($this->file_path);
+    }
+
+    /**
+     * getIsImageTypeAttribute
+     *
+     * @return void
+     */
+    public function getIsImageTypeAttribute()
+    {
+
+        return Str::startsWith($this->attributes['mime'], 'image');;
+    }
+
+    /**
+     * responsiveImagable
+     *
+     * @return void
+     */
+    public function responsiveImagable()
+    {
+        return $this->getIsImageTypeAttribute() ? $this->attributes['name'] : null;
     }
 }

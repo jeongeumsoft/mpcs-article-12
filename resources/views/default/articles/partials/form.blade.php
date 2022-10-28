@@ -38,8 +38,8 @@
                     </label>
                     <div class="col-auto">
                         <button type="button" class="btn btn-info align-middle btn-select"
-                            data-width="{{ config('mpcsarticle.thumbnail.width') ?? 512 }}"
-                            data-height="{{ config('mpcsarticle.thumbnail.height') ?? 512 }}">
+                            data-width="{{ $currentCategory->is_thumbnail_size ? config('mpcsarticle.thumbnail.width') ?? 512 : '' }}"
+                            data-height="{{ $currentCategory->is_thumbnail_size ? config('mpcsarticle.thumbnail.height') ?? 512 : '' }}">
                             <i class="mdi mdi-cloud-upload me-1"></i>
                             {{ trans('ui-bootstrap5::word.button.choose_a_image_file') }}
                         </button>

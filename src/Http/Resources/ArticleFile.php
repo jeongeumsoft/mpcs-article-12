@@ -33,6 +33,12 @@ class ArticleFile extends JsonResource
             'article' => $this->whenLoaded('article', function () {
                 return new ArticleCollection($this->article);
             }),
+            'is_image_type' => $this->is_image_type,
+            'image_file_url' => $this->image_file_url,
+            'thumb_image_url' => $this->thumb_image_url,
+            'small_image_url' => $this->small_image_url,
+            'medium_image_url' => $this->medium_image_url,
+            'image_aspect_ratio' => $this->image_aspect_ratio,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

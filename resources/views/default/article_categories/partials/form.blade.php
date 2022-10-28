@@ -28,3 +28,13 @@
 {!! Form::text('description', Str::ucfirst(trans('ui-bootstrap5::word.description')))->placeholder(
     Str::ucfirst(trans('ui-bootstrap5::word.description')),
 ) !!}
+
+<div class="form-group row">
+    <label class="col">{{ Str::ucfirst(trans('mpcs-article::word.attr.is_thumbnail_size_message')) }} </label>
+    <div class="col-auto">
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" name="is_thumbnail_size">
+            <label class="form-check-label"></label>
+        </div>
+    </div>
+</div>

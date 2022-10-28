@@ -45,6 +45,7 @@ class ArticleCategory extends JsonResource
             'type_str' => $this->type_str,
             'page_style' => $this->page_style,
             'per_page' => $this->per_page,
+            'is_thumbnail_size' => $this->is_thumbnail_size,
             'is_visible' => $this->is_visible,
             'depth' => $this->depth,
             'articles' => $this->whenLoaded('articles', function () {

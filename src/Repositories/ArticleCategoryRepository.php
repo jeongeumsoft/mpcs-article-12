@@ -64,6 +64,7 @@ class ArticleCategoryRepository implements ArticleCategoryRepositoryInterface
             $this->model->type = $this->request['type'];
             $this->model->page_style = $this->request['page_style'];
             $this->model->per_page = $this->request['per_page'];
+            $this->model->is_thumbnail_size = $this->request['is_thumbnail_size'] ?? false;
             $this->model->is_visible = $this->request['is_visible'] ?? false;
             $this->model->order = $order;
             $this->model->depth = $depth;
@@ -108,6 +109,7 @@ class ArticleCategoryRepository implements ArticleCategoryRepositoryInterface
             $model->type = $this->request['type'];
             $model->page_style = $this->request['page_style'];
             $model->per_page = $this->request['per_page'];
+            $model->is_thumbnail_size = $this->request['is_thumbnail_size'] ?? false;
             $model->is_visible = $this->request['is_visible'] ?? false;
 
             // max depth 체크
