@@ -17,11 +17,6 @@ class ArticleController extends Controller
      */
     public function index(Request $request)
     {
-        $categories = Core::dataSelect('article_categories', [
-            '_withs' => ['allChildren', 'articles'],
-            '_scopes' => ['nullParent'],
-            'is_visible' => true
-        ]);
         $article_categories = Core::dataSelect('article_categories', [
             'is_visible' => true
         ]);
@@ -46,6 +41,13 @@ class ArticleController extends Controller
         }
 
         $article_categories = $article_categories->pluck('nested_str', 'id')->toArray();
+
+        // 카테고리 네스티드 목록
+        $categories = Core::dataSelect('article_categories', [
+            '_withs' => ['allChildren', 'articles'],
+            '_scopes' => ['nullParent'],
+            'is_visible' => true
+        ]);
 
         return view(Facade::theme('articles.index'), compact('categories', 'article_categories', 'currentCategory', 'tags'))->withInput($request->flash());
     }
