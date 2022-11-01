@@ -10,8 +10,8 @@
   ],
   "require": {
     "cviebrock/eloquent-taggable": "^9.0",
-    "mpcs/bootstrap5": "~0.1.0|dev-master",
-    "mpcs/core": "~0.1.0|dev-master"
+    "mpcs/bootstrap5": "~0.2.0|dev-master",
+    "mpcs/core": "~0.2.0|dev-master"
   },
   "require-dev": {
     "phpunit/phpunit": "^8.0"
