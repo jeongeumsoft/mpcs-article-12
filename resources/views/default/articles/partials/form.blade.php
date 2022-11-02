@@ -75,7 +75,8 @@
         ) !!}
         {{-- 에디터 --}}
         <div data-type="editor" style="height: calc(100vh - 320px)">
-            <div class="editor-wrap" data-crud-edit-type="editor" data-crud-edit-name="markdown"></div>
+            <div class="editor-wrap" data-crud-edit-type="editor"
+                data-crud-edit-name="{{ config('mpcsui.editor_is_mode_wysiwyg') ? 'html' : 'markdown' }}"></div>
             <input type="hidden" data-get-lang="markdown" name="markdown">
             <input type="hidden" data-get-lang="html" name="html">
         </div>

@@ -177,7 +177,7 @@ class Article extends Model
     {
         return [
             'slug' => [
-                'source'     => 'title',
+                'source' => 'title',
                 'method' => function ($string, $separator) {
                     return preg_replace('/[^0-9a-zA-Z가-힣ㄱ-ㅎㅏ]+/i', $separator, $string);
                 },
@@ -193,7 +193,7 @@ class Article extends Model
      */
     public function responsiveImagable()
     {
-        return $this->attributes['thumbnail'] ? $this->attributes['thumbnail'] : null;
+        return $this->thumbnail ? $this->attributes['thumbnail'] : null;
     }
 
     /**
