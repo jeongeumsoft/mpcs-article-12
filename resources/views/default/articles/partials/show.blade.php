@@ -51,12 +51,10 @@
 
 <dl class="dl">
     <dt class="col-12">{{ trans('mpcs-article::word.attr.content') }}</dt>
-    <dd class="col-12 toastui-editor-contents" data-crud-show-name="html"></dd>
+    <dd class="col-12 mpcs-content-body p-4" data-crud-show-name="html"></dd>
 </dl>
 
 {{-- CURD 스크립트 --}}
 @push('after_app_scripts')
-    <script>
-
-    </script>
+    <script></script>
 @endpush
