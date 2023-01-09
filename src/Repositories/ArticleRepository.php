@@ -169,10 +169,10 @@ class ArticleRepository implements ArticleRepositoryInterface
     // show the record with the given id
     public function get($model)
     {
-        // 뷰카운트 추가
-        $viewCount = $model->view_count;
-        $model->view_count = ++$viewCount;
-        $model->save();
+        // 관리자가 아닐 경우, 뷰카운트 추가
+        if (!Core::user()) {
+            $model->increment('view_count');
+        }
         return $model->loadRelations();
     }
 
