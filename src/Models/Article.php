@@ -17,7 +17,6 @@ class Article extends Model
     use SoftDeletes, Sluggable, Taggable, ModelTrait, ResponsiveImageTrait;
 
     protected $table = 'articles';
-    protected $dates = ['created_at', 'updated_at', 'deleted_at', 'released_at'];
     protected $guarded = ['id'];
     protected static $m_params = [
         'default_load_relations' => ['articleCategory', 'articleFiles', 'tags', 'user'],

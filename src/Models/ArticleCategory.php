@@ -18,12 +18,16 @@ class ArticleCategory extends Model
 
     protected $table = 'article_categories';
     public $timestamps = false;
-    protected $dates = ['deleted_at'];
     protected $guarded = ['id'];
     // $sortable 정의시 정렬기능을 제공할 필드는 필수 기입
     public $sortable = ['id', 'name', 'is_visible'];
     public $defaultSortable = [
         'order' => 'asc',
+    ];
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:i',
+        'updated_at' => 'datetime:Y-m-d H:i',
+        'deleted_at' => 'datetime:Y-m-d H:i',
     ];
 
     public $appends = ['nested_str', 'type_str'];

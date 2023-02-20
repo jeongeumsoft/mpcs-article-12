@@ -14,7 +14,6 @@ class ArticleFile extends Model
     use ModelTrait, ResponsiveImageTrait;
 
     protected $table = 'article_files';
-    protected $dates = ['created_at', 'updated_at'];
     protected $guarded = ['id'];
     protected static $m_params = [
         'default_load_relations' => [],
