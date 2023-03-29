@@ -3,19 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Router;
 use Mpcs\Core\Facades\Core;
-use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
-use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
-
-$tenantyMiddlewares = [InitializeTenancyByDomain::class, PreventAccessFromCentralDomains::class];
-$middlewares = array_merge($tenantyMiddlewares, Core::getConfig('route.middleware'));
-$apiMiddlewares = array_merge($tenantyMiddlewares, Core::getConfig('route.open_api.middleware'));
 
 // Api Route
 Route::group([
     'as'            => Core::getRouteNamePrefix('api'),
     'prefix'        => Core::getUrlPrefix('api'),
     'namespace'     => 'Mpcs\Article\Http\Controllers\Api',
-    'middleware'    => $middlewares,
+    'middleware'    => Core::getUniversalMiddlewares('api'),
 ], function (Router $router) {
     $router->resource('article_categories', 'ArticleCategoryController')->names('article_categories')->except(['destroy']);
     $router->resource('articles', 'ArticleController')->names('articles');
@@ -29,7 +23,7 @@ Route::group([
     'as'            => Core::getRouteNamePrefix('ui'),
     'prefix'        => Core::getUrlPrefix('ui'),
     'namespace'     => 'Mpcs\Article\Http\Controllers\Blade',
-    'middleware'    => $middlewares,
+    'middleware'    => Core::getUniversalMiddlewares('ui'),
 ], function (Router $router) {
     $router->patch('article_categories/save_order', 'ArticleCategoryController@saveOrder')->name('article_categories.save_order');
     $router->get('article_categories/list', 'ArticleCategoryController@list')->name('article_categories.list');
@@ -43,7 +37,7 @@ Route::group([
     'as'            => Core::getRouteNamePrefix('open_api'),
     'prefix'        => Core::getUrlPrefix('open_api'),
     'namespace'     => 'Mpcs\Article\Http\Controllers\OpenApi',
-    'middleware'    => $apiMiddlewares,
+    'middleware'    => Core::getUniversalMiddlewares('open'),
 ], function (Router $router) {
     if (Core::getConfig('enable_open_api', 'mpcsarticle')) {
         $router->resource('articles', 'ArticleController')->names('articles')->only(['index', 'show']);

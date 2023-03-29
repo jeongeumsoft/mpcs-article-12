@@ -27,6 +27,7 @@ class ArticleServiceProvider extends ServiceProvider
         /* 콘솔에서 vendor:publish 가동시 설치 파일 */
         if ($this->app->runningInConsole()) {
             $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+            $this->loadMigrationsFrom(__DIR__ . '/../database/migrations/universal');
         }
 
         /* 라우터, 다국어 */
@@ -34,7 +35,7 @@ class ArticleServiceProvider extends ServiceProvider
 
             // 다국어 알리어스를 mpcs로 네이밍 규칙을 통일하여 사용하기로 함
             $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'mpcs-article');
-            $this->loadRoutesFrom(__DIR__ . '/../routes/tenant.php');
+            $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
         });
 
         // Core::dataSelect() 형성시 '_vendor' => 'namepsace' 제외 처리 가능
