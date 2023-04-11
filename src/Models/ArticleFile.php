@@ -34,7 +34,6 @@ class ArticleFile extends Model
         'image_aspect_ratio',
     ];
 
-    private $uploadDisk;
     private $rootDir;
     private $imageRootDir;
 
@@ -42,7 +41,6 @@ class ArticleFile extends Model
     {
         parent::__construct($attributes);
 
-        $this->uploadDisk = Storage::disk('upload');
         $this->rootDir = 'article_files';
         $this->imageRootDir = 'article_files';
     }
@@ -92,7 +90,7 @@ class ArticleFile extends Model
      */
     public function getUploadDiskAttribute()
     {
-        return $this->uploadDisk;
+        return Storage::disk('upload');
     }
 
     /**
