@@ -87,7 +87,7 @@ class ArticleRepository implements ArticleRepositoryInterface
         if (class_exists('Mpcs\PushSse\Facades\PushSse') && config('mpcspushsse.enabled')) {
             // PushSse 클래스가 있으면 푸시 전송
 
-            $category = $this->model->articleCategories->first();
+            $category = $this->model->articleCategory;
             $categoryName = $category->name ?? null;
 
             $pushMessage = $this->model->title;
