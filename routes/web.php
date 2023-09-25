@@ -37,7 +37,7 @@ Route::group([
     'as'            => Core::getRouteNamePrefix('open_api'),
     'prefix'        => Core::getUrlPrefix('open_api'),
     'namespace'     => 'Mpcs\Article\Http\Controllers\OpenApi',
-    'middleware'    => ['g.universal', 'g.open'],
+    'middleware'    => ['g.universal', 'g.open_api'],
 ], function (Router $router) {
     if (Core::getConfig('enable_open_api', 'mpcsarticle')) {
         $router->resource('articles', 'ArticleController')->names('articles')->only(['index', 'show']);
