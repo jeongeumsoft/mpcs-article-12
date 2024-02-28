@@ -1,7 +1,7 @@
-<table class="table table-borderless table-hover align-middle mb-0 w-100">
+<table class="table table-sm table-borderless table-hover align-middle mb-0 w-100 crud-table-responsive">
     <thead class="thead-light">
-        <tr class="d-none d-md-table-row border-bottom">
-            <th class="text-center min-width-rem-4 d-none d-md-table-cell">
+        <tr class="border-bottom">
+            <th class="text-center min-width-rem-4">
                 @sortablelink('id', 'ID')
             </th>
             <th class="text-center min-width-rem-4">
@@ -10,10 +10,10 @@
             <th class="text-center">
                 @sortablelink('title', trans('mpcs-article::word.attr.title'))
             </th>
-            <th class="text-center min-width-rem-6 d-none d-md-table-cell">
+            <th class="text-center min-width-rem-6">
                 {{ trans('mpcs-article::word.attr.writer') }}
             </th>
-            <th class="text-center min-width-rem-8 d-none d-md-table-cell">
+            <th class="text-center min-width-rem-8">
                 @sortablelink('view_count', trans('mpcs-article::word.attr.view_count'))
             </th>
             <th class="text-center min-width-rem-10">
@@ -26,16 +26,16 @@
     </thead>
     <tbody class="crud-list">
         @forelse($datas as $data)
-            <tr data-crud-id="{{ $data->id }}" class="border-bottom d-block d-md-table-row">
-                <td data-name='id' class="text-md-center d-none d-md-table-cell">
+            <tr data-crud-id="{{ $data->id }}" class="border-bottom">
+                <td data-header-title='ID' class="text-md-center">
                     {{ $data->id }}
                 </td>
-                <td data-name='status_released' class="text-start d-block d-md-table-cell">
+                <td data-header-title='{{ trans('mpcs-article::word.attr.status') }}' class="text-start">
                     <span class="badge bg-{{ $data->status_released ? 'success' : 'warning' }}">
                         {{ $data->status_released ? trans('mpcs-article::word.attr.released') : trans('mpcs-article::word.attr.nonrelease') }}
                     </span>
                 </td>
-                <td class="text-start d-block d-md-table-cell">
+                <td data-header-title='{{ trans('mpcs-article::word.attr.title') }}' class="text-start">
                     <div class="row no-gutters align-items-center">
                         @if (Article::useThumbnail() && $data->thumbnail)
                             <div class="col-auto mr-2">
@@ -49,7 +49,7 @@
                         @endif
                         <div class="col">
                             @if (isset($data->articleCategories))
-                                <p data-name='categories' class="mb-1">
+                                <p data-header-title='categories' class="mb-1">
                                     @forelse($data->articleCategories as $category)
                                         <span class="badge bg-info">
                                             {{ $category->nested_str }}
@@ -58,8 +58,7 @@
                                     @endforelse
                                 </p>
                             @endif
-                            <p data-name='title' class="mb-0">
-                                <span class="badge badge-pill bg-dark mr-1 d-md-none">{{ $data->id }}</span>
+                            <p class="mb-0">
                                 <span> {{ $data->title }} </span> <small
                                     class="d-md-none">({{ $data->view_count }})</small>
                                 @if ($data->summary)
@@ -71,7 +70,7 @@
                                 @endif
                             </p>
                             @if (Article::useTag() && isset($data->tags))
-                                <p data-name='tags' class="mt-1 mb-0">
+                                <p data-header-title='tags' class="mt-1 mb-0">
                                     @forelse($data->tags as $tag)
                                         <span class="badge rounded-pill border border-light text-dark">
                                             #{{ $tag->name }}
@@ -83,24 +82,24 @@
                         </div>
                     </div>
                 </td>
-                <td data-name='user.name' class="d-none d-md-table-cell text-center">
+                <td data-header-title='{{ trans('mpcs-article::word.attr.writer') }}' class="text-center">
                     {{ $data->user->name }}
                 </td>
-                <td data-name='view_count' class="d-none d-md-table-cell text-center">
+                <td data-header-title='{{ trans('mpcs-article::word.attr.view_count') }}' class="text-center">
                     {{ number_format($data->view_count) }}
                 </td>
-                <td data-name='released_at' class="d-none d-md-table-cell">
+                <td data-header-title='{{ trans('mpcs-article::word.attr.released_at') }}' class="">
                     {{ $data->released_at }}
                 </td>
-                <td class="d-block d-md-table-cell text-end text-md-center">
+                <td class="crud-td-actions text-end text-md-center">
                     @can('view', $data)
-                        <button class="btn-crud-show btn btn-icon btn-success text-white align-middle"
+                        <button class="btn-crud-show btn btn-sm btn-icon btn-success text-white align-middle"
                             title="{{ trans('ui-bootstrap5::word.button.show') }}">
                             <i class="mdi mdi-eye"></i>
                         </button>
                     @endcan
                     @can('delete', $data)
-                        <button class="btn-crud-delete btn btn-icon btn-danger text-white align-middle"
+                        <button class="btn-crud-delete btn btn-sm btn-icon btn-danger text-white align-middle"
                             title="{{ trans('ui-bootstrap5::word.button.delete') }}">
                             <i class="mdi mdi-trash-can"></i>
                         </button>
@@ -109,7 +108,9 @@
             </tr>
         @empty
             <tr>
-                <td colspan="6" class="text-center">{{ trans('ui-bootstrap5::word.crud.none_data') }}</td>
+                <td colspan="6" class="crud-td-actions text-center">
+                    {{ trans('ui-bootstrap5::word.crud.none_data') }}
+                </td>
             </tr>
         @endforelse
     </tbody>
