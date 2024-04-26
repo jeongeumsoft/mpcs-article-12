@@ -16,6 +16,19 @@
                 </div>
             </div>
         @endif
+
+        <div class="form-group row">
+            <label class="col">
+                {{ Str::title(trans('mpcs-article::word.attr.is_header_notice')) }}
+            </label>
+            <div class="col-auto">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" name="is_header_notice" value="1">
+                    <label class="form-check-label"></label>
+                </div>
+            </div>
+        </div>
+
         {!! Form::select('article_category_id', trans('mpcs-article::word.attr.categories'), $article_categories)->attrs(['data-type' => 'select-one'])->placeholder(trans('mpcs-article::word.attr.categories')) !!}
         {!! Form::text('released_at', trans('mpcs-article::word.attr.released_at'))->attrs(['data-type' => 'data-picker-datetime'])->placeholder(trans('mpcs-article::word.attr.released_at'))->wrapperAttrs(['class' => 'required']) !!}
 

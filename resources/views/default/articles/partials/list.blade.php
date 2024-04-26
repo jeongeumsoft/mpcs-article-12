@@ -4,6 +4,9 @@
             <th class="text-center min-width-rem-4">
                 @sortablelink('id', 'ID')
             </th>
+            <th class="text-center min-width-rem-3">
+                {{ trans('mpcs-article::word.attr.is_header_notice') }}
+            </th>
             <th class="text-center min-width-rem-4">
                 {{ trans('mpcs-article::word.attr.status') }}
             </th>
@@ -29,6 +32,11 @@
             <tr data-crud-id="{{ $data->id }}" class="border-bottom">
                 <td data-header-title='ID' class="text-md-center">
                     {{ $data->id }}
+                </td>
+                <td data-header-title='{{ trans('mpcs-article::word.attr.is_header_notice') }}' class="text-start">
+                    <span class="badge bg-{{ $data->is_header_notice ? 'info' : '' }}">
+                        {{ $data->is_header_notice ? trans('mpcs-article::word.attr.is_header_notice') : '' }}
+                    </span>
                 </td>
                 <td data-header-title='{{ trans('mpcs-article::word.attr.status') }}' class="text-start">
                     <span class="badge bg-{{ $data->status_released ? 'success' : 'warning' }}">

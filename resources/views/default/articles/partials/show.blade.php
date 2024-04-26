@@ -14,6 +14,7 @@
             <dt class="col-4 col-lg-2">{{ Str::title(trans('mpcs-article::word.attr.categories')) }}</dt>
             <dd class="col-8 col-lg-10" data-crud-show-template-id="script-template-article_categories"
                 data-crud-show-type="template-html" data-crud-show-name="article_categories"></dd>
+
             @if (Article::useTag())
                 <dt class="col-4 col-lg-2">{{ Str::title(trans('mpcs-article::word.attr.tags')) }}</dt>
                 <dd class="col-8 col-lg-10" data-crud-show-template-id="script-template-tags"

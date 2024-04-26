@@ -33,6 +33,7 @@ class Article extends JsonResource
             'medium_image_url' => $this->medium_image_url,
             'image_aspect_ratio' => $this->image_aspect_ratio,
             'status_released' => $this->status_released,
+            'is_header_notice' => $this->is_header_notice,
             'view_count' => number_format($this->view_count),
             'user' => $this->whenLoaded('user', function () {
                 return $this->user;

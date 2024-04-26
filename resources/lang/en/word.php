@@ -10,6 +10,7 @@ return [
         'created_at'        => "Created at",
         'deleted_at'        => "Deleted at",
         'image'             => 'Image',
+        'is_header_notice'  => "Header",
         'is_thumbnail_size_message' => "Do you want to use the specified thumbnail size?",
         'list_type'         => 'List type',
         'nonrelease'        => "Nonrelease",

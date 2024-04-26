@@ -10,6 +10,7 @@ return [
         'created_at'                => "생성일시",
         'deleted_at'                => "삭제일시",
         'image'                     => '이미지',
+        'is_header_notice'          => "머릿글",
         'is_thumbnail_size_message' => "지정된 썸네일 사이즈를 사용하시겠습니까?",
         'list_type'                 => '목록타입',
         'nonrelease'                => "비공개",

@@ -35,7 +35,7 @@ class ArticleRepository implements ArticleRepositoryInterface
     // Get all instances of model
     public function all()
     {
-        $model = $this->model::search()->sortable();
+        $model = $this->model::search()->orderBy('is_header_notice', 'desc')->sortable();
         return $model->with($this->model::getDefaultLoadRelations())->paging()->onEachSide(2);
     }
 
@@ -49,6 +49,7 @@ class ArticleRepository implements ArticleRepositoryInterface
             $this->model->summary = $this->request['summary'] ?? null;
             $this->model->markdown = $this->request['markdown'] ?? null;
             $this->model->html = $this->request['html'] ?? null;
+            $this->model->is_header_notice = $this->request['is_header_notice'] ?? 0;
             $this->model->released_at = $this->request['released_at'];
             $this->model->user_id = Core::user()->id;
 
@@ -127,6 +128,7 @@ class ArticleRepository implements ArticleRepositoryInterface
             $model->summary = $this->request['summary'] ?? $model->summary;
             $model->markdown = $this->request['markdown'] ?? $model->content;
             $model->html = $this->request['html'] ?? $model->html;
+            $model->is_header_notice = $this->request['is_header_notice'] ?? 0;
             $model->released_at = $this->request['released_at'];
             $model->user_id = Core::user()->id;
 
