@@ -4,7 +4,7 @@
             <th class="text-center min-width-rem-4">
                 @sortablelink('id', 'ID')
             </th>
-            <th class="text-center min-width-rem-3">
+            <th class="text-center min-width-rem-4">
                 {{ trans('mpcs-article::word.attr.is_header_notice') }}
             </th>
             <th class="text-center min-width-rem-4">
